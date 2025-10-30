@@ -437,7 +437,8 @@ export default function Layout({ children }) {
 
 {/* --- Content (no z-index so it won’t overlap the header) --- */}
 <AnimatePresence initial={false}>
-  <motion.div
+
+    <motion.div
     key={pathname}
     initial={{ opacity: 1 }}
     animate={{ opacity: 1 }}
@@ -446,19 +447,23 @@ export default function Layout({ children }) {
     style={{
       width: '100%',
       minHeight: '100vh',
-      position: 'relative' // ← zIndex removed
+      position: 'relative' // keep zIndex removed
     }}
   >
-    {React.cloneElement(children, {
-      t,
-      languages,
-      currentLang,
-      setCurrentLang,
-      handleSectionClick,
-      SECTION_IDS,
-      division: pageTheme,
-      setDivision
-    })}
+    {React.Children.map(children, (child) =>
+      React.isValidElement(child)
+        ? React.cloneElement(child, {
+            t,
+            languages,
+            currentLang,
+            setCurrentLang,
+            handleSectionClick,
+            SECTION_IDS,
+            division: pageTheme,
+            setDivision
+          })
+        : child
+    )}
   </motion.div>
 </AnimatePresence>
 
