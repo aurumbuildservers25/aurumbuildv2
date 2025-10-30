@@ -144,7 +144,9 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
         .nav-dd__cta:active { transform: translateY(1px); }
       `}</style>
 
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 h-14 shadow-lg`} style={{
+      <nav
+        className="fixed top-0 left-0 right-0 h-14 shadow-lg transition-colors duration-300" 
+        style={{
         backgroundColor: division === 'industrial' ? '#0C0E14' : '#F5F3F0',
         color: division === 'industrial' ? 'white' : '#24324B'
       }}>
