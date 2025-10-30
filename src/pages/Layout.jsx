@@ -419,45 +419,48 @@ export default function Layout({ children }) {
         }}
       />
 
-      <Header
-        t={t}
-        languages={languages}
-        currentLang={currentLang}
-        setCurrentLang={setCurrentLang}
-        currentLanguage={currentLanguage}
-        handleSectionClick={handleSectionClick}
-        SECTION_IDS={SECTION_IDS}
-        division={pageTheme}
-        setDivision={setDivision}
-        currentSection={currentSection}
-      />
+   {/* --- Header (sticky + above everything) --- */}
+<div style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+  <Header
+    t={t}
+    languages={languages}
+    currentLang={currentLang}
+    setCurrentLang={setCurrentLang}
+    currentLanguage={currentLanguage}
+    handleSectionClick={handleSectionClick}
+    SECTION_IDS={SECTION_IDS}
+    division={pageTheme}
+    setDivision={setDivision}
+    currentSection={currentSection}
+  />
+</div>
 
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={pathname}
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 1 }}
-          transition={{ duration: 0 }}
-          style={{ 
-            width: '100%',
-            minHeight: '100vh',
-            position: 'relative',
-            zIndex: 1
-          }}
-        >
-          {React.cloneElement(children, {
-            t,
-            languages,
-            currentLang,
-            setCurrentLang,
-            handleSectionClick,
-            SECTION_IDS,
-            division: pageTheme,
-            setDivision
-          })}
-        </motion.div>
-      </AnimatePresence>
+{/* --- Content (no z-index so it won’t overlap the header) --- */}
+<AnimatePresence initial={false}>
+  <motion.div
+    key={pathname}
+    initial={{ opacity: 1 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 1 }}
+    transition={{ duration: 0 }}
+    style={{
+      width: '100%',
+      minHeight: '100vh',
+      position: 'relative' // ← zIndex removed
+    }}
+  >
+    {React.cloneElement(children, {
+      t,
+      languages,
+      currentLang,
+      setCurrentLang,
+      handleSectionClick,
+      SECTION_IDS,
+      division: pageTheme,
+      setDivision
+    })}
+  </motion.div>
+</AnimatePresence>
 
       <footer className="py-12 transition-colors duration-600" style={{ 
         backgroundColor: isIndustrial ? '#0C0E14' : '#F5F3F0',
