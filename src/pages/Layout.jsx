@@ -245,6 +245,22 @@ const [currentLang, setCurrentLang] = useState(() => {
   const isContactPage = pathname.includes('contact');
 
   const t = translations[currentLang] || translations.en;
+
+  // --- DEBUG (TEMPORARY) ---
+if (typeof window !== "undefined") {
+  window.__AURUM_TRANSLATIONS__ = translations;
+  window.__AURUM_LANG__ = currentLang;
+
+  console.log("[AURUM] currentLang:", currentLang);
+  console.log("[AURUM] has translations[currentLang]?", !!translations[currentLang]);
+  console.log("[AURUM] en.about.industrial.title:",
+    translations?.en?.about?.industrial?.title
+  );
+  console.log("[AURUM] active.about.industrial.title:",
+    (translations[currentLang] || translations.en)?.about?.industrial?.title
+  );
+}
+  
   const currentLanguage = languages.find((lang) => lang.code === currentLang) || languages[0];
 
 useEffect(() => {
