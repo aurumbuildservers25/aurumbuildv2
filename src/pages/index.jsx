@@ -2,8 +2,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./Layout.jsx";
 
 import Home from "./Home.jsx";
-import Contact from "./Contact.jsx";        // make sure filenames match case
-import Technology from "./Technology.jsx";
+import Contact from "./contact.jsx";        // make sure filenames match case
+import Technology from "./technology.jsx";
 import Dreamhouse from "./Dreamhouse.jsx";
 
 function currentPageName(pathname) {
