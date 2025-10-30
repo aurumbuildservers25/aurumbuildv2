@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { createPageUrl } from "@/utils";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { motion, AnimatePresence } from 'framer-motion';
-import Header from '@/components/Header';
+import Header from "./Header.jsx";
 
 const languages = [
   { code: 'en', name: 'English', flag: 'EN' },
