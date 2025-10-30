@@ -216,12 +216,12 @@ const isHomePath = (p) => {
 const SECTION_IDS = ['home', 'about', 'technology', 'projects'];
 
 export default function Layout({ children }) {
-  const [currentLang, setCurrentLang] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('aurum-language') || 'en';
-    }
-    return 'en';
-  });
+const [currentLang, setCurrentLang] = useState(() => {
+  if (typeof window !== 'undefined') {
+    return (localStorage.getItem('aurum-language') || 'en').toLowerCase();
+  }
+  return 'en';
+});
   
   const [division, setDivision] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -247,11 +247,11 @@ export default function Layout({ children }) {
   const t = translations[currentLang] || translations.en;
   const currentLanguage = languages.find((lang) => lang.code === currentLang) || languages[0];
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('aurum-language', currentLang);
-    }
-  }, [currentLang]);
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('aurum-language', currentLang.toLowerCase());
+  }
+}, [currentLang]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
