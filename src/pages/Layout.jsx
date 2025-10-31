@@ -143,14 +143,20 @@ useEffect(() => {
     document.documentElement.style.transition = "background-color 0.6s ease";
   }, [isIndustrial]);
 
-  if (!ready) {
+  // Safety check - only render if translations are loaded
+  if (!t || !t.nav || !t.hero || !t.footer) {
     return (
       <div
         style={{
-          backgroundColor: division === "industrial" ? "#0C0E14" : "#F5F3F0",
+          backgroundColor: "#0C0E14",
           minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      />
+      >
+        <div style={{ color: "#FFB833", fontSize: "1.5rem" }}>Loading...</div>
+      </div>
     );
   }
 
