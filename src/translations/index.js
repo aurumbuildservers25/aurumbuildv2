@@ -206,10 +206,3 @@ export const translations = {
     footer: { tagline: 'Çavdêrî û pêkanîna bi kilît li seranserê Ewropayê.' }
   }
 };
-
-// Optional helpers
-export const getLang = (code) =>
-  (languages.find(l => l.code === (code || '').toLowerCase()) || languages[0]);
-
-export const getT = (code) =>
-  (translations[(code || '').toLowerCase()] || translations.en);
