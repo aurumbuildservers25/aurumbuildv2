@@ -7,6 +7,23 @@ import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 
 export default function Dreamhouse({ t, setDivision }) {
+  // ⬇️ ONE fallback object so the page never renders empty
+const dh = t?.dreamhouse ?? {
+  bannerDescription: '',
+  startTitle: 'Start the Dream',
+  startDescription: 'From site checks to feasibility…',
+  startNote: '',
+  premiumTitle: 'Premium',
+  premiumPrice: '',
+  premiumFeatures: [],
+  premiumPlusTitle: 'Premium Package +',
+  premiumPlusPrice: '',
+  premiumPlusSubtitle: '',
+  premiumPlusFeatures: [],
+  contactUs: 'Contact Us',
+  exploreTechnology: 'Explore Technology',
+};
+
   // ✅ safe access to translations (prevents "reading 'dreamhouse' of undefined")
   const dh = t?.dreamhouse || {};
 
