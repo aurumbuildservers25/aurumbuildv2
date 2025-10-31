@@ -1,54 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { createPageUrl } from "@/utils";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Menu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Header({
-  variant = "home",                    // <-- new prop from Layout
-  t = {},
-  languages = [],
-  currentLang = 'en',
-  setCurrentLang = () => {},
-  handleSectionClick = () => {},
-  SECTION_IDS = [],
-  division = 'industrial',
-  setDivision = () => {},
-  currentSection = 'home'
-}) {
+export default function Header({ t = {}, languages = [], currentLang = 'en', setCurrentLang = () => {}, handleSectionClick = () => {}, SECTION_IDS = [], division = 'industrial', setDivision = () => {}, currentSection = 'home' }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-
-  // --- Translations fallback (safety) ---
+  const [pathname, setPathname] = useState('/');
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setPathname(window.location.pathname);
+    }
+  }, []);
+  
   const safeT = {
     nav: {
       home: t?.nav?.home || 'Home',
       about: t?.nav?.about || 'About',
       technology: t?.nav?.technology || 'Technology',
       projects: t?.nav?.projects || 'Projects',
-      contact: t?.nav?.contact || 'Contact',
-    },
+      contact: t?.nav?.contact || 'Contact'
+    }
   };
+  
+  const currentLanguageObj = languages?.find(lang => lang.code === currentLang) || languages?.[0] || { code: 'en', name: 'English', flag: 'EN' };
+  
+  const isHomePage = pathname === '/' || pathname === '/Home' || pathname === createPageUrl('Home');
+  const isContactPage = pathname === createPageUrl('contact');
+  const isDreamhousePage = pathname.includes('dreamhouse') || pathname.includes('Dreamhouse');
+  const isTechnologyPage = pathname === createPageUrl('technology'); 
 
-  const currentLanguageObj =
-    languages?.find((lang) => lang.code === currentLang) ||
-    languages?.[0] || { code: 'en', name: 'English', flag: 'EN' };
-
-  // --- Variants (decide header layout) ---
-  const isHomePage = variant === "home";
-  const isTechnologyPage = variant === "tech";
-  const isDreamhousePage = variant === "dreamhouse";
-  const isSimple = variant === "simple";
-
-  // --- Go home action ---
   const handleGoHome = () => {
     if (isDreamhousePage) {
       setDivision('residential');
       localStorage.setItem('aurum-theme', 'residential');
     }
-    window.location.href = createPageUrl('home');
   };
-
+}
   return (
     <>
       <style>{`
