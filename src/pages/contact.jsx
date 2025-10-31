@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Clock, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useI18n } from '@/i18n';
 
-export default function Contact({ t, division = 'industrial' }) {
+export default function Contact({ division = 'industrial' }) {
+  const { t } = useI18n();
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const isIndustrial = division === 'industrial';
