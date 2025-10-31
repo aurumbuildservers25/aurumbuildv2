@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./Layout.jsx";
 
 import Home from "./Home.jsx";
-import Contact from "./contact.jsx";        // make sure filenames match case
+import Contact from "./contact.jsx";        // ensure filenames are lowercase as in project
 import Technology from "./technology.jsx";
 import Dreamhouse from "./Dreamhouse.jsx";
 
@@ -12,24 +12,26 @@ function currentPageName(pathname) {
   return cap(last === "" ? "home" : last);
 }
 
-function PagesContent() {
+export default function Pages({ division, setDivision }) {
   const { pathname } = useLocation();
   const page = currentPageName(pathname);
 
   return (
     <Layout currentPageName={page}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        {/* ✅ Home + Dreamhouse get access to division state */}
+        <Route path="/" element={<Home division={division} setDivision={setDivision} />} />
+        <Route path="/home" element={<Home division={division} setDivision={setDivision} />} />
+
         <Route path="/contact" element={<Contact />} />
         <Route path="/technology" element={<Technology />} />
-        <Route path="/dreamhouse" element={<Dreamhouse />} />
-        <Route path="*" element={<Home />} />
+
+        {/* ✅ Dreamhouse can setDivision('residential') */}
+        <Route path="/dreamhouse" element={<Dreamhouse setDivision={setDivision} />} />
+
+        {/* fallback */}
+        <Route path="*" element={<Home division={division} setDivision={setDivision} />} />
       </Routes>
     </Layout>
   );
-}
-
-export default function Pages() {
-  return <PagesContent />;
 }
