@@ -6,10 +6,24 @@ import { CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { createPageUrl } from '@/utils';
 
 export default function Dreamhouse({ t }) {
+  // --- 👇 Prevent crash if t is undefined
+  const dh = t?.dreamhouse || {};
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  return (
+    <div className="dreamhouse-page">
+      <h1>{dh.startTitle || 'Dreamhouse'}</h1>
+      <p>{dh.startDescription || ''}</p>
+
+      {/* Example: safely render HTML banner text */}
+      <div
+        dangerouslySetInnerHTML={{
+          __html: dh.bannerDescription || '',
+        }}
+      />
   return (
     <div className="min-h-screen bg-[#0C0E14] text-[#F1F5F9]">
       <div style={{ 
