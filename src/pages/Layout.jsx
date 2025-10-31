@@ -339,11 +339,11 @@ useEffect(() => {
         observer.disconnect();
       };
     }
-  }, [isHomePage]);
+ }, [isHomePage]);
 
   // Let the user-selected theme control the page, except Dreamhouse forces residential.
-const pageTheme = isDreamhousePage ? 'residential' : division;
-const isIndustrial = pageTheme === 'industrial';]
+  const pageTheme = isDreamhousePage ? 'residential' : division;
+  const isIndustrial = pageTheme === 'industrial';
 
   useEffect(() => {
     document.body.style.backgroundColor = isIndustrial ? '#0C0E14' : '#F5F3F0';
