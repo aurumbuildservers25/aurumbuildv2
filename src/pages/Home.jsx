@@ -26,7 +26,8 @@ const SectionWrapper = ({ children, id, className = '' }) =>
     {children}
   </motion.section>;
 
-export default function Home({ t = {}, division = 'industrial', setDivision = () => {} }) {
+export default function Home({ t = {}, division = 'industrial', setDivision })
+ {
   // ALL HOOKS MUST BE AT THE TOP - BEFORE ANY CONDITIONAL LOGIC OR RETURNS
   useEffect(() => {
     if (division) {
