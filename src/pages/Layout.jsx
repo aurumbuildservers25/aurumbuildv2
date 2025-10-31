@@ -165,11 +165,6 @@ useEffect(() => {
 }
 
   // Safety check - only render if translations are loaded
-if (!t || !t.nav || !t.hero || !t.footer) {
-  return ( ...Loading... );
-}
-  
-  // Safety check - only render if translations are loaded
   if (!t || !t.nav || !t.hero || !t.footer) {
     return (
       <div
