@@ -453,18 +453,13 @@ useEffect(() => {
 
 {/* --- Content (no z-index so it won’t overlap the header) --- */}
 <AnimatePresence initial={false}>
-
-    <motion.div
-    key={pathname}
+  <motion.div
+    key={`${pathname}-${currentLang}`}   // remount on language change
     initial={{ opacity: 1 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 1 }}
     transition={{ duration: 0 }}
-    style={{
-      width: '100%',
-      minHeight: '100vh',
-      position: 'relative' // keep zIndex removed
-    }}
+    style={{ width: '100%', minHeight: '100vh', position: 'relative' }}
   >
     {React.Children.map(children, (child) =>
       React.isValidElement(child)
