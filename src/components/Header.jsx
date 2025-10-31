@@ -49,7 +49,6 @@ export default function Header({
     window.location.href = createPageUrl('home');
   };
 
-
   return (
     <>
       <style>{`
