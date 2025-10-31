@@ -7,25 +7,28 @@ import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 
 export default function Dreamhouse({ t, setDivision }) {
-  // ⬇️ ONE fallback object so the page never renders empty
-const dh = t?.dreamhouse ?? {
-  bannerDescription: '',
-  startTitle: 'Start the Dream',
-  startDescription: 'From site checks to feasibility…',
-  startNote: '',
-  premiumTitle: 'Premium',
-  premiumPrice: '',
-  premiumFeatures: [],
-  premiumPlusTitle: 'Premium Package +',
-  premiumPlusPrice: '',
-  premiumPlusSubtitle: '',
-  premiumPlusFeatures: [],
-  contactUs: 'Contact Us',
-  exploreTechnology: 'Explore Technology',
-};
+  // ✅ single fallback so text always renders even if translations are missing
+  const dh = t?.dreamhouse ?? {
+    bannerDescription: '',
+    startTitle: 'Start the Dream',
+    startDescription: 'From site checks to feasibility…',
+    startNote: '',
+    premiumTitle: 'Premium',
+    premiumPrice: '',
+    premiumFeatures: [],
+    premiumPlusTitle: 'Premium Package +',
+    premiumPlusPrice: '',
+    premiumPlusSubtitle: '',
+    premiumPlusFeatures: [],
+    contactUs: 'Contact Us',
+    exploreTechnology: 'Explore Technology',
+  };
 
-  // ✅ safe access to translations (prevents "reading 'dreamhouse' of undefined")
-  const dh = t?.dreamhouse || {};
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // If you do NOT want the whole site to switch themes here, remove the next line
+    setDivision?.('residential');
+  }, [setDivision]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
