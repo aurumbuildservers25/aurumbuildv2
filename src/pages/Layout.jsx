@@ -32,6 +32,14 @@ const [initialPath] = useState(() =>
   typeof window !== "undefined" ? window.location.pathname : "/"
 );
 const { pathname = initialPath } = useLocation();
+
+  const headerVariant = (() => {
+  const p = (pathname || "").toLowerCase();
+  if (p.includes("/technology")) return "tech";
+  if (p.includes("/dreamhouse")) return "dreamhouse";
+  if (isHomePath(p)) return "home";
+  return "simple";
+})();
   
 useEffect(() => {
   // Quando il router è pronto, abilitiamo il render
@@ -263,20 +271,22 @@ useEffect(() => {
       />
 
       {/* --- Header (sticky + above everything) --- */}
-      <div style={{ position: "sticky", top: 0, zIndex: 1000 }}>
-        <Header
-          t={t}
-          languages={languages}
-          currentLang={normalizedLang}
-          setCurrentLang={setCurrentLang}
-          currentLanguage={currentLanguage}
-          handleSectionClick={handleSectionClick}
-          SECTION_IDS={SECTION_IDS}
-          division={pageTheme}
-          setDivision={setDivision}
-          currentSection={currentSection}
-        />
-      </div>
+   <div style={{ position: "sticky", top: 0, zIndex: 1000 }}>
+  <Header
+    key={headerVariant}        // <- force remount when variant changes
+    variant={headerVariant}    // <- tell Header what to render
+    t={t}
+    languages={languages}
+    currentLang={normalizedLang}
+    setCurrentLang={setCurrentLang}
+    currentLanguage={currentLanguage}
+    handleSectionClick={handleSectionClick}
+    SECTION_IDS={SECTION_IDS}
+    division={pageTheme}
+    setDivision={setDivision}
+    currentSection={currentSection}
+  />
+</div>
 
       {/* --- Content (now wrapped in i18n Provider) --- */}
       <AnimatePresence initial={false}>
