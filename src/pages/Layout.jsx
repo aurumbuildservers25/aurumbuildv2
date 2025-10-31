@@ -215,20 +215,14 @@ const isHomePath = (p) => {
 
 const SECTION_IDS = ['home', 'about', 'technology', 'projects'];
 
-export default function Layout({ children }) {
-const [currentLang, setCurrentLang] = useState(() => {
-  if (typeof window !== 'undefined') {
-    return (localStorage.getItem('aurum-language') || 'en').toLowerCase();
-  }
-  return 'en';
-});
-  
-  const [division, setDivision] = useState(() => {
+export default function Layout({ children, division, setDivision }) {
+  const [currentLang, setCurrentLang] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('aurum-theme') || 'industrial';
+      return (localStorage.getItem('aurum-language') || 'en').toLowerCase();
     }
-    return 'industrial';
+    return 'en';
   });
+
   
   const [currentSection, setCurrentSection] = useState('home');
   const [pathname, setPathname] = useState('/');
