@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./Layout.jsx";
 
 import Home from "./Home.jsx";
-import Contact from "./contact.jsx";        // ensure filenames match exactly
+import Contact from "./contact.jsx";
 import Technology from "./technology.jsx";
 import Dreamhouse from "./Dreamhouse.jsx";
 
@@ -17,33 +17,22 @@ export default function Pages({ division, setDivision }) {
   const page = currentPageName(pathname);
 
   return (
-    <Layout currentPageName={page} division={division}>
+    // ✅ pass BOTH division and setDivision to Layout
+    <Layout currentPageName={page} division={division} setDivision={setDivision}>
       <Routes>
-        {/* ✅ Home + Dreamhouse receive division + setDivision */}
-        <Route
-          path="/"
-          element={<Home division={division} setDivision={setDivision} />}
-        />
-        <Route
-          path="/home"
-          element={<Home division={division} setDivision={setDivision} />}
-        />
+        {/* Pages that need to toggle */}
+        <Route path="/" element={<Home division={division} setDivision={setDivision} />} />
+        <Route path="/home" element={<Home division={division} setDivision={setDivision} />} />
 
-        {/* ✅ Other pages just use the current division */}
+        {/* Pages that only read the theme */}
         <Route path="/contact" element={<Contact division={division} />} />
         <Route path="/technology" element={<Technology division={division} />} />
 
-        {/* ✅ Dreamhouse forces residential */}
-        <Route
-          path="/dreamhouse"
-          element={<Dreamhouse setDivision={setDivision} division={division} />}
-        />
+        {/* Dreamhouse can force residential on mount */}
+        <Route path="/dreamhouse" element={<Dreamhouse division={division} setDivision={setDivision} />} />
 
-        {/* fallback */}
-        <Route
-          path="*"
-          element={<Home division={division} setDivision={setDivision} />}
-        />
+        {/* Fallback */}
+        <Route path="*" element={<Home division={division} setDivision={setDivision} />} />
       </Routes>
     </Layout>
   );
