@@ -5,8 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
+import { useI18n } from '@/i18n';
 
-export default function Dreamhouse({ t, setDivision }) {
+export default function Dreamhouse({ division = 'residential', setDivision }) {
+  const { t } = useI18n();
+
   // Fallbacks so the page never renders empty if translations are missing
   const dh = t?.dreamhouse ?? {
     bannerDescription:
@@ -39,7 +42,7 @@ export default function Dreamhouse({ t, setDivision }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setDivision?.('residential'); // remove if you don't want to force theme here
+    setDivision?.('residential'); // keep forcing residential here
   }, [setDivision]);
 
   return (
