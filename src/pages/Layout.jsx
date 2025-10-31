@@ -26,7 +26,12 @@ export default function Layout({ children, division, setDivision }) {
   
   const [currentSection, setCurrentSection] = useState('home');
   const [pathname, setPathname] = useState('/');
+  
+// always use a lowercased key to read translations
+const normalizedLang = (currentLang || 'en').toLowerCase();
+const t = translations[normalizedLang] || translations.en;
 
+  
   // Use window.location instead of useLocation to avoid Router context issues
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -38,7 +43,6 @@ export default function Layout({ children, division, setDivision }) {
   const isDreamhousePage = pathname.includes('dreamhouse') || pathname.includes('Dreamhouse');
   const isContactPage = pathname.includes('contact');
 
-  const t = translations[currentLang] || translations.en;
 
   // --- DEBUG (TEMPORARY) ---
 if (typeof window !== "undefined") {
