@@ -87,11 +87,9 @@ export default function Contact({ division = 'industrial' }) {
                       </h3>
                       <div className="space-y-1 text-sm">
                         <a href="mailto:contact@aurumbuild.eu" className="block" style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>
-                          contact@aurumbuild.eu
+                          admin@aurumbuild.eu
                         </a>
-                        <a href="mailto:projects@aurumbuild.eu" className="block" style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>
-                          projects@aurumbuild.eu
-                        </a>
+    
                       </div>
                     </CardContent>
                   </Card>
@@ -113,10 +111,7 @@ export default function Contact({ division = 'industrial' }) {
                       </h3>
                       <div className="space-y-1 text-sm">
                         <a href="tel:+48221234567" className="block" style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>
-                          +48 22 123 4567
-                        </a>
-                        <a href="tel:+39021234567" className="block" style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>
-                          +39 02 123 4567
+                          +48 696379094
                         </a>
                       </div>
                     </CardContent>
