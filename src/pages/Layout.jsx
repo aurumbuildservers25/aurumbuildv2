@@ -143,6 +143,18 @@ useEffect(() => {
     document.documentElement.style.transition = "background-color 0.6s ease";
   }, [isIndustrial]);
 
+  if (!ready) {
+  return (
+    <div
+      style={{
+        backgroundColor: isIndustrial ? "#0C0E14" : "#F5F3F0",
+        minHeight: "100vh",
+        transition: "background-color 0.6s ease",
+      }}
+    />
+  );
+}
+  
   // Safety check - only render if translations are loaded
   if (!t || !t.nav || !t.hero || !t.footer) {
     return (
