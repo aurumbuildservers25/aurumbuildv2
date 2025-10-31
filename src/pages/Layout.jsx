@@ -31,6 +31,12 @@ const [initialPath] = useState(() =>
 );
 const { pathname = initialPath } = useLocation();
   
+useEffect(() => {
+  // Quando il router è pronto, abilitiamo il render
+  const timer = setTimeout(() => setReady(true), 50);
+  return () => clearTimeout(timer);
+}, []);
+  
   const isHomePage = isHomePath(pathname);
   const isDreamhousePage = pathname.includes("dreamhouse") || pathname.includes("Dreamhouse");
 
