@@ -275,15 +275,13 @@ useEffect(() => {
     }
   }, [division]);
 
-  useEffect(() => {
-    if (isDreamhousePage && division !== 'residential') {
-      setDivision('residential');
-    } else if (!isDreamhousePage && !isHomePage && !isContactPage && localStorage.getItem('aurum-theme') === 'residential' && division === 'residential') {
-      if (division !== 'industrial') {
-        setDivision('industrial');
-      }
-    }
-  }, [isDreamhousePage, isHomePage, isContactPage, division]);
+// Only enforce residential while on Dreamhouse.
+// Do NOT force-switch when leaving; let the user toggle wherever they like.
+useEffect(() => {
+  if (isDreamhousePage && division !== 'residential') {
+    setDivision('residential');
+  }
+}, [isDreamhousePage, division, setDivision]);
 
   const handleSectionClick = (sectionId) => {
     if (isDreamhousePage && sectionId === 'home') {
@@ -343,8 +341,9 @@ useEffect(() => {
     }
   }, [isHomePage]);
 
-  const pageTheme = isDreamhousePage ? 'residential' : (isHomePage || isContactPage ? division : 'industrial');
-  const isIndustrial = pageTheme === 'industrial';
+  // Let the user-selected theme control the page, except Dreamhouse forces residential.
+const pageTheme = isDreamhousePage ? 'residential' : division;
+const isIndustrial = pageTheme === 'industrial';
 
   useEffect(() => {
     document.body.style.backgroundColor = isIndustrial ? '#0C0E14' : '#F5F3F0';
