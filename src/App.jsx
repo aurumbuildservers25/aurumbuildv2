@@ -1,22 +1,18 @@
 import './App.css'
 import Pages from "@/pages/index.jsx"
 import { Toaster } from "@/components/ui/toaster"
-import React, { useState, createContext } from 'react'
-
-export const DivisionContext = createContext({
-  division: 'industrial',
-  setDivision: () => {},
-});
+import React, { useState } from "react"
 
 function App() {
-  const [division, setDivision] = useState('industrial');
+  // Single source of truth for the theme
+  const [division, setDivision] = useState("industrial");
 
   return (
-    <DivisionContext.Provider value={{ division, setDivision }}>
-      <Pages />
+    <>
+      <Pages division={division} setDivision={setDivision} />
       <Toaster />
-    </DivisionContext.Provider>
-  )
+    </>
+  );
 }
 
 export default App;
