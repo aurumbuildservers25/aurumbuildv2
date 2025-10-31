@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "@/components/Header.jsx";
 import { createPageUrl } from "@/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,13 +27,8 @@ export default function Layout({ children, division, setDivision }) {
   const [currentSection, setCurrentSection] = useState("home");
   const [pathname, setPathname] = useState("/");
 
-  // Use window.location instead of useLocation to avoid Router context issues
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPathname(window.location.pathname);
-    }
-  }, []);
-
+  const { pathname } = useLocation();
+  
   const isHomePage = isHomePath(pathname);
   const isDreamhousePage = pathname.includes("dreamhouse") || pathname.includes("Dreamhouse");
 
