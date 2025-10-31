@@ -23,6 +23,11 @@ export default function Layout({ children, division, setDivision }) {
 
   const normalizedLang = (currentLang || "en").toLowerCase();
   const t = translations[normalizedLang] || translations.en;
+
+  const [currentSection, setCurrentSection] = useState("home");
+  const [pathname, setPathname] = useState("/");
+
+  const { pathname } = useLocation();
   
   const isHomePage = isHomePath(pathname);
   const isDreamhousePage = pathname.includes("dreamhouse") || pathname.includes("Dreamhouse");
