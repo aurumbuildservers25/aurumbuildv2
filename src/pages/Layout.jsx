@@ -23,6 +23,8 @@ export default function Layout({ children, division, setDivision }) {
 
   const normalizedLang = (currentLang || "en").toLowerCase();
   const t = translations[normalizedLang] || translations.en;
+
+  const [ready, setReady] = useState(() => (typeof window === 'undefined' ? true : false));
   
 const [currentSection, setCurrentSection] = useState("home");
 
@@ -56,6 +58,13 @@ useEffect(() => {
       localStorage.setItem("aurum-language", normalizedLang);
     }
   }, [normalizedLang]);
+
+  useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const id = setTimeout(() => setReady(true), 0); // microtask -> super affidabile in deploy
+    return () => clearTimeout(id);
+  }
+}, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -153,6 +162,11 @@ useEffect(() => {
       }}
     />
   );
+}
+
+  // Safety check - only render if translations are loaded
+if (!t || !t.nav || !t.hero || !t.footer) {
+  return ( ...Loading... );
 }
   
   // Safety check - only render if translations are loaded
