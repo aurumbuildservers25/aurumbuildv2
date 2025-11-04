@@ -1,44 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { createPageUrl } from "@/utils";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Menu } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Menu } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { createPageUrl } from "@/utils";
 
-export default function Header({ t = {}, languages = [], currentLang = 'en', setCurrentLang = () => {}, handleSectionClick = () => {}, SECTION_IDS = [], division = 'industrial', setDivision = () => {}, currentSection = 'home' }) {
+export default function Header({
+  t = {},
+  languages = [],
+  currentLang = "en",
+  setCurrentLang = () => {},
+  handleSectionClick = () => {},
+  SECTION_IDS = [],
+  division = "industrial",
+  setDivision = () => {},
+  currentSection = "home",
+}) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [pathname, setPathname] = useState('/');
-  
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setPathname(window.location.pathname);
-    }
-  }, []);
-  
+  const { pathname } = useLocation();
+
   const safeT = {
     nav: {
-      home: t?.nav?.home || 'Home',
-      about: t?.nav?.about || 'About',
-      technology: t?.nav?.technology || 'Technology',
-      projects: t?.nav?.projects || 'Projects',
-      contact: t?.nav?.contact || 'Contact'
-    }
+      home: t?.nav?.home || "Home",
+      about: t?.nav?.about || "About",
+      technology: t?.nav?.technology || "Technology",
+      projects: t?.nav?.projects || "Projects",
+      contact: t?.nav?.contact || "Contact",
+    },
   };
-  
-  const currentLanguageObj = languages?.find(lang => lang.code === currentLang) || languages?.[0] || { code: 'en', name: 'English', flag: 'EN' };
-  
-  const isHomePage = pathname === '/' || pathname === '/Home' || pathname === createPageUrl('Home');
-  const isContactPage = pathname === createPageUrl('contact');
-  const isDreamhousePage = pathname.includes('dreamhouse') || pathname.includes('Dreamhouse');
-  const isTechnologyPage = pathname === createPageUrl('technology'); 
+
+  const currentLanguageObj =
+    languages?.find((lang) => lang.code === currentLang) ||
+    languages?.[0] ||
+    { code: "en", name: "English", flag: "EN" };
+
+  const isHomePage = pathname === "/" || pathname === "/Home" || pathname === createPageUrl("Home");
+  const isContactPage = pathname === createPageUrl("contact");
+  const isDreamhousePage = pathname.toLowerCase().includes("dreamhouse");
+  const isTechnologyPage = pathname === createPageUrl("technology");
 
   const handleGoHome = () => {
     if (isDreamhousePage) {
-      setDivision('residential');
-      localStorage.setItem('aurum-theme', 'residential');
+      setDivision("residential");
+      if (typeof window !== "undefined") localStorage.setItem("aurum-theme", "residential");
     }
   };
-}
+
   return (
     <>
       <style>{`
@@ -57,7 +65,6 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
           --dd-cta-bg: transparent;
           --dd-cta-hover-bg: rgba(132,204,22,.12);
         }
-
         .theme-industrial.mobile-nav-dropdown {
           --dd-bg: #1B2A3A;
           --dd-bg-elev: #132132;
@@ -72,7 +79,6 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
           --dd-cta-bg: transparent;
           --dd-cta-hover-bg: rgba(255,184,51,.14);
         }
-
         .theme-residential.mobile-nav-dropdown {
           --dd-bg: #F7F7F5;
           --dd-bg-elev: #FFFFFF;
@@ -88,7 +94,6 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
           --dd-cta-bg: transparent;
           --dd-cta-hover-bg: rgba(217,181,102,.12);
         }
-
         .mobile-nav-dropdown {
           background: linear-gradient(180deg, var(--dd-bg-elev), var(--dd-bg));
           border: 1px solid var(--dd-border);
@@ -102,7 +107,6 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
           flex-direction: column;
           gap: 0.25rem;
         }
-        
         .nav-dd__item {
           display: flex;
           align-items: center;
@@ -117,15 +121,9 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
           border-radius: 0.75rem;
           transition: background .15s ease, color .15s ease;
         }
-
         .nav-dd__item:hover { background: var(--dd-hover); }
         .nav-dd__item:active { background: var(--dd-active); }
-
-        .nav-dd__item.is-active {
-          background: var(--dd-active);
-          font-weight: 700;
-        }
-
+        .nav-dd__item.is-active { background: var(--dd-active); font-weight: 700; }
         .nav-dd__cta {
           display: block;
           margin: .5rem .25rem .5rem;
@@ -139,85 +137,290 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
           transition: background .15s ease, border-color .15s ease, transform .1s ease;
           font-size: 0.875rem;
         }
-
         .nav-dd__cta:hover { background: var(--dd-cta-hover-bg); }
         .nav-dd__cta:active { transform: translateY(1px); }
       `}</style>
 
       <nav
-        className="fixed top-0 left-0 right-0 h-14 shadow-lg transition-colors duration-300" 
+        className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 h-14 shadow-lg"
         style={{
-        backgroundColor: division === 'industrial' ? '#0C0E14' : '#F5F3F0',
-        color: division === 'industrial' ? 'white' : '#24324B'
-      }}>
+          zIndex: 1000,
+          backgroundColor: division === "industrial" ? "#0C0E14" : "#F5F3F0",
+          color: division === "industrial" ? "white" : "#24324B",
+        }}
+      >
         <div className="max-w-screen-xl mx-auto px-6 h-full relative flex items-center justify-between">
           {isHomePage ? (
-            <button type="button" onClick={() => handleSectionClick('home')} className="font-bold transition-all duration-300">
+            <button
+              type="button"
+              onClick={() => handleSectionClick("home")}
+              className="font-bold transition-all duration-300"
+            >
               <div className="hidden sm:block text-xl">
-                <span className="font-bold" style={{ color: division === 'industrial' ? '#FFB833' : '#D9B566' }}>AURUM</span>
-                <span style={{ color: division === 'industrial' ? '#FFFFFF' : '#24324B' }}>Build</span>
+                <span
+                  className="font-bold"
+                  style={{ color: division === "industrial" ? "#FFB833" : "#D9B566" }}
+                >
+                  AURUM
+                </span>
+                <span style={{ color: division === "industrial" ? "#FFFFFF" : "#24324B" }}>
+                  Build
+                </span>
               </div>
-              <div className={`sm:hidden flex items-baseline p-2 rounded-lg`} style={{ backgroundColor: division === 'industrial' ? 'rgba(27,42,58,0.80)' : 'rgba(36,50,75,0.08)' }}>
-                <span className="text-2xl leading-none font-bold" style={{ color: division === 'industrial' ? '#FFB833' : '#D9B566' }}>A</span>
-                <span className={`text-[26px] leading-none font-bold`} style={{ color: division === 'industrial' ? '#FFFFFF' : '#24324B' }}>B</span>
+              <div
+                className="sm:hidden flex items-baseline p-2 rounded-lg"
+                style={{
+                  backgroundColor:
+                    division === "industrial" ? "rgba(27,42,58,0.80)" : "rgba(36,50,75,0.08)",
+                }}
+              >
+                <span
+                  className="text-2xl leading-none font-bold"
+                  style={{ color: division === "industrial" ? "#FFB833" : "#D9B566" }}
+                >
+                  A
+                </span>
+                <span
+                  className="text-[26px] leading-none font-bold"
+                  style={{ color: division === "industrial" ? "#FFFFFF" : "#24324B" }}
+                >
+                  B
+                </span>
               </div>
             </button>
           ) : (
-            <a href={createPageUrl('Home')} onClick={handleGoHome} className="font-bold transition-all duration-300">
+            <Link to={createPageUrl("Home")} onClick={handleGoHome} className="font-bold transition-all duration-300">
               <div className="hidden sm:block text-xl">
-                <span className="font-bold" style={{ color: division === 'industrial' ? '#FFB833' : '#D9B566' }}>AURUM</span>
-                <span style={{ color: division === 'industrial' ? '#FFFFFF' : '#24324B' }}>Build</span>
+                <span
+                  className="font-bold"
+                  style={{ color: division === "industrial" ? "#FFB833" : "#D9B566" }}
+                >
+                  AURUM
+                </span>
+                <span style={{ color: division === "industrial" ? "#FFFFFF" : "#24324B" }}>
+                  Build
+                </span>
               </div>
-              <div className={`sm:hidden flex items-baseline p-2 rounded-lg`} style={{ backgroundColor: division === 'industrial' ? 'rgba(27,42,58,0.80)' : 'rgba(36,50,75,0.08)' }}>
-                <span className="text-2xl leading-none font-bold" style={{ color: division === 'industrial' ? '#FFB833' : '#D9B566' }}>A</span>
-                <span className={`text-[26px] leading-none font-bold`} style={{ color: division === 'industrial' ? '#FFFFFF' : '#24324B' }}>B</span>
+              <div
+                className="sm:hidden flex items-baseline p-2 rounded-lg"
+                style={{
+                  backgroundColor:
+                    division === "industrial" ? "rgba(27,42,58,0.80)" : "rgba(36,50,75,0.08)",
+                }}
+              >
+                <span
+                  className="text-2xl leading-none font-bold"
+                  style={{ color: division === "industrial" ? "#FFB833" : "#D9B566" }}
+                >
+                  A
+                </span>
+                <span
+                  className="text-[26px] leading-none font-bold"
+                  style={{ color: division === "industrial" ? "#FFFFFF" : "#24324B" }}
+                >
+                  B
+                </span>
               </div>
-            </a>
+            </Link>
           )}
 
           {isHomePage && (
             <div className="hidden lg:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8">
-              <button type="button" onClick={() => handleSectionClick('home')} className={`font-medium transition-all duration-300 rounded-full px-4 py-2 ${currentSection === 'home' ? 'font-semibold shadow-lg' : ''}`} style={{ backgroundColor: currentSection === 'home' ? (division === 'industrial' ? '#FFB833' : '#D9B566') : 'transparent', color: currentSection === 'home' ? (division === 'industrial' ? '#0C0E14' : '#24324B') : (division === 'industrial' ? '#E2E8F0' : '#24324B') }} aria-current={currentSection === 'home' ? 'page' : undefined}>{safeT.nav.home}</button>
-              <button type="button" onClick={() => handleSectionClick('about')} className={`font-medium transition-colors duration-300`} style={{ color: currentSection === 'about' ? (division === 'industrial' ? '#FFB833' : '#D9B566') : (division === 'industrial' ? '#E2E8F0' : '#24324B') }}>{safeT.nav.about}</button>
-              <button type="button" onClick={() => handleSectionClick('technology')} className={`font-medium transition-colors duration-300`} style={{ color: currentSection === 'technology' ? (division === 'industrial' ? '#FFB833' : '#D9B566') : (division === 'industrial' ? '#E2E8F0' : '#24324B') }}>{safeT.nav.technology}</button>
-              <button type="button" onClick={() => handleSectionClick('projects')} className={`font-medium transition-colors duration-300`} style={{ color: currentSection === 'projects' ? (division === 'industrial' ? '#FFB833' : '#D9B566') : (division === 'industrial' ? '#E2E8F0' : '#24324B') }}>{safeT.nav.projects}</button>
-              <a href={createPageUrl('contact')} className={`font-medium transition-colors duration-300`} style={{ color: isContactPage ? (division === 'industrial' ? '#FFB833' : '#D9B566') : (division === 'industrial' ? '#E2E8F0' : '#24324B') }}>{safeT.nav.contact}</a>
-              <a href={createPageUrl('dreamhouse')} className={`font-medium transition-colors duration-300`} style={{ color: isDreamhousePage ? (division === 'industrial' ? '#8B5CF6' : '#8B5CF6') : (division === 'industrial' ? '#E2E8F0' : '#24324B') }}>DH</a>
+              <button
+                type="button"
+                onClick={() => handleSectionClick("home")}
+                className={`font-medium transition-all duration-300 rounded-full px-4 py-2 ${
+                  currentSection === "home" ? "font-semibold shadow-lg" : ""
+                }`}
+                style={{
+                  backgroundColor:
+                    currentSection === "home"
+                      ? division === "industrial"
+                        ? "#FFB833"
+                        : "#D9B566"
+                      : "transparent",
+                  color:
+                    currentSection === "home"
+                      ? division === "industrial"
+                        ? "#0C0E14"
+                        : "#24324B"
+                      : division === "industrial"
+                      ? "#E2E8F0"
+                      : "#24324B",
+                }}
+                aria-current={currentSection === "home" ? "page" : undefined}
+              >
+                {safeT.nav.home}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSectionClick("about")}
+                className="font-medium transition-colors duration-300"
+                style={{
+                  color:
+                    currentSection === "about"
+                      ? division === "industrial"
+                        ? "#FFB833"
+                        : "#D9B566"
+                      : division === "industrial"
+                      ? "#E2E8F0"
+                      : "#24324B",
+                }}
+              >
+                {safeT.nav.about}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSectionClick("technology")}
+                className="font-medium transition-colors duration-300"
+                style={{
+                  color:
+                    currentSection === "technology"
+                      ? division === "industrial"
+                        ? "#FFB833"
+                        : "#D9B566"
+                      : division === "industrial"
+                      ? "#E2E8F0"
+                      : "#24324B",
+                }}
+              >
+                {safeT.nav.technology}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSectionClick("projects")}
+                className="font-medium transition-colors duration-300"
+                style={{
+                  color:
+                    currentSection === "projects"
+                      ? division === "industrial"
+                        ? "#FFB833"
+                        : "#D9B566"
+                      : division === "industrial"
+                      ? "#E2E8F0"
+                      : "#24324B",
+                }}
+              >
+                {safeT.nav.projects}
+              </button>
+
+              <Link
+                to={createPageUrl("contact")}
+                className="font-medium transition-colors duration-300"
+                style={{
+                  color: isContactPage
+                    ? division === "industrial"
+                      ? "#FFB833"
+                      : "#D9B566"
+                    : division === "industrial"
+                    ? "#E2E8F0"
+                    : "#24324B",
+                }}
+              >
+                {safeT.nav.contact}
+              </Link>
+
+              <Link
+                to={createPageUrl("dreamhouse")}
+                className="font-medium transition-colors duration-300"
+                style={{
+                  color: isDreamhousePage ? "#8B5CF6" : division === "industrial" ? "#E2E8F0" : "#24324B",
+                }}
+              >
+                DH
+              </Link>
             </div>
           )}
 
           <div className="flex items-center gap-2">
             {!isHomePage && (
-              <a href={createPageUrl('Home')} onClick={handleGoHome}>
-                <Button size="sm" className={`font-semibold shadow-lg text-sm hidden sm:inline-flex`} style={{ backgroundColor: division === 'industrial' ? '#FFFFFF' : '#24324B', color: division === 'industrial' ? '#0C0E14' : '#F5F3F0' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = division === 'industrial' ? '#E2E8F0' : '#1E293B'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = division === 'industrial' ? '#FFFFFF' : '#24324B'}>
+              <Link to={createPageUrl("Home")} onClick={handleGoHome}>
+                <Button
+                  size="sm"
+                  className="font-semibold shadow-lg text-sm hidden sm:inline-flex"
+                  style={{
+                    backgroundColor: division === "industrial" ? "#FFFFFF" : "#24324B",
+                    color: division === "industrial" ? "#0C0E14" : "#F5F3F0",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      division === "industrial" ? "#E2E8F0" : "#1E293B")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      division === "industrial" ? "#FFFFFF" : "#24324B")
+                  }
+                >
                   {safeT.nav.home}
                 </Button>
-              </a>
+              </Link>
             )}
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className={`flex items-center gap-1 px-3 py-1 text-sm transition-colors duration-300`} style={{ color: division === 'industrial' ? '#E2E8F0' : '#24324B' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = division === 'industrial' ? 'rgba(255,255,255,0.10)' : 'rgba(36,50,75,0.08)'; e.currentTarget.style.color = division === 'industrial' ? '#FFB833' : '#D9B566'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = division === 'industrial' ? '#E2E8F0' : '#24324B'; }} title="Change language" aria-label="Change language">
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-1 px-3 py-1 text-sm transition-colors duration-300"
+                  style={{ color: division === "industrial" ? "#E2E8F0" : "#24324B" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      division === "industrial" ? "rgba(255,255,255,0.10)" : "rgba(36,50,75,0.08)";
+                    e.currentTarget.style.color = division === "industrial" ? "#FFB833" : "#D9B566";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = division === "industrial" ? "#E2E8F0" : "#24324B";
+                  }}
+                  title="Change language"
+                  aria-label="Change language"
+                >
                   <span className="text-xs font-bold tracking-wider">{currentLanguageObj.flag}</span>
                   <ChevronDown className="w-4 h-4 opacity-70" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className={`backdrop-blur-md shadow-xl`} style={{ backgroundColor: division === 'industrial' ? '#1B2A3A' : '#FFFFFF', borderColor: division === 'industrial' ? 'rgba(255,255,255,0.10)' : 'rgba(36,50,75,0.15)', color: division === 'industrial' ? 'white' : '#24324B' }}>
-                {languages?.map((lang) => 
-                  <DropdownMenuItem key={lang.code} onClick={() => setCurrentLang(lang.code)} className={`flex items-center gap-3 cursor-pointer ${currentLang === lang.code ? (division === 'industrial' ? 'bg-[#FFB833]/20' : 'bg-[#D9B566]/20') : ''}`}>
+
+              <DropdownMenuContent
+                align="end"
+                className="backdrop-blur-md shadow-xl"
+                style={{
+                  backgroundColor: division === "industrial" ? "#1B2A3A" : "#FFFFFF",
+                  borderColor:
+                    division === "industrial" ? "rgba(255,255,255,0.10)" : "rgba(36,50,75,0.15)",
+                  color: division === "industrial" ? "white" : "#24324B",
+                }}
+              >
+                {languages?.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => setCurrentLang(lang.code)}
+                    className={`flex items-center gap-3 cursor-pointer ${
+                      currentLang === lang.code
+                        ? division === "industrial"
+                          ? "bg-[#FFB833]/20"
+                          : "bg-[#D9B566]/20"
+                        : ""
+                    }`}
+                  >
                     <span>{lang.name}</span>
                   </DropdownMenuItem>
-                )}
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
 
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               className="lg:hidden w-11 h-11 grid place-items-center rounded-md transition-colors duration-300"
-              style={{ color: division === 'industrial' ? '#E2E8F0' : '#24324B' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = division === 'industrial' ? 'rgba(255,255,255,0.10)' : 'rgba(36,50,75,0.08)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-              aria-label="Toggle mobile menu">
+              style={{ color: division === "industrial" ? "#E2E8F0" : "#24324B" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  division === "industrial" ? "rgba(255,255,255,0.10)" : "rgba(36,50,75,0.08)")
+              }
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+              aria-label="Toggle mobile menu"
+            >
               <Menu className="w-6 h-6" />
             </button>
           </div>
@@ -227,104 +430,140 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
       <AnimatePresence>
         {showMobileMenu && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{duration: 0.2}} className="fixed inset-0 z-40 bg-black/25 backdrop-blur-sm lg:hidden" onClick={() => setShowMobileMenu(false)} />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/25 backdrop-blur-sm lg:hidden"
+              onClick={() => setShowMobileMenu(false)}
+            />
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className={`fixed top-16 right-4 z-50 lg:hidden min-w-[200px] mobile-nav-dropdown ${division === 'industrial' ? 'theme-industrial' : 'theme-residential'}`}
-              role="menu">
-                {isHomePage ? (
-                  <>
-                    <button
-                      key="mobile-home"
-                      type="button"
-                      onClick={() => { handleSectionClick('home'); setShowMobileMenu(false); }}
-                      className={`nav-dd__item ${currentSection === 'home' ? 'is-active' : ''}`}
-                      role="menuitem">
-                      {safeT.nav.home}
-                    </button>
-                    <button
-                      key="mobile-about"
-                      type="button"
-                      onClick={() => { handleSectionClick('about'); setShowMobileMenu(false); }}
-                      className={`nav-dd__item ${currentSection === 'about' ? 'is-active' : ''}`}
-                      role="menuitem">
-                      {safeT.nav.about}
-                    </button>
-                    <button
-                      key="mobile-technology"
-                      type="button"
-                      onClick={() => { handleSectionClick('technology'); setShowMobileMenu(false); }}
-                      className={`nav-dd__item ${currentSection === 'technology' ? 'is-active' : ''}`}
-                      role="menuitem">
-                      {safeT.nav.technology}
-                    </button>
-                    <button
-                      key="mobile-projects"
-                      type="button"
-                      onClick={() => { handleSectionClick('projects'); setShowMobileMenu(false); }}
-                      className={`nav-dd__item ${currentSection === 'projects' ? 'is-active' : ''}`}
-                      role="menuitem">
-                      {safeT.nav.projects}
-                    </button>
-                    <a
-                      key="mobile-contact"
-                      href={createPageUrl('contact')}
-                      className={`nav-dd__item ${isContactPage ? 'is-active' : ''}`}
-                      onClick={() => setShowMobileMenu(false)}
-                      role="menuitem">
-                      {safeT.nav.contact}
-                    </a>
-                    <a
-                      key="mobile-dreamhouse"
-                      href={createPageUrl('dreamhouse')}
-                      className={`nav-dd__item ${isDreamhousePage ? 'is-active' : ''}`}
-                      onClick={() => setShowMobileMenu(false)}
-                      role="menuitem">
-                      Dreamhouse
-                    </a>
-                  </>
-                ) : (
-                  <>
-                    <a
-                      key="mobile-home-alt"
-                      href={createPageUrl('Home')}
-                      className={`nav-dd__item ${isHomePage ? 'is-active' : ''}`}
-                      onClick={() => { handleGoHome(); setShowMobileMenu(false); }}
-                      role="menuitem">
-                      {safeT.nav.home}
-                    </a>
-                    <a
-                      key="mobile-technology-alt"
-                      href={createPageUrl('technology')}
-                      className={`nav-dd__item ${isTechnologyPage ? 'is-active' : ''}`}
-                      onClick={() => setShowMobileMenu(false)}
-                      role="menuitem">
-                      {safeT.nav.technology}
-                    </a>
-                    <a
-                      key="mobile-contact-alt"
-                      href={createPageUrl('contact')}
-                      className={`nav-dd__item ${isContactPage ? 'is-active' : ''}`}
-                      onClick={() => setShowMobileMenu(false)}
-                      role="menuitem">
-                      {safeT.nav.contact}
-                    </a>
-                    <a
-                      key="mobile-dreamhouse-alt"
-                      href={createPageUrl('dreamhouse')}
-                      className={`nav-dd__item ${isDreamhousePage ? 'is-active' : ''}`}
-                      onClick={() => setShowMobileMenu(false)}
-                      role="menuitem">
-                      Dreamhouse
-                    </a>
-                  </>
-                )}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className={`fixed top-16 right-4 z-50 lg:hidden min-w-[200px] mobile-nav-dropdown ${
+                division === "industrial" ? "theme-industrial" : "theme-residential"
+              }`}
+              role="menu"
+            >
+              {isHomePage ? (
+                <>
+                  <button
+                    key="mobile-home"
+                    type="button"
+                    onClick={() => {
+                      handleSectionClick("home");
+                      setShowMobileMenu(false);
+                    }}
+                    className={`nav-dd__item ${currentSection === "home" ? "is-active" : ""}`}
+                    role="menuitem"
+                  >
+                    {safeT.nav.home}
+                  </button>
+                  <button
+                    key="mobile-about"
+                    type="button"
+                    onClick={() => {
+                      handleSectionClick("about");
+                      setShowMobileMenu(false);
+                    }}
+                    className={`nav-dd__item ${currentSection === "about" ? "is-active" : ""}`}
+                    role="menuitem"
+                  >
+                    {safeT.nav.about}
+                  </button>
+                  <button
+                    key="mobile-technology"
+                    type="button"
+                    onClick={() => {
+                      handleSectionClick("technology");
+                      setShowMobileMenu(false);
+                    }}
+                    className={`nav-dd__item ${currentSection === "technology" ? "is-active" : ""}`}
+                    role="menuitem"
+                  >
+                    {safeT.nav.technology}
+                  </button>
+                  <button
+                    key="mobile-projects"
+                    type="button"
+                    onClick={() => {
+                      handleSectionClick("projects");
+                      setShowMobileMenu(false);
+                    }}
+                    className={`nav-dd__item ${currentSection === "projects" ? "is-active" : ""}`}
+                    role="menuitem"
+                  >
+                    {safeT.nav.projects}
+                  </button>
+                  <Link
+                    key="mobile-contact"
+                    to={createPageUrl("contact")}
+                    className={`nav-dd__item ${isContactPage ? "is-active" : ""}`}
+                    onClick={() => setShowMobileMenu(false)}
+                    role="menuitem"
+                  >
+                    {safeT.nav.contact}
+                  </Link>
+                  <Link
+                    key="mobile-dreamhouse"
+                    to={createPageUrl("dreamhouse")}
+                    className={`nav-dd__item ${isDreamhousePage ? "is-active" : ""}`}
+                    onClick={() => setShowMobileMenu(false)}
+                    role="menuitem"
+                  >
+                    Dreamhouse
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    key="mobile-home-alt"
+                    to={createPageUrl("Home")}
+                    className={`nav-dd__item ${isHomePage ? "is-active" : ""}`}
+                    onClick={() => {
+                      handleGoHome();
+                      setShowMobileMenu(false);
+                    }}
+                    role="menuitem"
+                  >
+                    {safeT.nav.home}
+                  </Link>
+                  <Link
+                    key="mobile-technology-alt"
+                    to={createPageUrl("technology")}
+                    className={`nav-dd__item ${isTechnologyPage ? "is-active" : ""}`}
+                    onClick={() => setShowMobileMenu(false)}
+                    role="menuitem"
+                  >
+                    {safeT.nav.technology}
+                  </Link>
+                  <Link
+                    key="mobile-contact-alt"
+                    to={createPageUrl("contact")}
+                    className={`nav-dd__item ${isContactPage ? "is-active" : ""}`}
+                    onClick={() => setShowMobileMenu(false)}
+                    role="menuitem"
+                  >
+                    {safeT.nav.contact}
+                  </Link>
+                  <Link
+                    key="mobile-dreamhouse-alt"
+                    to={createPageUrl("dreamhouse")}
+                    className={`nav-dd__item ${isDreamhousePage ? "is-active" : ""}`}
+                    onClick={() => setShowMobileMenu(false)}
+                    role="menuitem"
+                  >
+                    Dreamhouse
+                  </Link>
+                </>
+              )}
             </motion.div>
           </>
         )}
       </AnimatePresence>
     </>
   );
+}
