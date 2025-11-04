@@ -328,4 +328,3 @@ export default function Header({ t = {}, languages = [], currentLang = 'en', set
       </AnimatePresence>
     </>
   );
-}
