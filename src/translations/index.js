@@ -14,7 +14,7 @@ export const translations = {
     nav: { about: 'About', technology: 'Technology', projects: 'Projects', contact: 'Contact', home: 'Home' },
     hero: {
       title: 'Building Tomorrow, Today.',
-      subtitle: 'Industrial & Residential Turnkey Projects',
+      subtitle: 'End to End Solutions & Projects',
       description: 'From initial design to final handover, we deliver excellence and precision in every project across Europe.',
       industrial: 'Industrial',
       residential: 'Residential',
@@ -143,7 +143,7 @@ export const translations = {
 
   pl: {
     nav: { about: 'O nas', technology: 'Technologia', projects: 'Projekty', contact: 'Kontakt', home: 'Strona główna' },
-    hero: { title: 'Budujemy przyszłość, dzisiaj.', subtitle: 'Projekty pod klucz - przemysłowe i mieszkaniowe', description: 'Od początkowego projektu do finalnego przekazania, dostarczamy doskonałość i precyzję w każdym projekcie w całej Europie.', industrial: 'Przemysłowe', residential: 'Mieszkaniowe', buildDream: 'Zbuduj swoje marzenie' },
+    hero: { title: 'Budujemy przyszłość, dzisiaj.', subtitle: 'Projekty pod klucz', description: 'Od początkowego projektu do finalnego przekazania, dostarczamy doskonałość i precyzję w każdym projekcie w całej Europie.', industrial: 'Przemysłowe', residential: 'Mieszkaniowe', buildDream: 'Zbuduj swoje marzenie' },
     contact: { subtitle: 'Zbudujmy Twoją przyszłość już dziś', email: 'E-mail', phone: 'Telefon', headquarters: 'Siedziba główna', location: 'Warszawa, Polska', operationsCenter: 'Centrum Operacyjne w Europie', officeHours: 'Poniedziałek - Piątek: 8:00 - 18:00', mondayFriday: 'Poniedziałek - Piątek: 8:00 - 18:00', saturday: 'Sobota: 9:00 - 14:00', coverageAreas: 'Obszary działania' },
     dreamhouse: { bannerDescription: '<strong>Każde marzenie zasługuje na dom, który je odzwierciedla.</strong><br>Z <em>Dreamhouse</em> Twoja wizja staje się rzeczywistością: przestrzenie pełne elegancji, kultury i harmonii.', startTitle: 'Rozpocznij Marzenie', startDescription: 'Od kontroli terenu po analizę wykonalności i kolejne kroki — strukturyzujemy Twój projekt, aby przejść od pomysłu do działania — gładko, jasno i przejrzyście.', startNote: 'Oferujemy dwa pakiety dostosowane do Twoich potrzeb: Premium i Premium Plus.', premiumTitle: 'Premium', premiumPrice: '€4.000', premiumFeatures: ['Wstępne studium koncepcyjne (układ funkcjonalny i wytyczne architektoniczne)', 'Wstępna kalkulacja kosztów i harmonogram realizacji', 'Selekcja odpowiednich działek (2-3 opcje, jeśli dotyczy)', 'Operacyjna mapa drogowa kolejnych kroków projektowych'], premiumPlusTitle: 'Pakiet Premium Plus', premiumPlusPrice: '€7.500', premiumPlusSubtitle: 'PAKIET PREMIUM +', premiumPlusFeatures: ['Pomiar dronem RTK/LiDAR (gdzie dostępne)', 'Model fotogrametryczny i analiza topograficzna terenu', 'Wczesna detekcja problemów krytycznych lub odchyleń projektowych', 'Kompletny zestaw danych do dostarczenia projektu 4D'], contactUs: 'Skontaktuj się z nami', exploreTechnology: 'Poznaj Technologię' },
     bim_monitoring: { title: "Monitorowanie Postępu BIM z wykorzystaniem Dronów", subtitle: "Mierz postęp budowy w 4D (czas + koszt) dzięki RTK LiDAR i fotogrametrii - bezpieczniej, szybciej, precyzyjniej.", badges: ["RTK + LiDAR + Fotogrammetria", "Integracja z 4D BIM (Navisworks/SYNCHRO)", "Raport dla Klienta w 48 godzin", "Stan rzeczywisty vs Projekt"], benefits: ["Redukcja czasu pomiarów nawet o 70%", "Wczesne wykrywanie kolizji i odchyleń", "Lepsza kontrola kosztów i harmonogramu"] },
