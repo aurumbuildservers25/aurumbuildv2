@@ -680,19 +680,24 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             </div>
           </div>
 
-{/* Projects */}
-<div className="mt-8">
-  <AnimatePresence mode="wait">
-    {(() => {
-      // Real projects per tab
-      const industrialOne = {
-        img: null,               // no image
-        comingSoon: true,        // placeholder image area
-        title: "Foundry, Poland",
-        type: "industrial",
-      };
-
-      const residentialThree = [
+     <AnimatePresence mode="wait">
+    <motion.div
+      key={`${division}-projects`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
+      {[
+        // only ONE industrial project (Foundry) — no image, coming soon
+        {
+          img: null,
+          comingSoon: true,
+          title: "Foundry, Poland",
+          type: "industrial",
+        },
+        // and the three residential cards
         {
           img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
           title: safeT.projects.residential[0],
@@ -708,107 +713,54 @@ export default function Home({ division = "industrial", setDivision = () => {} }
           title: safeT.projects.residential[2],
           type: "residential",
         },
-      ];
-
-      // Build a 3-slot array for both divisions to keep layout identical
-      const projects =
-        division === "industrial"
-          ? [
-              industrialOne,
-              { placeholder: true }, // invisible filler (keeps space)
-              { placeholder: true }, // invisible filler (keeps space)
-            ]
-          : residentialThree;
-
-      // Colors per theme
-      const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
-      const borderColor =
-        division === "industrial"
+      ].map((proj) => {
+        const isIndustrial = proj.type === "industrial";
+        const bgColor = isIndustrial
+          ? "#132132"
+          : division === "industrial"
+          ? "#132132"
+          : "#F7F7F5";
+        const borderColor = isIndustrial
+          ? "rgba(255,255,255,0.06)"
+          : division === "industrial"
           ? "rgba(255,255,255,0.06)"
           : "rgba(36,50,75,0.08)";
-      const titleColor = division === "industrial" ? "#FFB833" : "#D9B566";
+        const titleColor = isIndustrial ? "#FFB833" : "#D9B566";
 
-      return (
-        <motion.div
-          key={`${division}-projects-stable`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.35 }}
-          // 👇 same responsive grid for BOTH tabs => no shift
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          // optional: enforce a minimum height so the container never shrinks
-          style={{ minHeight: 400 }}
-        >
-          {projects.map((proj, i) => {
-            // Render an invisible “ghost” card for placeholders to keep the space
-            if (proj.placeholder) {
-              return (
+        return (
+          <Card
+            key={proj.title}
+            className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
+            style={{ backgroundColor: bgColor, borderColor }}
+          >
+            <div className="aspect-[4/3] overflow-hidden">
+              {proj.img ? (
+                <img
+                  src={proj.img}
+                  alt={proj.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+              ) : (
                 <div
-                  key={`ghost-${i}`}
-                  className="opacity-0 pointer-events-none"
+                  className="w-full h-full grid place-items-center"
+                  style={{ backgroundColor: "#0F1A26" }}
                 >
-                  <Card
-                    className="overflow-hidden group border"
-                    style={{ backgroundColor: bgColor, borderColor }}
-                  >
-                    <div className="aspect-[4/3]" />
-                    <CardContent className="p-5">
-                      <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-                        &nbsp;
-                      </h3>
-                    </CardContent>
-                  </Card>
+                  <span className="text-sm font-medium" style={{ color: "#9AA4B2" }}>
+                    Coming soon
+                  </span>
                 </div>
-              );
-            }
-
-            // Normal cards
-            return (
-              <Card
-                key={proj.title}
-                className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
-                style={{ backgroundColor: bgColor, borderColor }}
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  {proj.img ? (
-                    <img
-                      src={proj.img}
-                      alt={proj.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div
-                      className="w-full h-full grid place-items-center"
-                      style={{
-                        backgroundColor:
-                          division === "industrial" ? "#0F1A26" : "#EAE8E2",
-                      }}
-                    >
-                      <span
-                        className="text-sm font-medium"
-                        style={{
-                          color:
-                            division === "industrial" ? "#9AA4B2" : "#475569",
-                        }}
-                      >
-                        Coming soon
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <CardContent className="p-5">
-                  <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-                    {proj.title}
-                  </h3>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </motion.div>
-      );
-    })()}
+              )}
+            </div>
+            <CardContent className="p-5">
+              <h3 className="text-lg font-bold" style={{ color: titleColor }}>
+                {proj.title}
+              </h3>
+            </CardContent>
+          </Card>
+        );
+      })}
+    </motion.div>
   </AnimatePresence>
 </div>
       </SectionWrapper>
