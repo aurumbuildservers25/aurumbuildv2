@@ -1,58 +1,38 @@
-// src/sections/PortfolioSection.jsx
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function PortfolioSection({
-  division,                 // "industrial" | "residential" (from parent)
-  setDivision,              // parent setter (from main toggle)
+  division,            // "industrial" | "residential" (from parent)
+  setDivision,         // parent setter (from main toggle)
   safeT = {},
 }) {
-  // ---- Safe fallbacks
+  const isIndustrial = division === "industrial";
+
+  // Fallback texts
+  const titleText = safeT?.portfolio_title ?? "Our Portfolio";
   const residential = safeT?.projects?.residential ?? [
     "Coastal Residence, Italy",
     "Modern Villa, Turkey",
     "Luxury Apartments, Poland",
   ];
-  const titleText = safeT?.portfolio_title ?? "Our Portfolio";
 
-  const isIndustrial = division === "industrial";
-
-  // ---- Theme colors
+  // Theme
   const pageBg = isIndustrial ? "#0C0E14" : "#F5F3F0";
   const text = isIndustrial ? "#F1F5F9" : "#24324B";
   const accent = isIndustrial ? "#FFB833" : "#D9B566";
-  const toggleBorder = isIndustrial ? "rgba(255,255,255,0.10)" : "rgba(36,50,75,0.15)";
-  const toggleBg = isIndustrial ? "rgba(27,42,58,0.70)" : "rgba(36,50,75,0.06)";
-  const tabTextIdle = isIndustrial ? "#E2E8F0" : "#24324B";
+  const tabIdle = isIndustrial ? "#E2E8F0" : "#24324B";
+  const frameBg = isIndustrial ? "rgba(27,42,58,0.70)" : "rgba(36,50,75,0.06)";
+  const frameBorder = isIndustrial ? "rgba(255,255,255,0.10)" : "rgba(36,50,75,0.15)";
 
-  // ---- Projects
-  const industrialOne = {
-    img: null,
-    comingSoon: true,
-    title: "Foundry, Poland",
-    type: "industrial",
-  };
-
+  // Projects (fixed 3 slots to avoid layout jump)
+  const industrialOne = { img: null, comingSoon: true, title: "Foundry, Poland" };
   const residentialThree = [
-    {
-      img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      title: residential[0],
-      type: "residential",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-      title: residential[1],
-      type: "residential",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-      title: residential[2],
-      type: "residential",
-    },
+    { img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80", title: residential[0] },
+    { img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80", title: residential[1] },
+    { img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80", title: residential[2] },
   ];
 
-  // fixed 3 slots to prevent layout shift
   const projects = isIndustrial
     ? [industrialOne, { placeholder: true }, { placeholder: true }]
     : residentialThree;
@@ -67,37 +47,41 @@ export default function PortfolioSection({
         {/* Title */}
         <h2
           className="text-center font-bold mb-6"
-          style={{
-            fontSize: "clamp(1.6rem, 3.2vw, 2.4rem)",
-            color: accent,
-            lineHeight: 1.15,
-          }}
+          style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.4rem)", color: accent, lineHeight: 1.15 }}
         >
           {titleText}
         </h2>
 
-        {/* Toggle pill — controlled by parent */}
+        {/* Toggle pill (controlled by parent) */}
         <div
-          className="mx-auto mb-6 flex items-center rounded-full px-1"
+          className="relative mx-auto mb-6 flex items-center rounded-full px-1"
           style={{
             width: 280,
             height: 44,
-            border: `1px solid ${toggleBorder}`,
-            backgroundColor: toggleBg,
+            border: `1px solid ${frameBorder}`,
+            backgroundColor: frameBg,
           }}
         >
+          {/* Animated indicator */}
+          <motion.div
+            layout
+            className="absolute top-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              height: 36,
+              width: 138, // ~ half of 280 - padding
+              left: isIndustrial ? 4 : 280 - 4 - 138,
+              backgroundColor: accent,
+            }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          />
+          {/* Buttons sit above indicator */}
           <button
             type="button"
             onClick={() => setDivision?.("industrial")}
-            className="flex-1 h-[36px] rounded-full font-semibold text-sm"
+            className="relative z-10 flex-1 h-[36px] rounded-full font-semibold text-sm"
             style={{
-              color: division === "industrial" ? pageBg : tabTextIdle,
-              backgroundColor: division === "industrial" ? accent : "transparent",
-              boxShadow:
-                division === "industrial"
-                  ? "0 0 0 2px rgba(0,0,0,0.15) inset, 0 6px 14px rgba(0,0,0,0.25)"
-                  : "none",
-              transition: "all .2s ease",
+              color: isIndustrial ? pageBg : tabIdle,
+              transition: "color .2s ease",
             }}
           >
             Industrial
@@ -105,15 +89,10 @@ export default function PortfolioSection({
           <button
             type="button"
             onClick={() => setDivision?.("residential")}
-            className="flex-1 h-[36px] rounded-full font-semibold text-sm"
+            className="relative z-10 flex-1 h-[36px] rounded-full font-semibold text-sm"
             style={{
-              color: division === "residential" ? pageBg : tabTextIdle,
-              backgroundColor: division === "residential" ? accent : "transparent",
-              boxShadow:
-                division === "residential"
-                  ? "0 0 0 2px rgba(0,0,0,0.15) inset, 0 6px 14px rgba(0,0,0,0.25)"
-                  : "none",
-              transition: "all .2s ease",
+              color: !isIndustrial ? pageBg : tabIdle,
+              transition: "color .2s ease",
             }}
           >
             Residential
@@ -127,7 +106,7 @@ export default function PortfolioSection({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.3 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             style={{ minHeight: 400 }}
           >
@@ -164,14 +143,9 @@ export default function PortfolioSection({
                     ) : (
                       <div
                         className="w-full h-full grid place-items-center"
-                        style={{
-                          backgroundColor: isIndustrial ? "#0F1A26" : "#EAE8E2",
-                        }}
+                        style={{ backgroundColor: isIndustrial ? "#0F1A26" : "#EAE8E2" }}
                       >
-                        <span
-                          className="text-sm font-medium"
-                          style={{ color: isIndustrial ? "#9AA4B2" : "#475569" }}
-                        >
+                        <span className="text-sm font-medium" style={{ color: isIndustrial ? "#9AA4B2" : "#475569" }}>
                           Coming soon
                         </span>
                       </div>
