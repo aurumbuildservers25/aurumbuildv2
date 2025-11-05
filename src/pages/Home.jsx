@@ -616,7 +616,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
 
       <div className="section-divider" />
 
-   <PortfolioSection />
+<PortfolioSection division={division} setDivision={setDivision} safeT={safeT} />
       
     </div>
   );
