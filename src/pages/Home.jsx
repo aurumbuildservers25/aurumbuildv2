@@ -109,7 +109,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
     },
     projects: t.projects || {
       title: "Our Portfolio",
-      industrial: ["Project 1", "Project 2", "Project 3"],
+      industrial: ["Foundry Poland"],
       residential: ["Villa 1", "Apartment 2", "Residence 3"],
     },
   };
