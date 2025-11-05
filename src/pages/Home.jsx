@@ -680,75 +680,101 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             </div>
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${division}-projects`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {(division === "industrial"
-                ? [
-                    {
-                      img: "https://images.unsplash.com/photo-1564939558297-fc319db62985?auto=format&fit=crop&w=800&q=80",
-                      title: safeT.projects.industrial[0],
-                    },
-                    {
-                      img: "https://images.unsplash.com/photo-1444419219b7-53359079b9b7?auto=format&fit=crop&w=800&q=80",
-                      title: safeT.projects.industrial[1],
-                    },
-                    {
-                      img: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=800&q=80",
-                      title: safeT.projects.industrial[2],
-                    },
-                  ]
-                : [
-                    {
-                      img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-                      title: safeT.projects.residential[0],
-                    },
-                    {
-                      img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-                      title: safeT.projects.residential[1],
-                    },
-                    {
-                      img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-                      title: safeT.projects.residential[2],
-                    },
-                  ]
-              ).map((proj) => (
-                <Card
-                  key={proj.title}
-                  className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
+     AnimatePresence mode="wait">
+  <motion.div
+    key={`${division}-projects`}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+  >
+    {(
+      // ✅ Only show the Foundry + Residential projects
+      [
+        {
+          img: null,
+          comingSoon: true,
+          title: "Foundry, Poland",
+          type: "industrial",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+          title: safeT.projects.residential[0],
+          type: "residential",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+          title: safeT.projects.residential[1],
+          type: "residential",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+          title: safeT.projects.residential[2],
+          type: "residential",
+        },
+      ]
+    ).map((proj) => {
+      const isIndustrial = proj.type === "industrial";
+      const bgColor = isIndustrial
+        ? "#132132"
+        : division === "industrial"
+        ? "#132132"
+        : "#F7F7F5";
+      const borderColor = isIndustrial
+        ? "rgba(255,255,255,0.06)"
+        : division === "industrial"
+        ? "rgba(255,255,255,0.06)"
+        : "rgba(36,50,75,0.08)";
+      const titleColor = isIndustrial
+        ? "#FFB833"
+        : "#D9B566";
+
+      return (
+        <Card
+          key={proj.title}
+          className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
+          style={{
+            backgroundColor: bgColor,
+            borderColor: borderColor,
+          }}
+        >
+          <div className="aspect-[4/3] overflow-hidden">
+            {proj.img ? (
+              <img
+                src={proj.img}
+                alt={proj.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+              />
+            ) : (
+              <div
+                className="w-full h-full grid place-items-center"
+                style={{
+                  backgroundColor: "#0F1A26",
+                }}
+              >
+                <span
+                  className="text-sm font-medium"
                   style={{
-                    backgroundColor: division === "industrial" ? "#132132" : "#F7F7F5",
-                    borderColor:
-                      division === "industrial"
-                        ? "rgba(255,255,255,0.06)"
-                        : "rgba(36,50,75,0.08)",
+                    color: "#9AA4B2",
                   }}
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={proj.img}
-                      alt={proj.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-                  <CardContent className="p-5">
-                    <h3
-                      className="text-lg font-bold"
-                      style={{ color: division === "industrial" ? "#FFB833" : "#D9B566" }}
-                    >
-                      {proj.title}
-                    </h3>
-                  </CardContent>
-                </Card>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+                  Coming soon
+                </span>
+              </div>
+            )}
+          </div>
+          <CardContent className="p-5">
+            <h3 className="text-lg font-bold" style={{ color: titleColor }}>
+              {proj.title}
+            </h3>
+          </CardContent>
+        </Card>
+      );
+    })}
+  </motion.div>
+</AnimatePresence>
         </div>
       </SectionWrapper>
     </div>
