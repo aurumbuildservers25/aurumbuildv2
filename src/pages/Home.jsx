@@ -769,7 +769,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
         minHeight: "100%",         // ✅ same height consistency
       }}
     >
-      <div className="aspect-[4/3] overflow-hidden">
+      <div className="aspect-[5/3] overflow-hidden md:aspect-[4/3] lg:aspect-[5/3]">
         {proj.img ? (
           <img
             src={proj.img}
