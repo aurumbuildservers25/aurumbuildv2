@@ -10,7 +10,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/i18n";
 
-const SectionWrapper = ({ children, id, className = "" }) => (
+const SectionWrapper = ({ children, id, className = "", ...rest }) => (
   <motion.section
     id={id}
     data-section
@@ -24,6 +24,7 @@ const SectionWrapper = ({ children, id, className = "" }) => (
     whileInView={{ opacity: 1 }}
     viewport={{ once: true, amount: 0.2 }}
     transition={{ duration: 0.8 }}
+    {...rest}
   >
     <div id={`${id}-heading`} tabIndex="-1" />
     {children}
@@ -31,7 +32,6 @@ const SectionWrapper = ({ children, id, className = "" }) => (
 );
 
 export default function Home({ division = "industrial", setDivision = () => {} }) {
-  // ✅ Get translations from context (provided by Layout)
   const { t: ctxT } = useI18n();
   const t = ctxT || {};
 
@@ -41,7 +41,6 @@ export default function Home({ division = "industrial", setDivision = () => {} }
     }
   }, [division]);
 
-  // Build safe defaults only if something is missing
   const safeT = {
     nav: t.nav || { contact: "Contact", home: "Home" },
     hero: t.hero || {
@@ -261,7 +260,12 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                 style={{
                   backgroundColor:
                     division === "residential" ? "#8B5CF6" : "transparent",
-                  color: division === "residential" ? "white" : "#24324B",
+                  color:
+                    division === "residential"
+                      ? "white"
+                      : division === "industrial"
+                      ? "#E2E8F0"
+                      : "#24324B",
                   boxShadow:
                     division === "residential"
                       ? "0 4px 12px rgba(139,92,246,0.25)"
@@ -615,202 +619,200 @@ export default function Home({ division = "industrial", setDivision = () => {} }
 
       <div className="section-divider" />
 
-{/* ---- PROJECTS ---- */}
-<SectionWrapper id="projects" className="border-b" style={{ backgroundColor: division === "industrial" ? "#0C0E14" : "#E8E6E3", borderColor: "var(--border-color)" }}>
-  <div className="max-w-screen-xl mx-auto px-6">
-    <div className="text-center mb-6">
-      <h2
-        className="font-bold tracking-tight text-center mb-4"
-        style={{
-          fontSize: "clamp(1.8rem, 2.8vw, 2.4rem)",
-          fontWeight: 700,
-          color: division === "industrial" ? "#FFB833" : "#D9B566",
-          lineHeight: 1.2,
-        }}
-      >
-        {safeT.projects.title}
-      </h2>
-
-      <div className="flex justify-center mt-4">
-        <div
-          className="p-1.5 rounded-full flex gap-1 border-2 w-full max-w-md"
-          style={{
-            backgroundColor:
-              division === "industrial"
-                ? "rgba(12,14,20,0.50)"
-                : "rgba(244,246,248,0.80)",
-            backdropFilter: "blur(8px)",
-            borderColor:
-              division === "industrial"
-                ? "#1E4A6B"
-                : "rgba(36,50,75,0.15)",
-          }}
-        >
-          <button
-            onClick={() => setDivision("industrial")}
-            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
-              division === "industrial" ? "shadow-lg" : ""
-            }`}
-            style={{
-              backgroundColor:
-                division === "industrial" ? "#FFB833" : "transparent",
-              color: division === "industrial" ? "#0C0E14" : "#24324B",
-            }}
-          >
-            {safeT.hero.industrial}
-          </button>
-          <button
-            onClick={() => setDivision("residential")}
-            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
-              division === "residential" ? "shadow-md" : ""
-            }`}
-            style={{
-              backgroundColor:
-                division === "residential" ? "#8B5CF6" : "transparent",
-              color: division === "residential" ? "white" : "#24324B",
-              boxShadow:
-                division === "residential"
-                  ? "0 4px 12px rgba(139,92,246,0.25)"
-                  : "none",
-            }}
-          >
-            {safeT.hero.residential}
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Projects */}
-    <div className="mt-8">
-      <AnimatePresence mode="wait">
-        {(() => {
-          const industrialOne = {
-            img: null,
-            comingSoon: true,
-            title: "Foundry, Poland",
-            type: "industrial",
-          };
-
-          const residentialThree = [
-            {
-              img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-              title: safeT.projects.residential[0],
-              type: "residential",
-            },
-            {
-              img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-              title: safeT.projects.residential[1],
-              type: "residential",
-            },
-            {
-              img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-              title: safeT.projects.residential[2],
-              type: "residential",
-            },
-          ];
-
-         const projects =
-  division === "industrial"
-    ? [
-        { placeholder: true },                                  // left ghost
-        { ...industrialOne, center: true },                     // real card in the middle
-        { placeholder: true },                                  // right ghost
-      ]
-    : residentialThree;
-
-
-          const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
-          const borderColor =
-            division === "industrial"
-              ? "rgba(255,255,255,0.06)"
-              : "rgba(36,50,75,0.08)";
-          const titleColor = division === "industrial" ? "#FFB833" : "#D9B566";
-
-          return (
-            <motion.div
-              key={`${division}-projects-stable`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              style={{ minHeight: 400 }}
-            >
-            {projects.map((proj, i) => {
-  if (proj.placeholder) {
-    return (
-      <div
-        key={`ghost-${i}`}
-        className="opacity-0 pointer-events-none"
-      >
-        <Card
-          className="overflow-hidden group border"
-          style={{
-            backgroundColor: bgColor,
-            borderColor,
-            minHeight: "100%",     // ✅ keeps height identical
-          }}
-        >
-          <div className="aspect-[4/3]" />
-        </Card>
-      </div>
-    );
-  }
-
-  return (
-    <Card
-      key={proj.title}
-      className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${
-        proj.center ? "lg:col-start-2" : ""
-      }`}
-      style={{
-        backgroundColor: bgColor,
-        borderColor,
-        minHeight: "100%",         // ✅ same height consistency
-      }}
-    >
-      <div className="aspect-[4/3] overflow-hidden">
-        {proj.img ? (
-          <img
-            src={proj.img}
-            alt={proj.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            loading="lazy"
-          />
-        ) : (
-          <div
-            className="w-full h-full grid place-items-center"
-            style={{
-              backgroundColor:
-                division === "industrial" ? "#0F1A26" : "#EAE8E2",
-            }}
-          >
-            <span
-              className="text-sm font-semibold"
+      {/* ---- PROJECTS ---- */}
+      <SectionWrapper id="projects" className="border-b" style={{ backgroundColor: division === "industrial" ? "#0C0E14" : "#E8E6E3", borderColor: "var(--border-color)" }}>
+        <div className="max-w-screen-xl mx-auto px-6">
+          <div className="text-center mb-6">
+            <h2
+              className="font-bold tracking-tight text-center mb-4"
               style={{
-                color: "#FFB833", // ✅ Amber color for "Coming soon"
+                fontSize: "clamp(1.8rem, 2.8vw, 2.4rem)",
+                fontWeight: 700,
+                color: division === "industrial" ? "#FFB833" : "#D9B566",
+                lineHeight: 1.2,
               }}
             >
-              Coming soon
-            </span>
+              {safeT.projects.title}
+            </h2>
+
+            <div className="flex justify-center mt-4">
+              <div
+                className="p-1.5 rounded-full flex gap-1 border-2 w-full max-w-md"
+                style={{
+                  backgroundColor:
+                    division === "industrial"
+                      ? "rgba(12,14,20,0.50)"
+                      : "rgba(244,246,248,0.80)",
+                  backdropFilter: "blur(8px)",
+                  borderColor:
+                    division === "industrial"
+                      ? "#1E4A6B"
+                      : "rgba(36,50,75,0.15)",
+                }}
+              >
+                <button
+                  onClick={() => setDivision("industrial")}
+                  className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
+                    division === "industrial" ? "shadow-lg" : ""
+                  }`}
+                  style={{
+                    backgroundColor:
+                      division === "industrial" ? "#FFB833" : "transparent",
+                    color: division === "industrial" ? "#0C0E14" : "#24324B",
+                  }}
+                >
+                  {safeT.hero.industrial}
+                </button>
+                <button
+                  onClick={() => setDivision("residential")}
+                  className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
+                    division === "residential" ? "shadow-md" : ""
+                  }`}
+                  style={{
+                    backgroundColor:
+                      division === "residential" ? "#8B5CF6" : "transparent",
+                    color:
+                      division === "residential"
+                        ? "white"
+                        : division === "industrial"
+                        ? "#E2E8F0"
+                        : "#24324B",
+                    boxShadow:
+                      division === "residential"
+                        ? "0 4px 12px rgba(139,92,246,0.25)"
+                        : "none",
+                  }}
+                >
+                  {safeT.hero.residential}
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
-      <CardContent className="p-5">
-        <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-          {proj.title}
-        </h3>
-      </CardContent>
-    </Card>
-  );
-})}
-            </motion.div>
-          );
-        })()}
-      </AnimatePresence>
-    </div>
-  </div>
-</SectionWrapper>
+
+          {/* Projects */}
+          <div className="mt-8">
+            <AnimatePresence mode="wait">
+              {(() => {
+                const industrialOne = {
+                  img: null,
+                  comingSoon: true,
+                  title: "Foundry, Poland",
+                  type: "industrial",
+                };
+
+                const residentialThree = [
+                  {
+                    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+                    title: safeT.projects.residential[0],
+                    type: "residential",
+                  },
+                  {
+                    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+                    title: safeT.projects.residential[1],
+                    type: "residential",
+                  },
+                  {
+                    img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+                    title: safeT.projects.residential[2],
+                    type: "residential",
+                  },
+                ];
+
+                const projects =
+                  division === "industrial"
+                    ? [{ placeholder: true }, { ...industrialOne, center: true }, { placeholder: true }]
+                    : residentialThree;
+
+                const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
+                const borderColor =
+                  division === "industrial"
+                    ? "rgba(255,255,255,0.06)"
+                    : "rgba(36,50,75,0.08)";
+                const titleColor = division === "industrial" ? "#FFB833" : "#D9B566";
+
+                return (
+                  <motion.div
+                    key={`${division}-projects-stable`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                    style={{ minHeight: 400 }}
+                  >
+                    {projects.map((proj, i) => {
+                      if (proj.placeholder) {
+                        return (
+                          <div
+                            key={`ghost-${i}`}
+                            className="opacity-0 pointer-events-none hidden md:block"
+                          >
+                            <Card
+                              className="overflow-hidden group border"
+                              style={{
+                                backgroundColor: bgColor,
+                                borderColor,
+                                minHeight: "100%",
+                              }}
+                            >
+                              <div className="aspect-[4/3]" />
+                            </Card>
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <Card
+                          key={proj.title}
+                          className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${
+                            proj.center ? "md:col-start-2" : ""
+                          }`}
+                          style={{
+                            backgroundColor: bgColor,
+                            borderColor,
+                            minHeight: "100%",
+                          }}
+                        >
+                          <div className="aspect-[4/3] overflow-hidden">
+                            {proj.img ? (
+                              <img
+                                src={proj.img}
+                                alt={proj.title}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div
+                                className="w-full h-full grid place-items-center"
+                                style={{
+                                  backgroundColor:
+                                    division === "industrial" ? "#0F1A26" : "#EAE8E2",
+                                }}
+                              >
+                                <span
+                                  className="text-sm font-semibold"
+                                  style={{ color: "#FFB833" }}
+                                >
+                                  Coming soon
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <CardContent className="p-5">
+                            <h3 className="text-lg font-bold" style={{ color: titleColor }}>
+                              {proj.title}
+                            </h3>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </motion.div>
+                );
+              })()}
+            </AnimatePresence>
+          </div>
+        </div>
+      </SectionWrapper>
     </div>
   );
 }
