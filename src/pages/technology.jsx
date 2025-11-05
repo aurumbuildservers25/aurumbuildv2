@@ -418,50 +418,50 @@ export default function Technology({ division = "industrial" }) {
 </motion.div>
 
                 {/* AURUM: Drone + BIM */}
-        <motion.div>
-                  <Card
-                    className="border-2 p-4"
-                    style={{ backgroundColor: palette.cardBg, borderColor: palette.borderOk }}
-                  >
-                    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
-                      <TrendingUp
-                        className="w-6 h-6 flex-shrink-0"
-                        style={{ color: palette.ok }}
-                      />
-                      <CardTitle className="text-base sm:text-lg">
-                        {tech.roi_aurum_title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0 space-y-2 text-sm">
-                      <p className="text-xs" style={{ color: palette.subtext }}>
-                        {tech.roi_aurum_desc}
-                      </p>
-                      <div
-                        className="flex justify-between items-center p-2 rounded-lg"
-                        style={{ backgroundColor: palette.cardBg2 }}
-                      >
-                        <span className="text-xs" style={{ color: palette.subtext }}>
-                          {tech.roi_traditional_report_time}
-                        </span>
-                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-                          {tech.roi_aurum_report_value}
-                        </span>
-                      </div>
-                      <div
-                        className="flex justify-between items-center p-2 rounded-lg"
-                        style={{ backgroundColor: palette.cardBg2 }}
-                      >
-                        <span className="text-xs" style={{ color: palette.subtext }}>
-                          {tech.roi_traditional_decision}
-                        </span>
-                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-                          {tech.roi_aurum_decision_value}
-                        </span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </div>
+  <motion.div className="h-full">
+    <Card
+      className="border-2 p-4 h-full flex flex-col"
+      style={{ backgroundColor: palette.cardBg, borderColor: palette.borderOk }}
+    >
+      <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
+        <TrendingUp className="w-6 h-6 flex-shrink-0" style={{ color: palette.ok }} />
+        <CardTitle
+          className="text-base sm:text-lg font-semibold"
+          style={{
+            /* rich gold on dark, softer gold on light */
+            color: isIndustrial ? "#FFC85A" : "#C29B47",
+          }}
+        >
+          {tech.roi_aurum_title}
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="p-0 space-y-2 text-sm flex-1">
+        <p className="text-sm leading-relaxed" style={{ color: isIndustrial ? "#E2E8F0" : "#2D3748" }}>
+          {tech.roi_aurum_desc}
+        </p>
+
+        <div className="flex justify-between items-center p-2 rounded-lg" style={{ backgroundColor: palette.cardBg2 }}>
+          <span className="text-sm" style={{ color: isIndustrial ? "#CBD5E1" : "#4A5568" }}>
+            {tech.roi_traditional_report_time}
+          </span>
+          <span className="font-bold text-sm" style={{ color: palette.ok }}>
+            {tech.roi_aurum_report_value}
+          </span>
+        </div>
+
+        <div className="flex justify-between items-center p-2 rounded-lg" style={{ backgroundColor: palette.cardBg2 }}>
+          <span className="text-sm" style={{ color: isIndustrial ? "#CBD5E1" : "#4A5568" }}>
+            {tech.roi_traditional_decision}
+          </span>
+          <span className="font-bold text-sm" style={{ color: palette.ok }}>
+            {tech.roi_aurum_decision_value}
+          </span>
+        </div>
+      </CardContent>
+    </Card>
+  </motion.div>
+</div>
             </motion.div>
             {/* ---------------------------------------------------- */}
             {/* HOW IT WORKS + SPECS / DELIVERABLES */}
