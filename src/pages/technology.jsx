@@ -340,49 +340,82 @@ export default function Technology({ division = "industrial" }) {
 
               <div className="grid md:grid-cols-2 gap-4 mb-8">
                 {/* Traditional methods */}
-                <motion.div>
-                  <Card
-                    className="border-2 p-4"
-                    style={{ backgroundColor: palette.cardBg, borderColor: palette.border }}
-                  >
-                    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
-                      <AlertTriangle
-                        className="w-6 h-6 flex-shrink-0"
-                        style={{ color: palette.accent }}
-                      />
-                      <CardTitle className="text-base sm:text-lg">
-                        {tech.roi_traditional_title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0 space-y-2 text-sm">
-                      <p className="text-xs" style={{ color: palette.subtext }}>
-                        {tech.roi_traditional_desc}
-                      </p>
-                      <div
-                        className="flex justify-between items-center p-2 rounded-lg"
-                        style={{ backgroundColor: palette.cardBg2 }}
-                      >
-                        <span className="text-xs" style={{ color: palette.subtext }}>
-                          {tech.roi_traditional_report_time}
-                        </span>
-                        <span className="font-bold text-sm">
-                          {tech.roi_traditional_report_value}
-                        </span>
-                      </div>
-                      <div
-                        className="flex justify-between items-center p-2 rounded-lg"
-                        style={{ backgroundColor: palette.cardBg2 }}
-                      >
-                        <span className="text-xs" style={{ color: palette.subtext }}>
-                          {tech.roi_traditional_decision}
-                        </span>
-                        <span className="font-bold text-sm">
-                          {tech.roi_traditional_decision_value}
-                        </span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                
+       <motion.div>
+  <Card
+    className="border-2 p-4"
+    style={{
+      backgroundColor: palette.cardBg,
+      borderColor: palette.border,
+    }}
+  >
+    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
+      <AlertTriangle
+        className="w-6 h-6 flex-shrink-0"
+        style={{ color: palette.accent }}
+      />
+      <CardTitle
+        className="text-base sm:text-lg font-semibold"
+        style={{ color: palette.accent }}
+      >
+        {tech.roi_traditional_title}
+      </CardTitle>
+    </CardHeader>
+
+    <CardContent className="p-0 space-y-2 text-sm">
+      <p
+        className="text-sm leading-relaxed"
+        style={{ color: isIndustrial ? "#E2E8F0" : "#2D3748" }}
+      >
+        {tech.roi_traditional_desc}
+      </p>
+
+      <div
+        className="flex justify-between items-center p-2 rounded-lg"
+        style={{
+          backgroundColor: isIndustrial
+            ? "rgba(255,255,255,0.05)"
+            : "rgba(36,50,75,0.06)",
+        }}
+      >
+        <span
+          className="text-sm"
+          style={{ color: isIndustrial ? "#CBD5E1" : "#4A5568" }}
+        >
+          {tech.roi_traditional_report_time}
+        </span>
+        <span
+          className="font-bold text-sm"
+          style={{ color: isIndustrial ? "#F8FAFC" : "#1A202C" }}
+        >
+          {tech.roi_traditional_report_value}
+        </span>
+      </div>
+
+      <div
+        className="flex justify-between items-center p-2 rounded-lg"
+        style={{
+          backgroundColor: isIndustrial
+            ? "rgba(255,255,255,0.05)"
+            : "rgba(36,50,75,0.06)",
+        }}
+      >
+        <span
+          className="text-sm"
+          style={{ color: isIndustrial ? "#CBD5E1" : "#4A5568" }}
+        >
+          {tech.roi_traditional_decision}
+        </span>
+        <span
+          className="font-bold text-sm"
+          style={{ color: isIndustrial ? "#F8FAFC" : "#1A202C" }}
+        >
+          {tech.roi_traditional_decision_value}
+        </span>
+      </div>
+    </CardContent>
+  </Card>
+</motion.div>
 
                 {/* AURUM: Drone + BIM */}
                 <motion.div>
