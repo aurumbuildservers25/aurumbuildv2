@@ -552,16 +552,13 @@ export default function Technology({ division = "industrial" }) {
             </div>
 
             {/* end of page content */}
-          </div> {/* max-w wrapper */}
+            </div>
         </main>
-      </div>   {/* padded container */}
-    </div>     {/* root */}
+      </div>
+    </div>
   );
 }
 
-/* ============================ */
-/* Helpers                      */
-/* ============================ */
 function Row({ l, r }) {
   return (
     <div className="flex justify-between">
