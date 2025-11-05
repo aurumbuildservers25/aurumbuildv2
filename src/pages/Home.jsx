@@ -766,31 +766,31 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                     }`}
                     style={{ backgroundColor: bgColor, borderColor }}
                   >
-                    <div className="aspect-[4/3] overflow-hidden">
-                      {proj.img ? (
-                        <img
-                          src={proj.img}
-                          alt={proj.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div
-                          className="w-full h-full grid place-items-center"
-                          style={{
-                            backgroundColor:
-                              division === "industrial" ? "#0F1A26" : "#EAE8E2",
-                          }}
-                        >
-                          <span
-                            className="text-sm font-semibold"
-                            style={{ color: "#FFB833" }}
-                          >
-                            Coming soon
-                          </span>
-                        </div>
-                      )}
-                    </div>
+               <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+  {proj.img ? (
+    <img
+      src={proj.img}
+      alt={proj.title}
+      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      loading="lazy"
+      style={{ display: "block" }}
+    />
+  ) : (
+    <div
+      className="w-full h-full grid place-items-center"
+      style={{
+        backgroundColor: division === "industrial" ? "#0F1A26" : "#EAE8E2",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <span className="text-sm font-semibold" style={{ color: "#FFB833" }}>
+        Coming soon
+      </span>
+    </div>
+  )}
+</div>
+
                     <CardContent className="p-5">
                       <h3 className="text-lg font-bold" style={{ color: titleColor }}>
                         {proj.title}
