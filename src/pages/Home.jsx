@@ -709,10 +709,15 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             },
           ];
 
-          const projects =
-            division === "industrial"
-              ? [industrialOne, { placeholder: true }, { placeholder: true }]
-              : residentialThree;
+         const projects =
+  division === "industrial"
+    ? [
+        { placeholder: true },                                  // left ghost
+        { ...industrialOne, center: true },                     // real card in the middle
+        { placeholder: true },                                  // right ghost
+      ]
+    : residentialThree;
+
 
           const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
           const borderColor =
@@ -754,11 +759,12 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                 }
 
                 return (
-                  <Card
-                    key={proj.title}
-                    className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
-                    style={{ backgroundColor: bgColor, borderColor }}
-                  >
+  <Card
+    key={proj.title}
+    className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${proj.center ? "lg:col-start-2" : ""}`}
+    style={{ backgroundColor: bgColor, borderColor }}
+  >
+
                     <div className="aspect-[4/3] overflow-hidden">
                       {proj.img ? (
                         <img
