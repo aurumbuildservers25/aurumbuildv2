@@ -680,63 +680,90 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             </div>
           </div>
 
-   <AnimatePresence mode="wait">
+  {/* Projects */}
+<div className="mt-8">
+  <AnimatePresence mode="wait">
     {(() => {
-      // 1) Choose projects based on the active tab (division)
+      // Real projects per tab
+      const industrialOne = {
+        img: null,               // no image
+        comingSoon: true,        // placeholder image area
+        title: "Foundry, Poland",
+        type: "industrial",
+      };
+
+      const residentialThree = [
+        {
+          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+          title: safeT.projects.residential[0],
+          type: "residential",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+          title: safeT.projects.residential[1],
+          type: "residential",
+        },
+        {
+          img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+          title: safeT.projects.residential[2],
+          type: "residential",
+        },
+      ];
+
+      // Build a 3-slot array for both divisions to keep layout identical
       const projects =
         division === "industrial"
           ? [
-              {
-                img: null,           // no image
-                comingSoon: true,    // placeholder tile
-                title: "Foundry, Poland",
-                type: "industrial",
-              },
+              industrialOne,
+              { placeholder: true }, // invisible filler (keeps space)
+              { placeholder: true }, // invisible filler (keeps space)
             ]
-          : [
-              {
-                img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-                title: safeT.projects.residential[0],
-                type: "residential",
-              },
-              {
-                img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-                title: safeT.projects.residential[1],
-                type: "residential",
-              },
-              {
-                img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-                title: safeT.projects.residential[2],
-                type: "residential",
-              },
-            ];
+          : residentialThree;
 
-      // 2) Grid cols: 1 for Industrial (only one card), 3 for Residential
-      const gridCols =
+      // Colors per theme
+      const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
+      const borderColor =
         division === "industrial"
-          ? "grid grid-cols-1 gap-6 max-w-xl"                          // single column
-          : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";    // 3 columns
+          ? "rgba(255,255,255,0.06)"
+          : "rgba(36,50,75,0.08)";
+      const titleColor = division === "industrial" ? "#FFB833" : "#D9B566";
 
       return (
         <motion.div
-          key={`${division}-projects`}
+          key={`${division}-projects-stable`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className={gridCols}
+          transition={{ duration: 0.35 }}
+          // 👇 same responsive grid for BOTH tabs => no shift
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          // optional: enforce a minimum height so the container never shrinks
+          style={{ minHeight: 400 }}
         >
-          {projects.map((proj) => {
-            // Colors follow the current theme (division)
-            const bgColor =
-              division === "industrial" ? "#132132" : "#F7F7F5";
-            const borderColor =
-              division === "industrial"
-                ? "rgba(255,255,255,0.06)"
-                : "rgba(36,50,75,0.08)";
-            const titleColor =
-              division === "industrial" ? "#FFB833" : "#D9B566";
+          {projects.map((proj, i) => {
+            // Render an invisible “ghost” card for placeholders to keep the space
+            if (proj.placeholder) {
+              return (
+                <div
+                  key={`ghost-${i}`}
+                  className="opacity-0 pointer-events-none"
+                >
+                  <Card
+                    className="overflow-hidden group border"
+                    style={{ backgroundColor: bgColor, borderColor }}
+                  >
+                    <div className="aspect-[4/3]" />
+                    <CardContent className="p-5">
+                      <h3 className="text-lg font-bold" style={{ color: titleColor }}>
+                        &nbsp;
+                      </h3>
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            }
 
+            // Normal cards
             return (
               <Card
                 key={proj.title}
