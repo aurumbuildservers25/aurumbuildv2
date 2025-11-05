@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/i18n";
+import PortfolioSection from "@/sections/PortfolioSection";
 
 const SectionWrapper = ({ children, id, className = "" }) => (
   <motion.section
@@ -615,155 +616,8 @@ export default function Home({ division = "industrial", setDivision = () => {} }
 
       <div className="section-divider" />
 
-      {/* ---- PROJECTS ---- */}
-      <SectionWrapper id="projects" className="border-b" style={{ backgroundColor: division === "industrial" ? "#0C0E14" : "#E8E6E3", borderColor: "var(--border-color)" }}>
-        <div className="max-w-screen-xl mx-auto px-6">
-          <div className="text-center mb-6">
-            <h2
-              className="font-bold tracking-tight text-center mb-4"
-              style={{
-                fontSize: "clamp(1.8rem, 2.8vw, 2.4rem)",
-                fontWeight: 700,
-                color: division === "industrial" ? "#FFB833" : "#D9B566",
-                lineHeight: 1.2,
-              }}
-            >
-              {safeT.projects.title}
-            </h2>
-
-            <div className="flex justify-center mt-4">
-              <div
-                className="p-1.5 rounded-full flex gap-1 border-2 w-full max-w-md"
-                style={{
-                  backgroundColor:
-                    division === "industrial"
-                      ? "rgba(12,14,20,0.50)"
-                      : "rgba(244,246,248,0.80)",
-                  backdropFilter: "blur(8px)",
-                  borderColor:
-                    division === "industrial"
-                      ? "#1E4A6B"
-                      : "rgba(36,50,75,0.15)",
-                }}
-              >
-                <button
-                  onClick={() => setDivision("industrial")}
-                  className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
-                    division === "industrial" ? "shadow-lg" : ""
-                  }`}
-                  style={{
-                    backgroundColor:
-                      division === "industrial" ? "#FFB833" : "transparent",
-                    color: division === "industrial" ? "#0C0E14" : "#24324B",
-                  }}
-                >
-                  {safeT.hero.industrial}
-                </button>
-                <button
-                  onClick={() => setDivision("residential")}
-                  className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
-                    division === "residential" ? "shadow-md" : ""
-                  }`}
-                  style={{
-                    backgroundColor:
-                      division === "residential" ? "#8B5CF6" : "transparent",
-                    color: division === "residential" ? "white" : "#24324B",
-                    boxShadow:
-                      division === "residential"
-                        ? "0 4px 12px rgba(139,92,246,0.25)"
-                        : "none",
-                  }}
-                >
-                  {safeT.hero.residential}
-                </button>
-              </div>
-            </div>
-          </div>
-
-     <AnimatePresence mode="wait">
-    <motion.div
-      key={`${division}-projects`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-    >
-      {[
-        // only ONE industrial project (Foundry) — no image, coming soon
-        {
-          img: null,
-          comingSoon: true,
-          title: "Foundry, Poland",
-          type: "industrial",
-        },
-        // and the three residential cards
-        {
-          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-          title: safeT.projects.residential[0],
-          type: "residential",
-        },
-        {
-          img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-          title: safeT.projects.residential[1],
-          type: "residential",
-        },
-        {
-          img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-          title: safeT.projects.residential[2],
-          type: "residential",
-        },
-      ].map((proj) => {
-        const isIndustrial = proj.type === "industrial";
-        const bgColor = isIndustrial
-          ? "#132132"
-          : division === "industrial"
-          ? "#132132"
-          : "#F7F7F5";
-        const borderColor = isIndustrial
-          ? "rgba(255,255,255,0.06)"
-          : division === "industrial"
-          ? "rgba(255,255,255,0.06)"
-          : "rgba(36,50,75,0.08)";
-        const titleColor = isIndustrial ? "#FFB833" : "#D9B566";
-
-        return (
-          <Card
-            key={proj.title}
-            className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
-            style={{ backgroundColor: bgColor, borderColor }}
-          >
-            <div className="aspect-[4/3] overflow-hidden">
-              {proj.img ? (
-                <img
-                  src={proj.img}
-                  alt={proj.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-              ) : (
-                <div
-                  className="w-full h-full grid place-items-center"
-                  style={{ backgroundColor: "#0F1A26" }}
-                >
-                  <span className="text-sm font-medium" style={{ color: "#9AA4B2" }}>
-                    Coming soon
-                  </span>
-                </div>
-              )}
-            </div>
-            <CardContent className="p-5">
-              <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-                {proj.title}
-              </h3>
-            </CardContent>
-          </Card>
-        );
-      })}
-    </motion.div>
-  </AnimatePresence>
-</div>
-      </SectionWrapper>
+   <PortfolioSection />
+      
     </div>
   );
 }
