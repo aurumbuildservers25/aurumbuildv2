@@ -648,9 +648,12 @@ export default function Home({ division = "industrial", setDivision = () => {} }
         >
           <button
             onClick={() => setDivision("industrial")}
-            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${division === "industrial" ? "shadow-lg" : ""}`}
+            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
+              division === "industrial" ? "shadow-lg" : ""
+            }`}
             style={{
-              backgroundColor: division === "industrial" ? "#FFB833" : "transparent",
+              backgroundColor:
+                division === "industrial" ? "#FFB833" : "transparent",
               color: division === "industrial" ? "#0C0E14" : "#24324B",
             }}
           >
@@ -658,11 +661,20 @@ export default function Home({ division = "industrial", setDivision = () => {} }
           </button>
           <button
             onClick={() => setDivision("residential")}
-            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${division === "residential" ? "shadow-md" : ""}`}
+            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
+              division === "residential" ? "shadow-md" : ""
+            }`}
             style={{
-              backgroundColor: division === "residential" ? "#8B5CF6" : "transparent",
-              color: division === "residential" ? "white" : (division === "industrial" ? "#E2E8F0" : "#24324B"),
-              boxShadow: division === "residential" ? "0 4px 12px rgba(139,92,246,0.25)" : "none",
+              backgroundColor:
+                division === "residential" ? "#8B5CF6" : "transparent",
+              color:
+                division === "residential"
+                  ? "white"
+                  : (division === "industrial" ? "#E2E8F0" : "#24324B"),
+              boxShadow:
+                division === "residential"
+                  ? "0 4px 12px rgba(139,92,246,0.25)"
+                  : "none",
             }}
           >
             {safeT.hero.residential}
@@ -676,7 +688,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
       <AnimatePresence mode="wait">
         {(() => {
           const industrialOne = {
-            img: null, // no image → we'll show the "Coming soon" block
+            img: null,
             title: "Foundry, Poland",
             type: "industrial",
             center: true,
@@ -700,13 +712,13 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             },
           ];
 
-          // For industrial: 3 columns at md so we can center the single card
-          // (ghosts left/right keep spacing identical; hidden on mobile)
+          // Use ghost columns to keep the middle position at md+
           const projects =
             division === "industrial"
               ? [{ placeholder: true }, industrialOne, { placeholder: true }]
               : residentialThree;
 
+          // Colors
           const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
           const borderColor =
             division === "industrial"
@@ -721,12 +733,15 @@ export default function Home({ division = "industrial", setDivision = () => {} }
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.35 }}
-              className={`grid grid-cols-1 ${division === "industrial" ? "md:grid-cols-3" : "md:grid-cols-2"} lg:grid-cols-3 gap-6`}
+              // 👇 identical layout; only switch to 3 cols at md for Industrial to center a single card
+              className={`grid grid-cols-1 ${
+                division === "industrial" ? "md:grid-cols-3" : "md:grid-cols-2"
+              } lg:grid-cols-3 gap-6`}
               style={{ minHeight: 400 }}
             >
               {projects.map((proj, i) => {
-                // Invisible ghosts for centering at md+
                 if (proj.placeholder) {
+                  // Invisible fillers (create left/right columns at md+)
                   return (
                     <div
                       key={`ghost-${i}`}
@@ -742,11 +757,13 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                   );
                 }
 
-                // Real cards (identical size to residential)
+                // Real card — same size as residential; “Coming soon” replaces the image area
                 return (
                   <Card
                     key={proj.title}
-                    className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${proj.center ? "md:col-start-2" : ""}`}
+                    className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${
+                      proj.center ? "md:col-start-2" : ""
+                    }`}
                     style={{ backgroundColor: bgColor, borderColor }}
                   >
                     <div className="aspect-[4/3] overflow-hidden">
@@ -758,7 +775,6 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                           loading="lazy"
                         />
                       ) : (
-                        // "Coming soon" fills the image area and matches size
                         <div
                           className="w-full h-full grid place-items-center"
                           style={{
