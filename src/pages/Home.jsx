@@ -648,12 +648,9 @@ export default function Home({ division = "industrial", setDivision = () => {} }
         >
           <button
             onClick={() => setDivision("industrial")}
-            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
-              division === "industrial" ? "shadow-lg" : ""
-            }`}
+            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${division === "industrial" ? "shadow-lg" : ""}`}
             style={{
-              backgroundColor:
-                division === "industrial" ? "#FFB833" : "transparent",
+              backgroundColor: division === "industrial" ? "#FFB833" : "transparent",
               color: division === "industrial" ? "#0C0E14" : "#24324B",
             }}
           >
@@ -661,17 +658,11 @@ export default function Home({ division = "industrial", setDivision = () => {} }
           </button>
           <button
             onClick={() => setDivision("residential")}
-            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${
-              division === "residential" ? "shadow-md" : ""
-            }`}
+            className={`flex-1 px-4 sm:px-8 py-2 text-sm sm:text-md font-bold rounded-full transition-all ${division === "residential" ? "shadow-md" : ""}`}
             style={{
-              backgroundColor:
-                division === "residential" ? "#8B5CF6" : "transparent",
-              color: division === "residential" ? "white" : "#24324B",
-              boxShadow:
-                division === "residential"
-                  ? "0 4px 12px rgba(139,92,246,0.25)"
-                  : "none",
+              backgroundColor: division === "residential" ? "#8B5CF6" : "transparent",
+              color: division === "residential" ? "white" : (division === "industrial" ? "#E2E8F0" : "#24324B"),
+              boxShadow: division === "residential" ? "0 4px 12px rgba(139,92,246,0.25)" : "none",
             }}
           >
             {safeT.hero.residential}
@@ -685,10 +676,10 @@ export default function Home({ division = "industrial", setDivision = () => {} }
       <AnimatePresence mode="wait">
         {(() => {
           const industrialOne = {
-            img: null,
-            comingSoon: true,
+            img: null, // no image → we'll show the "Coming soon" block
             title: "Foundry, Poland",
             type: "industrial",
+            center: true,
           };
 
           const residentialThree = [
@@ -709,15 +700,12 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             },
           ];
 
-         const projects =
-  division === "industrial"
-    ? [
-        { placeholder: true },                                  // left ghost
-        { ...industrialOne, center: true },                     // real card in the middle
-        { placeholder: true },                                  // right ghost
-      ]
-    : residentialThree;
-
+          // For industrial: 3 columns at md so we can center the single card
+          // (ghosts left/right keep spacing identical; hidden on mobile)
+          const projects =
+            division === "industrial"
+              ? [{ placeholder: true }, industrialOne, { placeholder: true }]
+              : residentialThree;
 
           const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
           const borderColor =
@@ -733,77 +721,68 @@ export default function Home({ division = "industrial", setDivision = () => {} }
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.35 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              className={`grid grid-cols-1 ${division === "industrial" ? "md:grid-cols-3" : "md:grid-cols-2"} lg:grid-cols-3 gap-6`}
               style={{ minHeight: 400 }}
             >
-            {projects.map((proj, i) => {
-  if (proj.placeholder) {
-    return (
-      <div
-        key={`ghost-${i}`}
-        className="opacity-0 pointer-events-none"
-      >
-        <Card
-          className="overflow-hidden group border"
-          style={{
-            backgroundColor: bgColor,
-            borderColor,
-            minHeight: "100%",     // ✅ keeps height identical
-          }}
-        >
-          <div className="aspect-[4/3]" />
-        </Card>
-      </div>
-    );
-  }
+              {projects.map((proj, i) => {
+                // Invisible ghosts for centering at md+
+                if (proj.placeholder) {
+                  return (
+                    <div
+                      key={`ghost-${i}`}
+                      className="opacity-0 pointer-events-none hidden md:block"
+                    >
+                      <Card
+                        className="overflow-hidden group border"
+                        style={{ backgroundColor: bgColor, borderColor }}
+                      >
+                        <div className="aspect-[4/3]" />
+                      </Card>
+                    </div>
+                  );
+                }
 
-  return (
-    <Card
-      key={proj.title}
-      className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${
-        proj.center ? "lg:col-start-2" : ""
-      }`}
-      style={{
-        backgroundColor: bgColor,
-        borderColor,
-        minHeight: "100%",         // ✅ same height consistency
-      }}
-    >
-      <div className="aspect-[5/3] overflow-hidden md:aspect-[4/3] lg:aspect-[5/3]">
-        {proj.img ? (
-          <img
-            src={proj.img}
-            alt={proj.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            loading="lazy"
-          />
-        ) : (
-          <div
-            className="w-full h-full grid place-items-center"
-            style={{
-              backgroundColor:
-                division === "industrial" ? "#0F1A26" : "#EAE8E2",
-            }}
-          >
-            <span
-              className="text-sm font-semibold"
-              style={{
-                color: "#FFB833", // ✅ Amber color for "Coming soon"
-              }}
-            >
-              Coming soon
-            </span>
-          </div>
-        )}
-      </div>
-      <CardContent className="p-5">
-        <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-          {proj.title}
-        </h3>
-      </CardContent>
-    </Card>
-  );
-})}
+                // Real cards (identical size to residential)
+                return (
+                  <Card
+                    key={proj.title}
+                    className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${proj.center ? "md:col-start-2" : ""}`}
+                    style={{ backgroundColor: bgColor, borderColor }}
+                  >
+                    <div className="aspect-[4/3] overflow-hidden">
+                      {proj.img ? (
+                        <img
+                          src={proj.img}
+                          alt={proj.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          loading="lazy"
+                        />
+                      ) : (
+                        // "Coming soon" fills the image area and matches size
+                        <div
+                          className="w-full h-full grid place-items-center"
+                          style={{
+                            backgroundColor:
+                              division === "industrial" ? "#0F1A26" : "#EAE8E2",
+                          }}
+                        >
+                          <span
+                            className="text-sm font-semibold"
+                            style={{ color: "#FFB833" }}
+                          >
+                            Coming soon
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <CardContent className="p-5">
+                      <h3 className="text-lg font-bold" style={{ color: titleColor }}>
+                        {proj.title}
+                      </h3>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </motion.div>
           );
         })()}
