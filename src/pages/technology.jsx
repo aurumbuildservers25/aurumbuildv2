@@ -369,51 +369,86 @@ export default function Technology({ division = "industrial" }) {
                   </Card>
                 </motion.div>
 
-                <motion.div>
-                  <Card
-                    className="border-2 p-4"
-                    style={{ backgroundColor: palette.cardBg, borderColor: palette.borderOk }}
-                  >
-                    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
-                      <TrendingUp
-                        className="w-6 h-6 flex-shrink-0"
-                        style={{ color: palette.ok }}
-                      />
-                      <CardTitle className="text-base sm:text-lg">
-                        {tech.roi_aurum_title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0 space-y-2 text-sm">
-                      <p className="text-xs" style={{ color: palette.subtext }}>
-                        {tech.roi_aurum_desc}
-                      </p>
-                      <div
-                        className="flex justify-between items-center p-2 rounded-lg"
-                        style={{ backgroundColor: palette.cardBg2 }}
-                      >
-                        <span className="text-xs" style={{ color: palette.subtext }}>
-                          {tech.roi_traditional_report_time}
-                        </span>
-                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-                          {tech.roi_aurum_report_value}
-                        </span>
-                      </div>
-                      <div
-                        className="flex justify-between items-center p-2 rounded-lg"
-                        style={{ backgroundColor: palette.cardBg2 }}
-                      >
-                        <span className="text-xs" style={{ color: palette.subtext }}>
-                          {tech.roi_traditional_decision}
-                        </span>
-                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-                          {tech.roi_aurum_decision_value}
-                        </span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </div>
-            </motion.div>
+               <motion.div>
+  <Card
+    className="border-2 p-4"
+    style={{
+      backgroundColor: palette.cardBg,
+      borderColor: palette.borderWarn,
+      boxShadow: `0 0 12px ${division === 'industrial' ? 'rgba(255,184,51,0.2)' : 'rgba(217,181,102,0.25)'}`,
+    }}
+  >
+    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
+      <AlertTriangle
+        className="w-6 h-6 flex-shrink-0"
+        style={{ color: palette.warn }}
+      />
+      <CardTitle
+        className="text-base sm:text-lg px-2 py-1 rounded-md font-semibold"
+        style={{
+          backgroundColor: division === 'industrial' ? 'rgba(255,184,51,0.15)' : 'rgba(217,181,102,0.25)',
+          color: division === 'industrial' ? '#FFD580' : '#A3741F',
+        }}
+      >
+        {tech.roi_traditional_title}
+      </CardTitle>
+    </CardHeader>
+
+    <CardContent className="p-0 space-y-2 text-sm">
+      <p
+        className="text-xs"
+        style={{
+          color: division === 'industrial' ? '#CBD5E1' : '#4B5563',
+        }}
+      >
+        {tech.roi_traditional_desc}
+      </p>
+
+      <div
+        className="flex justify-between items-center p-2 rounded-lg"
+        style={{
+          backgroundColor: division === 'industrial' ? 'rgba(255,184,51,0.08)' : 'rgba(217,181,102,0.1)',
+          border: `1px solid ${division === 'industrial' ? 'rgba(255,184,51,0.25)' : 'rgba(217,181,102,0.35)'}`,
+        }}
+      >
+        <span
+          className="text-xs font-medium"
+          style={{ color: division === 'industrial' ? '#FFD580' : '#7C5A10' }}
+        >
+          {tech.roi_traditional_report_time}
+        </span>
+        <span
+          className="font-bold text-sm"
+          style={{ color: division === 'industrial' ? '#FFFFFF' : '#24324B' }}
+        >
+          {tech.roi_traditional_report_value}
+        </span>
+      </div>
+
+      <div
+        className="flex justify-between items-center p-2 rounded-lg"
+        style={{
+          backgroundColor: division === 'industrial' ? 'rgba(255,184,51,0.08)' : 'rgba(217,181,102,0.1)',
+          border: `1px solid ${division === 'industrial' ? 'rgba(255,184,51,0.25)' : 'rgba(217,181,102,0.35)'}`,
+        }}
+      >
+        <span
+          className="text-xs font-medium"
+          style={{ color: division === 'industrial' ? '#FFD580' : '#7C5A10' }}
+        >
+          {tech.roi_traditional_decision}
+        </span>
+        <span
+          className="font-bold text-sm"
+          style={{ color: division === 'industrial' ? '#FFFFFF' : '#24324B' }}
+        >
+          {tech.roi_traditional_decision_value}
+        </span>
+      </div>
+    </CardContent>
+  </Card>
+</motion.div>
+
 
             <div className="border-t-2 pt-6" style={{ borderColor: palette.divider }}>
               <div className="max-w-5xl mx-auto">
