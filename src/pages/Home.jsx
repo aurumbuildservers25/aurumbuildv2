@@ -736,71 +736,74 @@ export default function Home({ division = "industrial", setDivision = () => {} }
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               style={{ minHeight: 400 }}
             >
-              {projects.map((proj, i) => {
-                if (proj.placeholder) {
-                  return (
-                    <div
-                      key={`ghost-${i}`}
-                      className="opacity-0 pointer-events-none"
-                    >
-                      <Card
-                        className="overflow-hidden group border"
-                        style={{ backgroundColor: bgColor, borderColor }}
-                      >
-                        <div className="aspect-[4/3]" />
-                        <CardContent className="p-5">
-                          <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-                            &nbsp;
-                          </h3>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  );
-                }
+            {projects.map((proj, i) => {
+  if (proj.placeholder) {
+    return (
+      <div
+        key={`ghost-${i}`}
+        className="opacity-0 pointer-events-none"
+      >
+        <Card
+          className="overflow-hidden group border"
+          style={{
+            backgroundColor: bgColor,
+            borderColor,
+            minHeight: "100%",     // ✅ keeps height identical
+          }}
+        >
+          <div className="aspect-[4/3]" />
+        </Card>
+      </div>
+    );
+  }
 
-                return (
-  <Card
-    key={proj.title}
-    className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${proj.center ? "lg:col-start-2" : ""}`}
-    style={{ backgroundColor: bgColor, borderColor }}
-  >
-
-                    <div className="aspect-[4/3] overflow-hidden">
-                      {proj.img ? (
-                        <img
-                          src={proj.img}
-                          alt={proj.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div
-                          className="w-full h-full grid place-items-center"
-                          style={{
-                            backgroundColor:
-                              division === "industrial" ? "#0F1A26" : "#EAE8E2",
-                          }}
-                        >
-                          <span
-                            className="text-sm font-medium"
-                            style={{
-                              color:
-                                division === "industrial" ? "#9AA4B2" : "#475569",
-                            }}
-                          >
-                            Coming soon
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <CardContent className="p-5">
-                      <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-                        {proj.title}
-                      </h3>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+  return (
+    <Card
+      key={proj.title}
+      className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${
+        proj.center ? "lg:col-start-2" : ""
+      }`}
+      style={{
+        backgroundColor: bgColor,
+        borderColor,
+        minHeight: "100%",         // ✅ same height consistency
+      }}
+    >
+      <div className="aspect-[4/3] overflow-hidden">
+        {proj.img ? (
+          <img
+            src={proj.img}
+            alt={proj.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            className="w-full h-full grid place-items-center"
+            style={{
+              backgroundColor:
+                division === "industrial" ? "#0F1A26" : "#EAE8E2",
+            }}
+          >
+            <span
+              className="text-sm font-semibold"
+              style={{
+                color: "#FFB833", // ✅ Amber color for "Coming soon"
+              }}
+            >
+              Coming soon
+            </span>
+          </div>
+        )}
+      </div>
+      <CardContent className="p-5">
+        <h3 className="text-lg font-bold" style={{ color: titleColor }}>
+          {proj.title}
+        </h3>
+      </CardContent>
+    </Card>
+  );
+})}
             </motion.div>
           );
         })()}
