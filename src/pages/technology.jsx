@@ -370,172 +370,173 @@ export default function Technology({ division = "industrial" }) {
                 </motion.div>
 
                 <motion.div>
-              <motion.div>
-  <Card
-    className="border-2 p-4"
-    style={{ backgroundColor: palette.cardBg, borderColor: palette.borderOk }}
-  >
-    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
-      <TrendingUp className="w-6 h-6 flex-shrink-0" style={{ color: palette.ok }} />
-      <CardTitle className="text-base sm:text-lg">
-        {tech.roi_aurum_title}
-      </CardTitle>
-    </CardHeader>
-    <CardContent className="p-0 space-y-2 text-sm">
-      <p className="text-xs" style={{ color: palette.subtext }}>
-        {tech.roi_aurum_desc}
-      </p>
-      <div
-        className="flex justify-between items-center p-2 rounded-lg"
-        style={{ backgroundColor: palette.cardBg2 }}
-      >
-        <span className="text-xs" style={{ color: palette.subtext }}>
-          {tech.roi_traditional_report_time}
-        </span>
-        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-          {tech.roi_aurum_report_value}
-        </span>
-      </div>
-      <div
-        className="flex justify-between items-center p-2 rounded-lg"
-        style={{ backgroundColor: palette.cardBg2 }}
-      >
-        <span className="text-xs" style={{ color: palette.subtext }}>
-          {tech.roi_traditional_decision}
-        </span>
-        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-          {tech.roi_aurum_decision_value}
-        </span>
-      </div>
-    </CardContent>
-  </Card>
-</motion.div>
+                  <Card
+                    className="border-2 p-4"
+                    style={{ backgroundColor: palette.cardBg, borderColor: palette.borderOk }}
+                  >
+                    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
+                      <TrendingUp
+                        className="w-6 h-6 flex-shrink-0"
+                        style={{ color: palette.ok }}
+                      />
+                      <CardTitle className="text-base sm:text-lg">
+                        {tech.roi_aurum_title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0 space-y-2 text-sm">
+                      <p className="text-xs" style={{ color: palette.subtext }}>
+                        {tech.roi_aurum_desc}
+                      </p>
+                      <div
+                        className="flex justify-between items-center p-2 rounded-lg"
+                        style={{ backgroundColor: palette.cardBg2 }}
+                      >
+                        <span className="text-xs" style={{ color: palette.subtext }}>
+                          {tech.roi_traditional_report_time}
+                        </span>
+                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
+                          {tech.roi_aurum_report_value}
+                        </span>
+                      </div>
+                      <div
+                        className="flex justify-between items-center p-2 rounded-lg"
+                        style={{ backgroundColor: palette.cardBg2 }}
+                      >
+                        <span className="text-xs" style={{ color: palette.subtext }}>
+                          {tech.roi_traditional_decision}
+                        </span>
+                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
+                          {tech.roi_aurum_decision_value}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </div>
+            </motion.div>
 
-{/* ✅ replaced </main> with proper closing tag */}
-</motion.div> 
+            <div className="border-t-2 pt-6" style={{ borderColor: palette.divider }}>
+              <div className="max-w-5xl mx-auto">
+                <motion.h3
+                  className="font-bold text-center mb-6"
+                  style={{
+                    fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
+                    color: palette.accent,
+                  }}
+                >
+                  {tech.how_it_works_title}
+                </motion.h3>
 
-<div className="border-t-2 pt-6" style={{ borderColor: palette.divider }}>
-  <div className="max-w-5xl mx-auto">
-    <motion.h3
-      className="font-bold text-center mb-6"
-      style={{
-        fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
-        color: palette.accent,
-      }}
-    >
-      {tech.how_it_works_title}
-    </motion.h3>
+                <div className="grid md:grid-cols-4 gap-4 mb-8">
+                  {[
+                    {
+                      step: "1",
+                      icon: <Scan className="w-8 h-8" />,
+                      title: tech.step1_title,
+                      desc: tech.step1_desc,
+                      color: palette.accent,
+                    },
+                    {
+                      step: "2",
+                      icon: <Cpu className="w-8 h-8" />,
+                      title: tech.step2_title,
+                      desc: tech.step2_desc,
+                      color: palette.ok,
+                    },
+                    {
+                      step: "3",
+                      icon: <BarChart4 className="w-8 h-8" />,
+                      title: tech.step3_title,
+                      desc: tech.step3_desc,
+                      color: palette.violet,
+                    },
+                    {
+                      step: "4",
+                      icon: <Eye className="w-8 h-8" />,
+                      title: tech.step4_title,
+                      desc: tech.step4_desc,
+                      color: palette.accent,
+                    },
+                  ].map((s, i) => (
+                    <motion.div
+                      key={s.step}
+                      className="text-center relative"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.5 }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                    >
+                      <div
+                        className="relative z-10 w-16 h-16 mx-auto mb-3 flex items-center justify-center rounded-full"
+                        style={{ backgroundColor: palette.cardBg2 }}
+                      >
+                        <div style={{ color: s.color }}>{s.icon}</div>
+                      </div>
+                      <div
+                        className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2"
+                        style={{
+                          backgroundColor: s.color,
+                          borderColor: palette.pageBg,
+                          color: "white",
+                        }}
+                      >
+                        {s.step}
+                      </div>
+                      <h4 className="font-bold mb-2 text-sm">{s.title}</h4>
+                      <p className="text-xs" style={{ color: palette.subtext }}>
+                        {s.desc}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
 
-    <div className="grid md:grid-cols-4 gap-4 mb-8">
-      {[
-        {
-          step: "1",
-          icon: <Scan className="w-8 h-8" />,
-          title: tech.step1_title,
-          desc: tech.step1_desc,
-          color: palette.accent,
-        },
-        {
-          step: "2",
-          icon: <Cpu className="w-8 h-8" />,
-          title: tech.step2_title,
-          desc: tech.step2_desc,
-          color: palette.ok,
-        },
-        {
-          step: "3",
-          icon: <BarChart4 className="w-8 h-8" />,
-          title: tech.step3_title,
-          desc: tech.step3_desc,
-          color: palette.violet,
-        },
-        {
-          step: "4",
-          icon: <Eye className="w-8 h-8" />,
-          title: tech.step4_title,
-          desc: tech.step4_desc,
-          color: palette.accent,
-        },
-      ].map((s, i) => (
-        <motion.div
-          key={s.step}
-          className="text-center relative"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: i * 0.1 }}
-        >
-          <div
-            className="relative z-10 w-16 h-16 mx-auto mb-3 flex items-center justify-center rounded-full"
-            style={{ backgroundColor: palette.cardBg2 }}
-          >
-            <div style={{ color: s.color }}>{s.icon}</div>
-          </div>
-          <div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2"
-            style={{
-              backgroundColor: s.color,
-              borderColor: palette.pageBg,
-              color: "white",
-            }}
-          >
-            {s.step}
-          </div>
-          <h4 className="font-bold mb-2 text-sm">{s.title}</h4>
-          <p className="text-xs" style={{ color: palette.subtext }}>
-            {s.desc}
-          </p>
-        </motion.div>
-      ))}
-    </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <Card
+                    className="border-2"
+                    style={{ backgroundColor: palette.cardBg, borderColor: palette.border }}
+                  >
+                    <CardHeader className="p-4 pb-2">
+                      <CardTitle className="text-base" style={{ color: palette.accent }}>
+                        {tech.tech_specs_title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-2 space-y-2 text-sm">
+                      <Row l={tech.tech_specs_accuracy} r={tech.tech_specs_accuracy_value} />
+                      <Row l={tech.tech_specs_coverage} r={tech.tech_specs_coverage_value} />
+                      <Row
+                        l={tech.tech_specs_point_density}
+                        r={tech.tech_specs_point_density_value}
+                      />
+                      <Row
+                        l={tech.tech_specs_report_delivery}
+                        r={tech.tech_specs_report_delivery_value}
+                      />
+                    </CardContent>
+                  </Card>
 
-    <div className="grid md:grid-cols-2 gap-4">
-      <Card
-        className="border-2"
-        style={{ backgroundColor: palette.cardBg, borderColor: palette.border }}
-      >
-        <CardHeader className="p-4 pb-2">
-          <CardTitle className="text-base" style={{ color: palette.accent }}>
-            {tech.tech_specs_title}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-4 pt-2 space-y-2 text-sm">
-          <Row l={tech.tech_specs_accuracy} r={tech.tech_specs_accuracy_value} />
-          <Row l={tech.tech_specs_coverage} r={tech.tech_specs_coverage_value} />
-          <Row
-            l={tech.tech_specs_point_density}
-            r={tech.tech_specs_point_density_value}
-          />
-          <Row
-            l={tech.tech_specs_report_delivery}
-            r={tech.tech_specs_report_delivery_value}
-          />
-        </CardContent>
-      </Card>
-
-      <Card
-        className="border-2"
-        style={{ backgroundColor: palette.cardBg, borderColor: palette.border }}
-      >
-        <CardHeader className="p-4 pb-2">
-          <CardTitle className="text-base" style={{ color: palette.accent }}>
-            {tech.deliverables_title}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-4 pt-2">
-          <List
-            items={[
-              tech.deliverables_item1,
-              tech.deliverables_item2,
-              tech.deliverables_item3,
-              tech.deliverables_item4,
-            ]}
-          />
-        </CardContent>
-      </Card>
-    </div>
-  </div>
-</div>
+                  <Card
+                    className="border-2"
+                    style={{ backgroundColor: palette.cardBg, borderColor: palette.border }}
+                  >
+                    <CardHeader className="p-4 pb-2">
+                      <CardTitle className="text-base" style={{ color: palette.accent }}>
+                        {tech.deliverables_title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-2">
+                      <List
+                        items={[
+                          tech.deliverables_item1,
+                          tech.deliverables_item2,
+                          tech.deliverables_item3,
+                          tech.deliverables_item4,
+                        ]}
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
           </div>
         </main>
       </div>
