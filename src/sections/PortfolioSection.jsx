@@ -1,19 +1,24 @@
 // src/sections/PortfolioSection.jsx
-import React, { useState } from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function PortfolioSection({ initialDivision = "industrial", safeT = {} }) {
-  const [division, setDivision] = useState(initialDivision);
-
-  const titleText = safeT?.portfolio_title ?? "Our Portfolio";
+export default function PortfolioSection({
+  division,                 // "industrial" | "residential" (from parent)
+  setDivision,              // parent setter (from main toggle)
+  safeT = {},
+}) {
+  // ---- Safe fallbacks
   const residential = safeT?.projects?.residential ?? [
     "Coastal Residence, Italy",
     "Modern Villa, Turkey",
     "Luxury Apartments, Poland",
   ];
+  const titleText = safeT?.portfolio_title ?? "Our Portfolio";
 
   const isIndustrial = division === "industrial";
+
+  // ---- Theme colors
   const pageBg = isIndustrial ? "#0C0E14" : "#F5F3F0";
   const text = isIndustrial ? "#F1F5F9" : "#24324B";
   const accent = isIndustrial ? "#FFB833" : "#D9B566";
@@ -21,6 +26,7 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
   const toggleBg = isIndustrial ? "rgba(27,42,58,0.70)" : "rgba(36,50,75,0.06)";
   const tabTextIdle = isIndustrial ? "#E2E8F0" : "#24324B";
 
+  // ---- Projects
   const industrialOne = {
     img: null,
     comingSoon: true,
@@ -46,6 +52,7 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
     },
   ];
 
+  // fixed 3 slots to prevent layout shift
   const projects = isIndustrial
     ? [industrialOne, { placeholder: true }, { placeholder: true }]
     : residentialThree;
@@ -57,6 +64,7 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
   return (
     <section className="w-full" style={{ backgroundColor: pageBg, color: text }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Title */}
         <h2
           className="text-center font-bold mb-6"
           style={{
@@ -68,6 +76,7 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
           {titleText}
         </h2>
 
+        {/* Toggle pill — controlled by parent */}
         <div
           className="mx-auto mb-6 flex items-center rounded-full px-1"
           style={{
@@ -79,7 +88,7 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
         >
           <button
             type="button"
-            onClick={() => setDivision("industrial")}
+            onClick={() => setDivision?.("industrial")}
             className="flex-1 h-[36px] rounded-full font-semibold text-sm"
             style={{
               color: division === "industrial" ? pageBg : tabTextIdle,
@@ -93,10 +102,9 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
           >
             Industrial
           </button>
-
           <button
             type="button"
-            onClick={() => setDivision("residential")}
+            onClick={() => setDivision?.("residential")}
             className="flex-1 h-[36px] rounded-full font-semibold text-sm"
             style={{
               color: division === "residential" ? pageBg : tabTextIdle,
@@ -112,6 +120,7 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
           </button>
         </div>
 
+        {/* Projects grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`${division}-projects-stable`}
@@ -161,9 +170,7 @@ export default function PortfolioSection({ initialDivision = "industrial", safeT
                       >
                         <span
                           className="text-sm font-medium"
-                          style={{
-                            color: isIndustrial ? "#9AA4B2" : "#475569",
-                          }}
+                          style={{ color: isIndustrial ? "#9AA4B2" : "#475569" }}
                         >
                           Coming soon
                         </span>
