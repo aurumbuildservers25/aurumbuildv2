@@ -680,7 +680,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             </div>
           </div>
 
-  {/* Projects */}
+{/* Projects */}
 <div className="mt-8">
   <AnimatePresence mode="wait">
     {(() => {
