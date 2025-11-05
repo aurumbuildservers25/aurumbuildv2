@@ -418,55 +418,51 @@ export default function Technology({ division = "industrial" }) {
 </motion.div>
 
                 {/* AURUM: Drone + BIM */}
-             <motion.div className="h-full">
-  <Card
-    className="border-2 p-4 h-full flex flex-col"  // <-- forza stessa altezza e layout a colonna
-    style={{ backgroundColor: palette.cardBg, borderColor: palette.borderOk }}
-  >
-    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
-      <TrendingUp
-        className="w-6 h-6 flex-shrink-0"
-        style={{ color: palette.ok }}
-      />
-      <CardTitle
-        className="text-base sm:text-lg"
-        style={{ color: (palette.gold ?? '#D4AF37') }} // <-- titolo oro
-      >
-        {tech.roi_aurum_title}
-      </CardTitle>
-    </CardHeader>
-
-    <CardContent className="p-0 space-y-2 text-sm flex-1"> {/* <-- riempie lo spazio per allineare le altezze */}
-      <p className="text-xs" style={{ color: palette.subtext }}>
-        {tech.roi_aurum_desc}
-      </p>
-
-      <div
-        className="flex justify-between items-center p-2 rounded-lg"
-        style={{ backgroundColor: palette.cardBg2 }}
-      >
-        <span className="text-xs" style={{ color: palette.subtext }}>
-          {tech.roi_traditional_report_time}
-        </span>
-        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-          {tech.roi_aurum_report_value}
-        </span>
-      </div>
-
-      <div
-        className="flex justify-between items-center p-2 rounded-lg"
-        style={{ backgroundColor: palette.cardBg2 }}
-      >
-        <span className="text-xs" style={{ color: palette.subtext }}>
-          {tech.roi_traditional_decision}
-        </span>
-        <span className="font-bold text-sm" style={{ color: palette.ok }}>
-          {tech.roi_aurum_decision_value}
-        </span>
-      </div>
-    </CardContent>
-  </Card>
-</motion.div>
+        <motion.div>
+                  <Card
+                    className="border-2 p-4"
+                    style={{ backgroundColor: palette.cardBg, borderColor: palette.borderOk }}
+                  >
+                    <CardHeader className="p-0 mb-3 flex-row items-center gap-3">
+                      <TrendingUp
+                        className="w-6 h-6 flex-shrink-0"
+                        style={{ color: palette.ok }}
+                      />
+                      <CardTitle className="text-base sm:text-lg">
+                        {tech.roi_aurum_title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0 space-y-2 text-sm">
+                      <p className="text-xs" style={{ color: palette.subtext }}>
+                        {tech.roi_aurum_desc}
+                      </p>
+                      <div
+                        className="flex justify-between items-center p-2 rounded-lg"
+                        style={{ backgroundColor: palette.cardBg2 }}
+                      >
+                        <span className="text-xs" style={{ color: palette.subtext }}>
+                          {tech.roi_traditional_report_time}
+                        </span>
+                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
+                          {tech.roi_aurum_report_value}
+                        </span>
+                      </div>
+                      <div
+                        className="flex justify-between items-center p-2 rounded-lg"
+                        style={{ backgroundColor: palette.cardBg2 }}
+                      >
+                        <span className="text-xs" style={{ color: palette.subtext }}>
+                          {tech.roi_traditional_decision}
+                        </span>
+                        <span className="font-bold text-sm" style={{ color: palette.ok }}>
+                          {tech.roi_aurum_decision_value}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </div>
+            </motion.div>
             {/* ---------------------------------------------------- */}
             {/* HOW IT WORKS + SPECS / DELIVERABLES */}
             {/* ---------------------------------------------------- */}
