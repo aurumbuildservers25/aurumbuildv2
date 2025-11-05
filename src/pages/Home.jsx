@@ -263,9 +263,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                   color:
                     division === "residential"
                       ? "white"
-                      : division === "industrial"
-                      ? "#E2E8F0"
-                      : "#24324B",
+                      : (division === "industrial" ? "#E2E8F0" : "#24324B"),
                   boxShadow:
                     division === "residential"
                       ? "0 4px 12px rgba(139,92,246,0.25)"
@@ -674,9 +672,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                     color:
                       division === "residential"
                         ? "white"
-                        : division === "industrial"
-                        ? "#E2E8F0"
-                        : "#24324B",
+                        : (division === "industrial" ? "#E2E8F0" : "#24324B"),
                     boxShadow:
                       division === "residential"
                         ? "0 4px 12px rgba(139,92,246,0.25)"
@@ -764,9 +760,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
                       return (
                         <Card
                           key={proj.title}
-                          className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${
-                            proj.center ? "md:col-start-2" : ""
-                          }`}
+                          className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${proj.center ? "md:col-start-2" : ""}`}
                           style={{
                             backgroundColor: bgColor,
                             borderColor,
