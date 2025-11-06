@@ -616,7 +616,14 @@ export default function Home({ division = "industrial", setDivision = () => {} }
       <div className="section-divider" />
 
 {/* ---- PROJECTS ---- */}
-<SectionWrapper id="projects" className="border-b" style={{ backgroundColor: division === "industrial" ? "#0C0E14" : "#E8E6E3", borderColor: "var(--border-color)" }}>
+<SectionWrapper
+  id="projects"
+  className="border-b"
+  style={{
+    backgroundColor: division === "industrial" ? "#0C0E14" : "#E8E6E3",
+    borderColor: "var(--border-color)",
+  }}
+>
   <div className="max-w-screen-xl mx-auto px-6">
     <div className="text-center mb-6">
       <h2
@@ -631,6 +638,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
         {safeT.projects.title}
       </h2>
 
+      {/* Toggle */}
       <div className="flex justify-center mt-4">
         <div
           className="p-1.5 rounded-full flex gap-1 border-2 w-full max-w-md"
@@ -667,10 +675,7 @@ export default function Home({ division = "industrial", setDivision = () => {} }
             style={{
               backgroundColor:
                 division === "residential" ? "#8B5CF6" : "transparent",
-              color:
-                division === "residential"
-                  ? "white"
-                  : (division === "industrial" ? "#E2E8F0" : "#24324B"),
+              color: division === "residential" ? "white" : "#24324B",
               boxShadow:
                 division === "residential"
                   ? "0 4px 12px rgba(139,92,246,0.25)"
@@ -683,42 +688,25 @@ export default function Home({ division = "industrial", setDivision = () => {} }
       </div>
     </div>
 
-    {/* Projects */}
+    {/* PROJECT GRID */}
     <div className="mt-8">
       <AnimatePresence mode="wait">
         {(() => {
-          const industrialOne = {
-            img: null,
-            title: "Foundry, Poland",
-            type: "industrial",
-            center: true,
-          };
-
-          const residentialThree = [
+          const residentialProjects = [
             {
               img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
               title: safeT.projects.residential[0],
-              type: "residential",
             },
             {
               img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
               title: safeT.projects.residential[1],
-              type: "residential",
             },
             {
               img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
               title: safeT.projects.residential[2],
-              type: "residential",
             },
           ];
 
-          // Use ghost columns to keep the middle position at md+
-          const projects =
-            division === "industrial"
-              ? [{ placeholder: true }, industrialOne, { placeholder: true }]
-              : residentialThree;
-
-          // Colors
           const bgColor = division === "industrial" ? "#132132" : "#F7F7F5";
           const borderColor =
             division === "industrial"
@@ -726,79 +714,121 @@ export default function Home({ division = "industrial", setDivision = () => {} }
               : "rgba(36,50,75,0.08)";
           const titleColor = division === "industrial" ? "#FFB833" : "#D9B566";
 
+          if (division === "industrial") {
+            return (
+              <motion.div
+                key="industrial-projects"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              >
+                {/* --- Left ghost column (3 cards) --- */}
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={`ghost-left-${i}`}
+                    className="hidden md:block opacity-0 pointer-events-none"
+                  >
+                    <Card
+                      className="overflow-hidden border"
+                      style={{
+                        backgroundColor: bgColor,
+                        borderColor,
+                      }}
+                    >
+                      <div style={{ aspectRatio: "4 / 3" }} />
+                    </Card>
+                  </div>
+                ))}
+
+                {/* --- Center real card --- */}
+                <Card
+                  key="foundry"
+                  className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
+                  style={{
+                    backgroundColor: bgColor,
+                    borderColor,
+                  }}
+                >
+                  <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+                    <div
+                      className="w-full h-full flex items-center justify-center"
+                      style={{ backgroundColor: "#0F1A26" }}
+                    >
+                      <span
+                        className="text-base font-semibold"
+                        style={{ color: "#FFB833" }}
+                      >
+                        Coming soon
+                      </span>
+                    </div>
+                  </div>
+                  <CardContent className="p-5 text-center">
+                    <h3
+                      className="text-lg font-bold"
+                      style={{ color: titleColor }}
+                    >
+                      Foundry, Poland
+                    </h3>
+                  </CardContent>
+                </Card>
+
+                {/* --- Right ghost column (3 cards) --- */}
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={`ghost-right-${i}`}
+                    className="hidden md:block opacity-0 pointer-events-none"
+                  >
+                    <Card
+                      className="overflow-hidden border"
+                      style={{
+                        backgroundColor: bgColor,
+                        borderColor,
+                      }}
+                    >
+                      <div style={{ aspectRatio: "4 / 3" }} />
+                    </Card>
+                  </div>
+                ))}
+              </motion.div>
+            );
+          }
+
+          // ---- RESIDENTIAL ----
           return (
             <motion.div
-              key={`${division}-projects-stable`}
+              key="residential-projects"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.35 }}
-              // 👇 identical layout; only switch to 3 cols at md for Industrial to center a single card
-              className={`grid grid-cols-1 ${
-                division === "industrial" ? "md:grid-cols-3" : "md:grid-cols-2"
-              } lg:grid-cols-3 gap-6`}
-              style={{ minHeight: 400 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {projects.map((proj, i) => {
-                if (proj.placeholder) {
-                  // Invisible fillers (create left/right columns at md+)
-                  return (
-                    <div
-                      key={`ghost-${i}`}
-                      className="opacity-0 pointer-events-none hidden md:block"
+              {residentialProjects.map((proj) => (
+                <Card
+                  key={proj.title}
+                  className="overflow-hidden group border transition-all duration-300 hover:shadow-2xl"
+                  style={{ backgroundColor: bgColor, borderColor }}
+                >
+                  <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+                    <img
+                      src={proj.img}
+                      alt={proj.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
+                  <CardContent className="p-5 text-center">
+                    <h3
+                      className="text-lg font-bold"
+                      style={{ color: titleColor }}
                     >
-                      <Card
-                        className="overflow-hidden group border"
-                        style={{ backgroundColor: bgColor, borderColor }}
-                      >
-                        <div className="aspect-[4/3]" />
-                      </Card>
-                    </div>
-                  );
-                }
-
-                // Real card — same size as residential; “Coming soon” replaces the image area
-                return (
-                  <Card
-                    key={proj.title}
-                    className={`overflow-hidden group border transition-all duration-300 hover:shadow-2xl ${
-                      proj.center ? "md:col-start-2" : ""
-                    }`}
-                    style={{ backgroundColor: bgColor, borderColor }}
-                  >
-               <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
-  {proj.img ? (
-    <img
-      src={proj.img}
-      alt={proj.title}
-      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-      loading="lazy"
-      style={{ display: "block" }}
-    />
-  ) : (
-    <div
-      className="w-full h-full grid place-items-center"
-      style={{
-        backgroundColor: division === "industrial" ? "#0F1A26" : "#EAE8E2",
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <span className="text-sm font-semibold" style={{ color: "#FFB833" }}>
-        Coming soon
-      </span>
-    </div>
-  )}
-</div>
-
-                    <CardContent className="p-5">
-                      <h3 className="text-lg font-bold" style={{ color: titleColor }}>
-                        {proj.title}
-                      </h3>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+                      {proj.title}
+                    </h3>
+                  </CardContent>
+                </Card>
+              ))}
             </motion.div>
           );
         })()}
