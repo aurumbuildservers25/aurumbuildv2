@@ -6,7 +6,7 @@ export const languages = [
   { code: 'it', name: 'Italiano', flag: 'IT' },
   { code: 'es', name: 'Español',  flag: 'ES' },
   { code: 'ru', name: 'Русский',  flag: 'RU' },
-  { code: 'ku', name: 'Kurdî',    flag: 'KU' }
+  { code: 'ku', name: 'Turkish',    flag: 'TR' }
 ];
 
 export const translations = {
@@ -193,16 +193,162 @@ export const translations = {
     footer: { tagline: 'Надзор и реализация под ключ по всей Европе.' }
   },
 
-  ku: {
-    nav: { about: 'Der barê me de', technology: 'Teknoloji', projects: 'Projeyên me', contact: 'Têkilî', home: 'Sereke' },
-    hero: { title: 'Avakirina sibê, îro.', subtitle: 'Projeyên Pîşesazî û Niştecîh bi Kilît', description: 'Ji sêwirana destpêkê heya radestkirina dawîn, em di her projeyê de li seranserê Ewropayê jêhatîbûn û rastbûnê peyda dikin.', industrial: 'Pîşesazî', residential: 'Niştecîh', buildDream: 'Xewna xwe çêbikin' },
-    contact: { subtitle: 'Ba pêkve pêşerojê çêbikin', email: 'E-mail', phone: 'Têlefon', headquarters: 'Navenda Sereke', location: 'Warşova, Polonya', operationsCenter: 'Navenda Karûbarên Ewropî', officeHours: 'Duşem - În: 8:00 - 18:00', mondayFriday: 'Duşem - În: 8:00 - 18:00', saturday: 'Şemî: 9:00 - 14:00', coverageAreas: 'Herêmên Xizmetê' },
-    dreamhouse: { bannerDescription: '<strong>Her xewneke maleke wê ku wê nîşan dide şayî ye.</strong><br>Bi <em>Dreamhouse</em>, dîtina we dibe rastî: cîhên elegansiyê, çandê û ahengiyê.', startTitle: 'Xewnê Dest Pê Bikin', startDescription: 'Ji kontrolên cîhê heya nirxandina pêkaniyê û gavên pêş — em projeya we sazî dikin ku ji ramanê ber bi karê ve here — nerm, zelal û şefaf.', startNote: 'Em du pakêt pêşkêş dikin ku li gorî pêdiviyên we hatine saz kirin: Premium û Premium Plus.', premiumTitle: 'Premium', premiumPrice: '€4.000', premiumFeatures: ['Lêkolîna konseptê ya destpêkî (plana fonksiyonel û rêberiyên mîmariyê)', 'Texmînkirina destpêkî ya lêçûnan û demjimêra pêkaniyê', 'Hilbijartina erdên guncan (2-3 vebijark, heke bicih be)', 'Nexşeya operasyonel a gavên pêş ên projeyê'], premiumPlusTitle: 'Pakêta Premium Plus', premiumPlusPrice: '€7.500', premiumPlusSubtitle: 'PAKÊTA PREMIUM +', premiumPlusFeatures: ['Lêkolîna dronê RTK/LiDAR (li ku heye)', 'Modela fotogrammetrî û analîza topografîk a axê', 'Naskirina zû ya pirsgirêkên girîng an veqetandinên sêwiranê', 'Danegira tevahî ji bo radestkirina projeya 4D'], contactUs: 'Têkilî daynin', exploreTechnology: 'Keşif Teknolojî' },
-    bim_monitoring: { title: "Çavdêriya Pêşveçûna Avakirinê ya BIM-ê bi Drone", subtitle: "Pêşveçûna avakirinê di 4D de (dem + lêçûn) bi RTK LiDAR & fotogrammetrî bipîvin - ewletir, zûtir, rasttir.", badges: ["RTK + LiDAR + Fotogrammetrî", "Yekbûna 4D BIM (Navisworks/SYNCHRO)", "Raporta Mişterî di 48 saetan de", "Avakirî li hember Sêwiranê"], benefits: ["Dema pîvandinê heya 70% kêm bikin", "Destnîşankirina zû ya pevçûn û veqetandinan", "Kontrola çêtir li ser lêçûn û bernameyê"] },
-    about: { residential: { title: 'Xewn jiyîn kirin, kalîte çêkirin.', description: 'Her niştecîhek ji hevdîtina sêwiran û endezyariyê tê çêkirin. Ji lêkolîna destpêkê heya radestkirina dawî, em sêwirkar, pispor û dabînker hevdeng dikin da ku rehetî, rastbûn û nirxa dirêj misoger bikin.', microclaim: 'Elegansî, rêbaz û baldarî di her hûrgiliyê de.' }, industrial: { title: 'Karfermaya Giştî ji bo projeyên dirêj.', description: 'Ji sêwiranê heya radestkirinê, em plansazî, endezyarî û rêveberiya şantiyeyê bi pêvajoyan ên pejirandî û standardên navneteweyî hevdeng dikin.', microclaim: 'Bikêrî, kontrol û hêza bingeh di her qonaxek ê avakirinê de.' }, reach: 'Gihîştina Ewropî', methods: 'Rêbazên Pejirandî', team: 'Tîma Pispor', quality: 'Kalîteya Bêhempa' },
-    process: { title: 'Pêvajoyek ku Hûn Dikarin Pê Bawer Bikin', description: 'Ji stendina axê heya radestkirina dawîn, em piştrast dikin ku her gav zelal û bikêr e.', steps: { land: { title: 'Bidestxistina Zeviyê', desc: 'Cihê bêkêmasî ji bo projeya xwe ewle bikin.' }, permits: { title: 'Destûr û Plansazkirin', desc: 'Navîgasyona burokrasiyê ji bo erêkirina tevahî.' }, design: { title: 'Sêwiran û Avakirin', desc: 'Çêkirina nexşeyê û anîna jiyanê.' }, supervision: { title: 'Çavdêriya Veberhêner', desc: 'Pabendbûna bi kalîte û budceyê misoger dike.' }, handover: { title: 'Radestkirina Kilît-dest', desc: 'Radestkirina milkê dawîn, amade-bikaranîna.' } } },
-    technology: { title: 'Teknoloji', challenge_title: 'Pirsgirêk', challenge_desc: 'Çavdêriya avakirinê ya kevneşopî li ser lêkolînên destan û çerxên raporkirinê yên hêdî disekine, ku dibe sedema derengî û zêdebûna lêçûnan.', solution_title: 'Çareseriya Me', solution_desc: 'Teknolojiya dronê ya yekbûyî bi 4D BIM re cêwîyek dîjîtal a bêkêmasî diafirîne ji bo şopandina pêşkeftinê ya rast-dem û analîzên pêşbînîker.', eu_projects_delay_note: 'Di Yekîtiya Ewropayê de, zêdetirî', eu_projects_delay_percentage: '70%', eu_projects_delay_context: 'projeyên mezin bi derengî û lêçûnên zêde re rû bi rû ne.', feature_4dbim_title: 'Yekbûna 4D BIM', feature_4dbim_desc: 'Pêşkeftinê bi sêwiranê re hevdeng bikin da ku demjimêr û budçeyê kontrol bikin.', feature_quality_title: 'Kalîteya Dîjîtal û Ewlehiyê', feature_quality_desc: 'Lihevhatina ewlehiyê û piştrastkirina kalîteyê ya bi AI-ê ve hatî çalak kirin.', feature_future_title: 'Amûrên Amade-Pêşerojê', feature_future_desc: 'Lênêrîna pêşbînîker û veqetandina çavkaniyên jîr.', feature_savings_title: 'Teserûfa Lêçûn û Demê', feature_savings_desc: 'Dema pîvandinê heya 70% kêm bikin û biryarên proaktîf bidin.', roi_title: 'Ji Hefteyan heya Saetan: ROI ya Çavdêriya Dîjîtal', roi_traditional_title: 'Rêbazên Kevneşopî', roi_traditional_desc: 'Li ser lêkolînên destan disekine, ku dibe sedema berhevkirina daneyan a hêdî û potansiyela bilind a xeletiyan.', roi_traditional_report_time: 'Dema Raporkirinê', roi_traditional_report_value: '2-4 Hefte', roi_traditional_decision: 'Biryardanîn', roi_traditional_decision_value: 'Reaktîf', roi_aurum_title: 'AURUM: Drone + BIM', roi_aurum_desc: 'Girtina daneya dronê ya otomatîkî bi mîlyonan xalên daneyê ji bo cêwîyek dîjîtal a rast-dem peyda dike.', roi_aurum_report_value: '48 Saet', roi_aurum_decision_value: 'Proaktîf', how_it_works_title: 'Çawa Dixebite', step1_title: 'Girtina Daneyan', step1_desc: 'Firînên dronê yên RTK daneyên LiDAR û fotogrammetrî digirin', step2_title: 'Pêvajoya', step2_desc: 'Algorîtmayên AI ewrên xalan pêvajoy dikin û modelên 3D diafirînin', step3_title: 'Analîz', step3_desc: 'Avakirî li hember sêwiranê berhev bikin, pêşkeftin û lêçûnan bişopînin', step4_title: 'Raporkirin', step4_desc: 'Raporên berfireh di nav 48 demjimêran de radest bikin', tech_specs_title: 'Taybetmendiyên Teknîkî', tech_specs_accuracy: 'Rastbûn:', tech_specs_accuracy_value: 'Rastbûna RTK ±2cm', tech_specs_coverage: 'Vegirtin:', tech_specs_coverage_value: 'Heta 500 hektar di rojê de', tech_specs_point_density: 'Dendika Xalê:', tech_specs_point_density_value: '300-600 xal ji bo metreya çargoşe', tech_specs_report_delivery: 'Radestkirina Raporê:', tech_specs_report_delivery_value: '48 saet', deliverables_title: 'Radestkirin', deliverables_item1: 'Daneyên Ewrê Xalê 3D', deliverables_item2: 'Berawirdkirina Avakirî li hember Sêwiranê', deliverables_item3: 'Dashboarda Analîzên Pêşketinê', deliverables_item4: 'Raporên Guhertina Lêçûn û Ewlehiyê', cta: 'Keşif Teknolojî' },
-    projects: { title: 'Portfolioya Me', industrial: ['Navenda Lojîstîkê, Polonya', 'Fabrîkaya Otomotîvê, Îtalya', 'Kompleksa Embarê, Spanya'], residential: ['Vîlaya Nûjen, Tirkiye', 'Apartmanên Luks, Polonya', 'Rûniştina Deryayê, Îtalya'] },
-    footer: { tagline: 'Çavdêrî û pêkanîna bi kilît li seranserê Ewropayê.' }
+tr: {
+  nav: { 
+    about: 'Hakkımızda', 
+    technology: 'Teknoloji', 
+    projects: 'Projeler', 
+    contact: 'İletişim', 
+    home: 'Ana Sayfa' 
+  },
+  hero: { 
+    title: 'Geleceği bugün inşa ediyoruz.', 
+    subtitle: 'Anahtar teslim projeler', 
+    description: 'İlk tasarımdan son teslim aşamasına kadar, Avrupa genelindeki her projede mükemmellik ve hassasiyet sunuyoruz.', 
+    industrial: 'Endüstriyel', 
+    residential: 'Konut', 
+    buildDream: 'Hayalini İnşa Et' 
+  },
+  contact: { 
+    subtitle: 'Gelin geleceğinizi bugün inşa edelim', 
+    email: 'E-posta', 
+    phone: 'Telefon', 
+    headquarters: 'Merkez Ofis', 
+    location: 'Varşova, Polonya', 
+    operationsCenter: 'Avrupa Operasyon Merkezi', 
+    officeHours: 'Pazartesi - Cuma: 8:00 - 18:00', 
+    mondayFriday: 'Pazartesi - Cuma: 8:00 - 18:00', 
+    saturday: 'Cumartesi: 9:00 - 14:00', 
+    coverageAreas: 'Hizmet Bölgeleri' 
+  },
+  dreamhouse: { 
+    bannerDescription: '<strong>Her hayal, onu yansıtan bir evi hak eder.</strong><br><em>Dreamhouse</em> ile vizyonunuz gerçeğe dönüşür: zarafet, kültür ve uyumla dolu yaşam alanları.', 
+    startTitle: 'Hayale Başla', 
+    startDescription: 'Arazi kontrolünden fizibilite analizine ve sonraki adımlara kadar — projenizi fikirden uygulamaya sorunsuz, açık ve net bir şekilde taşıyoruz.', 
+    startNote: 'İhtiyaçlarınıza göre iki paket sunuyoruz: Premium ve Premium Plus.', 
+    premiumTitle: 'Premium', 
+    premiumPrice: '€4.000', 
+    premiumFeatures: [
+      'Ön konsept çalışması (fonksiyonel yerleşim ve mimari yönergeler)', 
+      'Ön maliyet hesaplaması ve uygulama takvimi', 
+      'Uygun arsa seçimi (uygunsa 2-3 seçenek)', 
+      'Bir sonraki proje adımları için operasyonel yol haritası'
+    ], 
+    premiumPlusTitle: 'Premium Plus Paketi', 
+    premiumPlusPrice: '€7.500', 
+    premiumPlusSubtitle: 'PREMIUM PAKET +', 
+    premiumPlusFeatures: [
+      'RTK/LiDAR drone ölçümü (uygun olduğunda)', 
+      'Fotogrametrik model ve arazinin topografik analizi', 
+      'Kritik sorunların veya tasarım sapmalarının erken tespiti', 
+      '4D proje teslimi için eksiksiz veri seti'
+    ], 
+    contactUs: 'Bizimle İletişime Geçin', 
+    exploreTechnology: 'Teknolojiyi Keşfet' 
+  },
+  bim_monitoring: { 
+    title: "Drone ile BIM İlerleme İzleme", 
+    subtitle: "RTK LiDAR ve fotogrametri sayesinde 4D (zaman + maliyet) ilerlemeyi ölçün — daha güvenli, daha hızlı, daha hassas.", 
+    badges: [
+      "RTK + LiDAR + Fotogrametri", 
+      "4D BIM Entegrasyonu (Navisworks/SYNCHRO)", 
+      "48 Saatte Müşteri Raporu", 
+      "Gerçek Durum vs Proje"
+    ], 
+    benefits: [
+      "Ölçüm süresinde %70’e kadar azalma", 
+      "Çakışma ve sapmaların erken tespiti", 
+      "Maliyet ve zamanlama üzerinde daha iyi kontrol"
+    ] 
+  },
+  about: { 
+    residential: { 
+      title: 'Hayalleri gerçekleştirmek, kaliteyi inşa etmek.', 
+      description: 'Her konut projesi tasarım ile mühendisliğin buluşmasından doğar. İlk çalışmadan son teslimata kadar tasarımcıları, ustaları ve tedarikçileri koordine ederek konfor, hassasiyet ve uzun vadeli değer sağlıyoruz.', 
+      microclaim: 'Her detayda zarafet, yöntem ve özen.' 
+    }, 
+    industrial: { 
+      title: 'Uzun soluklu projeler için Genel Yüklenici.', 
+      description: 'Tasarım aşamasından teslimata kadar proje planlamasını, mühendisliği ve şantiye yönetimini kanıtlanmış süreçler ve uluslararası standartlarla entegre ediyoruz.', 
+      microclaim: 'Her inşaat aşamasında verimlilik, kontrol ve sağlamlık.' 
+    }, 
+    reach: 'Avrupa Çapında Erişim', 
+    methods: 'Kanıtlanmış Yöntemler', 
+    team: 'Uzman Ekibi', 
+    quality: 'Eşsiz Kalite' 
+  },
+  process: { 
+    title: 'Güvenebileceğiniz Bir Süreç', 
+    description: 'Arsa ediniminden anahtar teslimine kadar her adımın şeffaf ve verimli olmasını sağlıyoruz.', 
+    steps: { 
+      land: { title: 'Arsa Edinimi', desc: 'Projeniz için ideal konumu güvence altına alın.' }, 
+      permits: { title: 'İzinler ve Planlama', desc: 'Tam onay almak için bürokratik süreçleri sorunsuz yönetin.' }, 
+      design: { title: 'Tasarım ve İnşaat', desc: 'Proje oluşturma ve arazide uygulama.' }, 
+      supervision: { title: 'Yatırımcı Denetimi', desc: 'Kaliteyi ve bütçe uyumunu sağlayın.' }, 
+      handover: { title: 'Anahtar Teslim Teslimat', desc: 'Kullanıma hazır bir mülkün teslimi.' } 
+    } 
+  },
+  technology: { 
+    title: 'Teknoloji', 
+    challenge_title: 'Zorluk', 
+    challenge_desc: 'Geleneksel şantiye takibi manuel ölçümlere ve yavaş raporlamaya dayanır, bu da maliyet aşımlarına ve gecikmelere yol açar.', 
+    solution_title: 'Çözümümüz', 
+    solution_desc: '4D BIM ile entegre drone teknolojisi, gerçek zamanlı ilerleme takibi ve tahmine dayalı analizler için akıcı bir dijital ikiz oluşturur.', 
+    eu_projects_delay_note: 'Avrupa Birliği’nde büyük projelerin', 
+    eu_projects_delay_percentage: '%70’i', 
+    eu_projects_delay_context: 'gecikme ve bütçe aşımı sorunlarıyla karşılaşıyor.', 
+    feature_4dbim_title: '4D BIM Entegrasyonu', 
+    feature_4dbim_desc: 'İlerlemeyi projeyle senkronize ederek zaman ve bütçeyi kontrol edin.', 
+    feature_quality_title: 'Dijital Kalite ve Güvenlik', 
+    feature_quality_desc: 'Yapay zeka destekli güvenlik ve kalite güvencesi.', 
+    feature_future_title: 'Geleceğin Araçları', 
+    feature_future_desc: 'Geleceğin Araçları', 
+    feature_savings_title: 'Zaman ve Maliyet Tasarrufu', 
+    feature_savings_desc: 'Ölçüm süresini %70’e kadar kısaltın ve proaktif kararlar alın.', 
+    roi_title: 'Haftalardan Saatlere: Dijital İzlemede Yatırım Getirisi', 
+    roi_traditional_title: 'Geleneksel Yöntemler', 
+    roi_traditional_desc: 'Manuel ölçümlere dayanır; veri toplama yavaş ve hata riski yüksektir.', 
+    roi_traditional_report_time: 'Raporlama Süresi', 
+    roi_traditional_report_value: '2-4 Hafta', 
+    roi_traditional_decision: 'Karar Verme', 
+    roi_traditional_decision_value: 'Reaktif', 
+    roi_aurum_title: 'AURUM: Drone + BIM', 
+    roi_aurum_desc: 'Drone ile otomatik veri toplama, gerçek zamanlı dijital ikiz için milyonlarca veri noktası sağlar.', 
+    roi_aurum_report_value: '48 Saat', 
+    roi_aurum_decision_value: 'Proaktif', 
+    how_it_works_title: 'Nasıl Çalışır', 
+    step1_title: 'Veri Toplama', 
+    step1_desc: 'RTK drone uçuşları LiDAR ve fotogrametri verilerini toplar', 
+    step2_title: 'İşleme', 
+    step2_desc: 'Yapay zeka algoritmaları nokta bulutlarını işleyip 3D modeller oluşturur', 
+    step3_title: 'Analiz', 
+    step3_desc: 'Gerçek durum ile projeyi karşılaştırın, ilerlemeyi ve maliyetleri takip edin', 
+    step4_title: 'Raporlama', 
+    step4_desc: '48 saat içinde kapsamlı raporlar sunun', 
+    tech_specs_title: 'Teknik Özellikler', 
+    tech_specs_accuracy: 'Hassasiyet:', 
+    tech_specs_accuracy_value: 'RTK Doğruluğu ±2cm', 
+    tech_specs_coverage: 'Kapsam:', 
+    tech_specs_coverage_value: 'Günde 500 hektara kadar', 
+    tech_specs_point_density: 'Nokta Yoğunluğu:', 
+    tech_specs_point_density_value: '300-600 nokta/m²', 
+    tech_specs_report_delivery: 'Rapor Teslimi:', 
+    tech_specs_report_delivery_value: '48 saat', 
+    deliverables_title: 'Çıktılar', 
+    deliverables_item1: '3D Nokta Bulutu Verileri', 
+    deliverables_item2: 'Gerçek Durum vs Proje Karşılaştırması', 
+    deliverables_item3: 'İlerleme Analiz Paneli', 
+    deliverables_item4: 'Maliyet ve Güvenlik Değişim Raporları', 
+    cta: 'Teknolojiyi Keşfet' 
+  },
+  projects: { 
+    title: 'Portföyümüz', 
+    industrial: ['Lojistik Merkezi, Polonya', 'Otomotiv Fabrikası, İtalya', 'Depo Kompleksi, İspanya'], 
+    residential: ['Modern Villa, Türkiye', 'Lüks Daireler, Polonya', 'Sahil Rezidansı, İtalya'] 
+  },
+  footer: { 
+    tagline: 'Avrupa genelinde anahtar teslim gözetim ve uygulama.' 
   }
+}
+
 };
