@@ -6,7 +6,7 @@ export const languages = [
   { code: 'it', name: 'Italiano', flag: 'IT' },
   { code: 'es', name: 'Español',  flag: 'ES' },
   { code: 'ru', name: 'Русский',  flag: 'RU' },
-  { code: 'ku', name: 'Turkish',    flag: 'TR' }
+  { code: 'tr', name: 'Turkish',    flag: 'TR' }
 ];
 
 export const translations = {
