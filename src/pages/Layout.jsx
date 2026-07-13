@@ -305,7 +305,6 @@ useEffect(() => {
           </I18nCtx.Provider>
         </motion.div>
       </AnimatePresence>
-
    <footer
   className="py-12 transition-colors duration-600"
   style={{
@@ -321,7 +320,8 @@ useEffect(() => {
   }}
 >
   <div className="max-w-screen-xl mx-auto px-6">
-    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-10 mb-10">
+    {/* Main footer row */}
+    <div className="grid md:grid-cols-3 gap-12 mb-10">
       {/* Brand */}
       <div>
         <div className="text-2xl font-bold mb-4">
@@ -474,7 +474,7 @@ useEffect(() => {
         </h4>
 
         <div
-          className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm"
+          className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm"
           style={{
             color: isIndustrial ? "#C9D1D9" : "#4A5568",
             opacity: 0.8,
@@ -490,21 +490,28 @@ useEffect(() => {
           ))}
         </div>
       </div>
+    </div>
 
-      {/* Company Details */}
-      <div>
-        <h4
-          className="font-semibold mb-4 text-base"
-          style={{
-            color: isIndustrial ? "#FFB833" : "#D9B566",
-          }}
-        >
-          Company
-        </h4>
-
-        <div className="text-sm">
+    {/* Legal information strip */}
+    <div
+      className="py-6"
+      style={{
+        borderTop: `1px solid ${
+          isIndustrial
+            ? "rgba(255,255,255,0.08)"
+            : "rgba(36,50,75,0.10)"
+        }`,
+        borderBottom: `1px solid ${
+          isIndustrial
+            ? "rgba(255,255,255,0.08)"
+            : "rgba(36,50,75,0.10)"
+        }`,
+      }}
+    >
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <div>
           <p
-            className="mb-4 font-semibold"
+            className="text-sm font-semibold m-0"
             style={{
               color: isIndustrial ? "#F1F5F9" : "#24324B",
               letterSpacing: "0.01em",
@@ -512,60 +519,46 @@ useEffect(() => {
           >
             AURUMBUILD Sp. z o.o.
           </p>
+        </div>
 
-          <dl className="m-0">
-            {[
-              ["NIP", "6312742513"],
-              ["REGON", "54519473000000"],
-              ["KRS", "0001252561"],
-            ].map(([label, value]) => (
-              <div
-                key={label}
-                className="grid grid-cols-[64px_1fr] gap-4 py-2 border-b last:border-b-0"
+        <dl className="flex flex-wrap items-center gap-x-8 gap-y-3 m-0">
+          {[
+            ["NIP", "6312742513"],
+            ["REGON", "54519473000000"],
+            ["KRS", "0001252561"],
+          ].map(([label, value]) => (
+            <div
+              key={label}
+              className="flex items-baseline gap-3"
+            >
+              <dt
+                className="text-xs font-bold uppercase"
                 style={{
-                  borderColor: isIndustrial
-                    ? "rgba(255,255,255,0.08)"
-                    : "rgba(36,50,75,0.10)",
+                  color: isIndustrial ? "#7C8798" : "#6B7280",
+                  letterSpacing: "0.12em",
                 }}
               >
-                <dt
-                  className="text-xs font-bold uppercase"
-                  style={{
-                    color: isIndustrial ? "#7C8798" : "#6B7280",
-                    letterSpacing: "0.12em",
-                  }}
-                >
-                  {label}
-                </dt>
+                {label}
+              </dt>
 
-                <dd
-                  className="m-0"
-                  style={{
-                    color: isIndustrial ? "#C9D1D9" : "#4A5568",
-                    fontVariantNumeric: "tabular-nums",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+              <dd
+                className="m-0 text-sm"
+                style={{
+                  color: isIndustrial ? "#C9D1D9" : "#4A5568",
+                  fontVariantNumeric: "tabular-nums",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {value}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
 
     {/* Copyright */}
-    <div
-      className="text-center pt-8"
-      style={{
-        borderTop: `1px solid ${
-          isIndustrial
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(36,50,75,0.10)"
-        }`,
-      }}
-    >
+    <div className="text-center pt-8">
       <p
         className="text-sm"
         style={{
