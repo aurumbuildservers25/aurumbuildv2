@@ -492,84 +492,43 @@ useEffect(() => {
       </div>
     </div>
 
-    {/* Legal information strip */}
-    <div
-      className="py-6"
-      style={{
-        borderTop: `1px solid ${
-          isIndustrial
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(36,50,75,0.10)"
-        }`,
-        borderBottom: `1px solid ${
-          isIndustrial
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(36,50,75,0.10)"
-        }`,
-      }}
-    >
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-        <div>
-          <p
-            className="text-sm font-semibold m-0"
-            style={{
-              color: isIndustrial ? "#F1F5F9" : "#24324B",
-              letterSpacing: "0.01em",
-            }}
-          >
-            AURUMBUILD Sp. z o.o.
-          </p>
-        </div>
+    {/* Minimal legal footer */}
+<div
+  className="pt-8 mt-8 text-center"
+  style={{
+    borderTop: `1px solid ${
+      isIndustrial
+        ? "rgba(255,255,255,0.08)"
+        : "rgba(36,50,75,0.10)"
+    }`,
+  }}
+>
+  <p
+    className="text-sm flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
+    style={{
+      color: isIndustrial ? "#94A3B8" : "#6B7280",
+      letterSpacing: "0.02em",
+      fontVariantNumeric: "tabular-nums",
+      lineHeight: 1.8,
+    }}
+  >
+    <span>
+      © {new Date().getFullYear()} AURUMBUILD Sp. z o.o.
+    </span>
 
-        <dl className="flex flex-wrap items-center gap-x-8 gap-y-3 m-0">
-          {[
-            ["NIP", "6312742513"],
-            ["REGON", "54519473000000"],
-            ["KRS", "0001252561"],
-          ].map(([label, value]) => (
-            <div
-              key={label}
-              className="flex items-baseline gap-3"
-            >
-              <dt
-                className="text-xs font-bold uppercase"
-                style={{
-                  color: isIndustrial ? "#7C8798" : "#6B7280",
-                  letterSpacing: "0.12em",
-                }}
-              >
-                {label}
-              </dt>
+    <span style={{ opacity: 0.45 }}>•</span>
 
-              <dd
-                className="m-0 text-sm"
-                style={{
-                  color: isIndustrial ? "#C9D1D9" : "#4A5568",
-                  fontVariantNumeric: "tabular-nums",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </div>
+    <span>NIP 6312742513</span>
 
-    {/* Copyright */}
-    <div className="text-center pt-8">
-      <p
-        className="text-sm"
-        style={{
-          color: isIndustrial ? "#94A3B8" : "#6B7280",
-          opacity: 0.7,
-        }}
-      >
-        © {new Date().getFullYear()} AURUMBUILD Sp. z o.o. All rights reserved.
-      </p>
-    </div>
-  </div>
+    <span style={{ opacity: 0.45 }}>•</span>
+
+    <span>REGON 54519473000000</span>
+
+    <span style={{ opacity: 0.45 }}>•</span>
+
+    <span>KRS 0001252561</span>
+  </p>
+</div>
 </footer>
     </>
   );
