@@ -306,187 +306,278 @@ useEffect(() => {
         </motion.div>
       </AnimatePresence>
 
-      <footer
-        className="py-12 transition-colors duration-600"
-        style={{
-          backgroundColor: isIndustrial ? "#0C0E14" : "#F5F3F0",
-          borderTop: `1px solid ${
-            isIndustrial ? "rgba(255,255,255,0.08)" : "rgba(36,50,75,0.10)"
-          }`,
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <div className="max-w-screen-xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="text-2xl font-bold mb-4">
-                <span style={{ color: isIndustrial ? "#FFB833" : "#D9B566" }}>
-                  AURUM
-                </span>
-                <span style={{ color: isIndustrial ? "#F1F5F9" : "#24324B" }}>
-                  Build
-                </span>
-              </div>
-              <p
-                className="text-sm leading-relaxed"
-                style={{
-                  color: isIndustrial ? "#C9D1D9" : "#4A5568",
-                  opacity: 0.85,
-                }}
-              >
-                {t.footer.tagline}
-              </p>
-            </div>
-
-            <div>
-              <h4
-                className="font-semibold mb-3 text-base"
-                style={{ color: isIndustrial ? "#FFB833" : "#D9B566" }}
-              >
-                Quick Links
-              </h4>
-              <div className="space-y-2 text-sm">
-                <button
-                  key="footer-home"
-                  type="button"
-                  onClick={() => handleSectionClick("home")}
-                  className="block transition-all duration-200 hover:translate-x-1"
-                  style={{
-                    color: isIndustrial ? "#E2E8F0" : "#24324B",
-                    opacity: 0.75,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "1";
-                    e.currentTarget.style.color = isIndustrial
-                      ? "#FFB833"
-                      : "#D9B566";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0.75";
-                    e.currentTarget.style.color = isIndustrial
-                      ? "#E2E8F0"
-                      : "#24324B";
-                  }}
-                >
-                  {t.nav.home}
-                </button>
-                {SECTION_IDS.filter((id) => id !== "home").map((id) => (
-                  <button
-                    key={`footer-${id}`}
-                    type="button"
-                    onClick={() => handleSectionClick(id)}
-                    className="block transition-all duration-200 hover:translate-x-1"
-                    style={{
-                      color: isIndustrial ? "#E2E8F0" : "#24324B",
-                      opacity: 0.75,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.opacity = "1";
-                      e.currentTarget.style.color = isIndustrial
-                        ? "#FFB833"
-                        : "#D9B566";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.opacity = "0.75";
-                      e.currentTarget.style.color = isIndustrial
-                        ? "#E2E8F0"
-                        : "#24324B";
-                    }}
-                  >
-                    {t.nav[id]}
-                  </button>
-                ))}
-                <a
-                  key="footer-dreamhouse"
-                  href={createPageUrl("dreamhouse")}
-                  className="block transition-all duration-200 hover:translate-x-1"
-                  style={{
-                    color: isIndustrial ? "#E2E8F0" : "#24324B",
-                    opacity: 0.75,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "1";
-                    e.currentTarget.style.color = "#8B5CF6";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0.75";
-                    e.currentTarget.style.color = isIndustrial
-                      ? "#E2E8F0"
-                      : "#24324B";
-                  }}
-                >
-                  DH — Dreamhouse
-                </a>
-                <a
-                  key="footer-contact"
-                  href={createPageUrl("contact")}
-                  className="block transition-all duration-200 hover:translate-x-1"
-                  style={{
-                    color: isIndustrial ? "#E2E8F0" : "#24324B",
-                    opacity: 0.75,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "1";
-                    e.currentTarget.style.color = isIndustrial
-                      ? "#FFB833"
-                      : "#D9B566";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0.75";
-                    e.currentTarget.style.color = isIndustrial
-                      ? "#E2E8F0"
-                      : "#24324B";
-                  }}
-                >
-                  {t.nav.contact}
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h4
-                className="font-semibold mb-3 text-base"
-                style={{ color: isIndustrial ? "#FFB833" : "#D9B566" }}
-              >
-                {t.contact.coverageAreas}
-              </h4>
-              <div
-                className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm"
-                style={{
-                  color: isIndustrial ? "#C9D1D9" : "#4A5568",
-                  opacity: 0.8,
-                }}
-              >
-                {["Italy", "Poland", "Spain", "Turkey"].map((country) => (
-                  <span
-                    key={country}
-                    className="transition-opacity duration-200 hover:opacity-100"
-                  >
-                    {country}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="text-center pt-8"
+   <footer
+  className="py-12 transition-colors duration-600"
+  style={{
+    backgroundColor: isIndustrial ? "#0C0E14" : "#F5F3F0",
+    borderTop: `1px solid ${
+      isIndustrial
+        ? "rgba(255,255,255,0.08)"
+        : "rgba(36,50,75,0.10)"
+    }`,
+    position: "relative",
+    zIndex: 1,
+    fontFamily: "inherit",
+  }}
+>
+  <div className="max-w-screen-xl mx-auto px-6">
+    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-10 mb-10">
+      {/* Brand */}
+      <div>
+        <div className="text-2xl font-bold mb-4">
+          <span
             style={{
-              borderTop: `1px solid ${
-                isIndustrial ? "rgba(255,255,255,0.08)" : "rgba(36,50,75,0.10)"
-              }`,
+              color: isIndustrial ? "#FFB833" : "#D9B566",
             }}
           >
-            <p
-              className="text-sm"
-              style={{ color: isIndustrial ? "#94A3B8" : "#6B7280", opacity: 0.7 }}
-            >
-              © 2025 AURUM Build sp z o. o. All Rights Reserved.
-            </p>
-          </div>
+            AURUM
+          </span>
+
+          <span
+            style={{
+              color: isIndustrial ? "#F1F5F9" : "#24324B",
+            }}
+          >
+            Build
+          </span>
         </div>
-      </footer>
+
+        <p
+          className="text-sm leading-relaxed max-w-sm"
+          style={{
+            color: isIndustrial ? "#C9D1D9" : "#4A5568",
+            opacity: 0.85,
+          }}
+        >
+          {t.footer.tagline}
+        </p>
+      </div>
+
+      {/* Quick Links */}
+      <div>
+        <h4
+          className="font-semibold mb-4 text-base"
+          style={{
+            color: isIndustrial ? "#FFB833" : "#D9B566",
+          }}
+        >
+          Quick Links
+        </h4>
+
+        <div className="space-y-2 text-sm">
+          <button
+            type="button"
+            onClick={() => handleSectionClick("home")}
+            className="block transition-all duration-200 hover:translate-x-1"
+            style={{
+              color: isIndustrial ? "#E2E8F0" : "#24324B",
+              opacity: 0.75,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "1";
+              e.currentTarget.style.color = isIndustrial
+                ? "#FFB833"
+                : "#D9B566";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "0.75";
+              e.currentTarget.style.color = isIndustrial
+                ? "#E2E8F0"
+                : "#24324B";
+            }}
+          >
+            {t.nav.home}
+          </button>
+
+          {SECTION_IDS.filter((id) => id !== "home").map((id) => (
+            <button
+              key={`footer-${id}`}
+              type="button"
+              onClick={() => handleSectionClick(id)}
+              className="block transition-all duration-200 hover:translate-x-1"
+              style={{
+                color: isIndustrial ? "#E2E8F0" : "#24324B",
+                opacity: 0.75,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.color = isIndustrial
+                  ? "#FFB833"
+                  : "#D9B566";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "0.75";
+                e.currentTarget.style.color = isIndustrial
+                  ? "#E2E8F0"
+                  : "#24324B";
+              }}
+            >
+              {t.nav[id]}
+            </button>
+          ))}
+
+          <a
+            href={createPageUrl("dreamhouse")}
+            className="block transition-all duration-200 hover:translate-x-1"
+            style={{
+              color: isIndustrial ? "#E2E8F0" : "#24324B",
+              opacity: 0.75,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "1";
+              e.currentTarget.style.color = "#8B5CF6";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "0.75";
+              e.currentTarget.style.color = isIndustrial
+                ? "#E2E8F0"
+                : "#24324B";
+            }}
+          >
+            DH — Dreamhouse
+          </a>
+
+          <a
+            href={createPageUrl("contact")}
+            className="block transition-all duration-200 hover:translate-x-1"
+            style={{
+              color: isIndustrial ? "#E2E8F0" : "#24324B",
+              opacity: 0.75,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = "1";
+              e.currentTarget.style.color = isIndustrial
+                ? "#FFB833"
+                : "#D9B566";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = "0.75";
+              e.currentTarget.style.color = isIndustrial
+                ? "#E2E8F0"
+                : "#24324B";
+            }}
+          >
+            {t.nav.contact}
+          </a>
+        </div>
+      </div>
+
+      {/* Coverage Areas */}
+      <div>
+        <h4
+          className="font-semibold mb-4 text-base"
+          style={{
+            color: isIndustrial ? "#FFB833" : "#D9B566",
+          }}
+        >
+          {t.contact.coverageAreas}
+        </h4>
+
+        <div
+          className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm"
+          style={{
+            color: isIndustrial ? "#C9D1D9" : "#4A5568",
+            opacity: 0.8,
+          }}
+        >
+          {["Italy", "Poland", "Spain", "Turkey"].map((country) => (
+            <span
+              key={country}
+              className="transition-opacity duration-200 hover:opacity-100"
+            >
+              {country}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Company Details */}
+      <div>
+        <h4
+          className="font-semibold mb-4 text-base"
+          style={{
+            color: isIndustrial ? "#FFB833" : "#D9B566",
+          }}
+        >
+          Company
+        </h4>
+
+        <div className="text-sm">
+          <p
+            className="mb-4 font-semibold"
+            style={{
+              color: isIndustrial ? "#F1F5F9" : "#24324B",
+              letterSpacing: "0.01em",
+            }}
+          >
+            AURUMBUILD Sp. z o.o.
+          </p>
+
+          <dl className="m-0">
+            {[
+              ["NIP", "6312742513"],
+              ["REGON", "54519473000000"],
+              ["KRS", "0001252561"],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="grid grid-cols-[64px_1fr] gap-4 py-2 border-b last:border-b-0"
+                style={{
+                  borderColor: isIndustrial
+                    ? "rgba(255,255,255,0.08)"
+                    : "rgba(36,50,75,0.10)",
+                }}
+              >
+                <dt
+                  className="text-xs font-bold uppercase"
+                  style={{
+                    color: isIndustrial ? "#7C8798" : "#6B7280",
+                    letterSpacing: "0.12em",
+                  }}
+                >
+                  {label}
+                </dt>
+
+                <dd
+                  className="m-0"
+                  style={{
+                    color: isIndustrial ? "#C9D1D9" : "#4A5568",
+                    fontVariantNumeric: "tabular-nums",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    {/* Copyright */}
+    <div
+      className="text-center pt-8"
+      style={{
+        borderTop: `1px solid ${
+          isIndustrial
+            ? "rgba(255,255,255,0.08)"
+            : "rgba(36,50,75,0.10)"
+        }`,
+      }}
+    >
+      <p
+        className="text-sm"
+        style={{
+          color: isIndustrial ? "#94A3B8" : "#6B7280",
+          opacity: 0.7,
+        }}
+      >
+        © {new Date().getFullYear()} AURUMBUILD Sp. z o.o. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
     </>
   );
 }
