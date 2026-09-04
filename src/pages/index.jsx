@@ -3,6 +3,7 @@ import Layout from "./Layout.jsx";
 
 import Welcome from "./Welcome.jsx";
 import Industrial from "./Industrial.jsx";
+import Residential from "./Residential.jsx";
 import Home from "./Home.jsx";
 import Contact from "./contact.jsx";
 import Technology from "./technology.jsx";
@@ -18,17 +19,22 @@ export default function Pages({ division, setDivision }) {
   const { pathname } = useLocation();
   const page = currentPageName(pathname);
 
-  // Welcome page without old header/footer
+  // Public gateway
   if (pathname === "/") {
     return <Welcome />;
   }
 
-  // New Industrial page without old layout
+  // New Industrial page - work in progress
   if (pathname === "/industrial") {
     return <Industrial />;
   }
 
-  // Existing website stays unchanged
+  // New Residential page - work in progress
+  if (pathname === "/residential") {
+    return <Residential />;
+  }
+
+  // Existing public website stays unchanged
   return (
     <Layout
       currentPageName={page}
