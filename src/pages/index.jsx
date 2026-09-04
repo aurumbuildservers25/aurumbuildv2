@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./Layout.jsx";
 
+import Welcome from "./Welcome.jsx";
 import Home from "./Home.jsx";
 import Contact from "./contact.jsx";
 import Technology from "./technology.jsx";
@@ -17,22 +18,53 @@ export default function Pages({ division, setDivision }) {
   const page = currentPageName(pathname);
 
   return (
-    // ✅ pass BOTH division and setDivision to Layout
-    <Layout currentPageName={page} division={division} setDivision={setDivision}>
+    <Layout
+      currentPageName={page}
+      division={division}
+      setDivision={setDivision}
+    >
       <Routes>
-        {/* Pages that need to toggle */}
-        <Route path="/" element={<Home division={division} setDivision={setDivision} />} />
-        <Route path="/home" element={<Home division={division} setDivision={setDivision} />} />
+        <Route path="/" element={<Welcome />} />
 
-        {/* Pages that only read the theme */}
-        <Route path="/contact" element={<Contact division={division} />} />
-        <Route path="/technology" element={<Technology division={division} />} />
+        <Route
+          path="/home"
+          element={
+            <Home
+              division={division}
+              setDivision={setDivision}
+            />
+          }
+        />
 
-        {/* Dreamhouse can force residential on mount */}
-        <Route path="/dreamhouse" element={<Dreamhouse division={division} setDivision={setDivision} />} />
+        <Route
+          path="/contact"
+          element={<Contact division={division} />}
+        />
 
-        {/* Fallback */}
-        <Route path="*" element={<Home division={division} setDivision={setDivision} />} />
+        <Route
+          path="/technology"
+          element={<Technology division={division} />}
+        />
+
+        <Route
+          path="/dreamhouse"
+          element={
+            <Dreamhouse
+              division={division}
+              setDivision={setDivision}
+            />
+          }
+        />
+
+        <Route
+          path="*"
+          element={
+            <Home
+              division={division}
+              setDivision={setDivision}
+            />
+          }
+        />
       </Routes>
     </Layout>
   );
