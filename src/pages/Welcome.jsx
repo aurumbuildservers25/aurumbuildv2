@@ -17,7 +17,7 @@ export default function Welcome() {
 
         {/* Industrial */}
         <Link
-          to="/industrial"
+          to="/home"
           className="
             group
             relative
