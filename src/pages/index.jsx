@@ -17,6 +17,12 @@ export default function Pages({ division, setDivision }) {
   const { pathname } = useLocation();
   const page = currentPageName(pathname);
 
+  // Welcome page has no normal site header/footer
+  if (pathname === "/") {
+    return <Welcome />;
+  }
+
+  // All existing pages keep the current layout
   return (
     <Layout
       currentPageName={page}
@@ -24,8 +30,6 @@ export default function Pages({ division, setDivision }) {
       setDivision={setDivision}
     >
       <Routes>
-        <Route path="/" element={<Welcome />} />
-
         <Route
           path="/home"
           element={
