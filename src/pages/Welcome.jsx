@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Welcome() {
   return (
-    <main className="min-h-screen bg-[#090d14] text-white flex flex-col overflow-hidden">
+      <main className="h-[100dvh] bg-[#090d14] text-white flex flex-col overflow-hidden">
 
       {/* Brand */}
       <div className="h-[14vh] min-h-[90px] flex items-center justify-center px-6">
