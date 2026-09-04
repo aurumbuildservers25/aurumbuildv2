@@ -5,13 +5,14 @@ export default function Industrial() {
     <main className="min-h-screen bg-[#090D14] text-[#F5F7FA]">
 
       {/* HERO */}
-      <section className="min-h-[100dvh] flex items-center px-6 md:px-12 lg:px-20">
+      <section className="min-h-[100dvh] flex items-center px-5 py-16 md:px-12 lg:px-20">
         <div className="max-w-5xl">
+
           <div className="text-xs tracking-[0.28em] text-[#FFB52E] mb-5">
             AURUMBUILD INDUSTRIAL
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.95] tracking-tight">
+          <h1 className="text-[2.65rem] sm:text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.98] tracking-tight">
             KNOW WHAT&apos;S BUILT.
             <br />
             CONTROL WHAT COMES NEXT.
@@ -32,12 +33,14 @@ export default function Industrial() {
               SEE HOW IT WORKS
             </button>
           </div>
+
         </div>
       </section>
 
       {/* CORE QUESTION */}
-      <section className="border-t border-white/10 px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <section className="border-t border-white/10 px-5 md:px-12 lg:px-20 py-24 md:py-32">
         <div className="max-w-5xl">
+
           <div className="text-xs tracking-[0.28em] text-[#FFB52E] mb-5">
             PROJECT CONTROL
           </div>
@@ -52,12 +55,14 @@ export default function Industrial() {
             Project documentation describes intent. Construction happens in
             physical space. AURUMBuild creates the evidence layer between the two.
           </p>
+
         </div>
       </section>
 
       {/* WORKFLOW */}
-      <section className="border-t border-white/10 px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <section className="border-t border-white/10 px-5 md:px-12 lg:px-20 py-24 md:py-32">
         <div className="max-w-6xl">
+
           <div className="text-xs tracking-[0.28em] text-[#FFB52E] mb-5">
             WORKFLOW
           </div>
@@ -82,12 +87,14 @@ export default function Industrial() {
                 <div className="text-xs text-[#FFB52E] mb-2">
                   0{index + 1}
                 </div>
+
                 <div className="text-sm font-medium tracking-wide">
                   {item}
                 </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
