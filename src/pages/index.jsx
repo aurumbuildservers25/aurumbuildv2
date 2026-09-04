@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./Layout.jsx";
 
 import Welcome from "./Welcome.jsx";
+import Industrial from "./Industrial.jsx";
 import Home from "./Home.jsx";
 import Contact from "./contact.jsx";
 import Technology from "./technology.jsx";
@@ -17,12 +18,17 @@ export default function Pages({ division, setDivision }) {
   const { pathname } = useLocation();
   const page = currentPageName(pathname);
 
-  // Welcome page has no normal site header/footer
+  // Welcome page without old header/footer
   if (pathname === "/") {
     return <Welcome />;
   }
 
-  // All existing pages keep the current layout
+  // New Industrial page without old layout
+  if (pathname === "/industrial") {
+    return <Industrial />;
+  }
+
+  // Existing website stays unchanged
   return (
     <Layout
       currentPageName={page}
