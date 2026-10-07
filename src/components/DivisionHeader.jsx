@@ -38,7 +38,7 @@ export default function DivisionHeader({ division = "industrial" }) {
           aria-label="AURUMBuild"
         >
           <img
-            src="/images/AurumBuild_Logo_FullColor_3000px.png"
+            src="/images/aurumbuild-logo.png"
             alt="AURUMBuild"
             className="h-[18px] w-auto sm:h-[20px] lg:h-[22px]"
           />
