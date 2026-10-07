@@ -23,32 +23,25 @@ export default function DivisionHeader({ division = "industrial" }) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b ${
+      className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md ${
         industrial
           ? "border-white/10 bg-[#03070C]/95 text-[#F2F3F0]"
           : "border-[#0F2740]/10 bg-[#F8F6F1]/95 text-[#0F2740]"
-      } backdrop-blur-md`}
+      }`}
     >
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-16">
 
-        {/* LOGO */}
+        {/* MASTER AURUMBUILD LOGO */}
         <Link
           to={industrial ? "/industrial" : "/residential"}
           className="flex items-center"
           aria-label="AURUMBuild"
         >
-          {industrial ? (
-            <div className="flex items-center text-[18px] font-semibold tracking-[-0.04em] sm:text-[20px]">
-              <span className="text-[#C39242]">AURUM</span>
-              <span className="text-[#F2F3F0]">BUILD</span>
-            </div>
-          ) : (
-            <img
-              src="/images/aurumbuild-logo.png"
-              alt="AURUMBuild"
-              className="h-[20px] w-auto sm:h-[23px]"
-            />
-          )}
+          <img
+            src="/images/aurumbuild-logo.png"
+            alt="AURUMBuild"
+            className="h-[18px] w-auto sm:h-[20px] lg:h-[22px]"
+          />
         </Link>
 
         {/* DESKTOP NAV */}
@@ -58,7 +51,7 @@ export default function DivisionHeader({ division = "industrial" }) {
               key={label}
               href={href}
               className={`text-[13px] font-medium transition-opacity hover:opacity-60 ${
-                industrial ? "text-white/70" : "text-[#0F2740]/75"
+                industrial ? "text-white/65" : "text-[#0F2740]/70"
               }`}
             >
               {label}
@@ -68,18 +61,20 @@ export default function DivisionHeader({ division = "industrial" }) {
           <button
             type="button"
             className={`ml-2 text-[11px] font-semibold tracking-[0.14em] ${
-              industrial ? "text-white/55" : "text-[#0F2740]/55"
+              industrial ? "text-white/45" : "text-[#0F2740]/45"
             }`}
           >
             EN
           </button>
         </nav>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          className="grid h-10 w-10 place-items-center lg:hidden"
+          className={`grid h-10 w-10 place-items-center lg:hidden ${
+            industrial ? "text-white/75" : "text-[#0F2740]"
+          }`}
           aria-label="Toggle navigation"
         >
           {menuOpen ? <X size={21} /> : <Menu size={21} />}
@@ -89,7 +84,7 @@ export default function DivisionHeader({ division = "industrial" }) {
       {/* MOBILE NAV */}
       {menuOpen && (
         <div
-          className={`border-t px-5 pb-7 pt-4 lg:hidden ${
+          className={`border-t px-5 pb-7 pt-3 lg:hidden ${
             industrial
               ? "border-white/10 bg-[#03070C]"
               : "border-[#0F2740]/10 bg-[#F8F6F1]"
@@ -103,8 +98,8 @@ export default function DivisionHeader({ division = "industrial" }) {
                 onClick={() => setMenuOpen(false)}
                 className={`border-b py-4 text-[15px] ${
                   industrial
-                    ? "border-white/10 text-white/80"
-                    : "border-[#0F2740]/10 text-[#0F2740]/80"
+                    ? "border-white/10 text-white/75"
+                    : "border-[#0F2740]/10 text-[#0F2740]/75"
                 }`}
               >
                 {label}
@@ -114,7 +109,7 @@ export default function DivisionHeader({ division = "industrial" }) {
             <button
               type="button"
               className={`pt-5 text-left text-[11px] font-semibold tracking-[0.14em] ${
-                industrial ? "text-white/50" : "text-[#0F2740]/50"
+                industrial ? "text-white/40" : "text-[#0F2740]/40"
               }`}
             >
               EN
