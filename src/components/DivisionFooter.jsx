@@ -24,11 +24,16 @@ export default function DivisionFooter({ division = "industrial" }) {
               aria-label="AURUMBuild"
               className="inline-block"
             >
-              <img
-                src="/aurumbuild-logo.png"
-                alt="AURUMBuild"
-                className="h-auto w-[190px] sm:w-[210px]"
-              />
+      <img
+  src="/aurumbuild-logo.png"
+  alt="AURUMBuild"
+  className="block h-auto w-[190px] sm:w-[210px]"
+  style={{
+    opacity: 1,
+    visibility: "visible",
+    filter: "none",
+  }}
+/>
             </Link>
 
             <p
