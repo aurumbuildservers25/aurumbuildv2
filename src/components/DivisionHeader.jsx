@@ -78,8 +78,8 @@ export default function DivisionHeader({
     : "bg-[#102D5B] text-white hover:bg-[#1B4177]";
 
   const logo = isIndustrial
-    ? "/images/aurumbuild-logo-industrial.svg"
-    : "/images/aurumbuild-logo-residential.svg";
+    ? "/images/aurumbuild-logo-industrial.png"
+    : "/images/aurumbuild-logo-residential.png";
 
   return (
     <header
