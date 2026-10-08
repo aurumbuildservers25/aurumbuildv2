@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-
+import DivisionHeader from "../components/DivisionHeader";
 import DivisionFooter from "../components/DivisionFooter";
 
 const PHOTO = "/images/residential-pool-v22.jpg";
@@ -215,7 +215,7 @@ function ResidentialHeader() {
 export default function Residential() {
   return (
     <>
-      <ResidentialHeader />
+      <<DivisionHeader division="residential" /> />
 
       <main
         id="top"
