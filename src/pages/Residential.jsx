@@ -5,14 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Compass,
-  ClipboardCheck,
-  Hammer,
-  KeyRound,
-  ShieldCheck,
-  Building2,
-  MapPin,
-  FileCheck2,
 } from "lucide-react";
 
 import DivisionHeader from "../components/DivisionHeader";
@@ -22,50 +14,56 @@ const services = [
   {
     number: "01",
     title: "Project Management",
-    text: "A clear point of coordination across design, consultants, contractors, budgets and programme.",
-    icon: Compass,
+    description:
+      "One point of coordination for design, consultants, contractors, budget and programme.",
   },
   {
     number: "02",
     title: "Construction Delivery",
-    text: "Practical management of construction activities, site coordination and quality through completion.",
-    icon: Hammer,
+    description:
+      "Practical site management, technical coordination and quality oversight through completion.",
   },
   {
     number: "03",
     title: "Investor Representation",
-    text: "Technical oversight and transparent reporting for clients managing a property project from abroad.",
-    icon: ShieldCheck,
+    description:
+      "Independent project oversight and clear reporting for clients managing investments from abroad.",
   },
   {
     number: "04",
     title: "Turnkey Delivery",
-    text: "Coordinated support from early project decisions through construction, finishing and handover.",
-    icon: KeyRound,
+    description:
+      "Coordinated support from early planning and construction through finishing and handover.",
   },
 ];
 
-const steps = [
+const stages = [
   {
     number: "01",
-    title: "Define",
-    text: "Understand the vision, location, scope and investment priorities.",
+    title: "Plan",
+    text: "Understand your vision, site, priorities and project requirements.",
   },
   {
     number: "02",
     title: "Prepare",
-    text: "Coordinate feasibility, design, approvals and delivery planning.",
+    text: "Coordinate design, approvals, consultants and the delivery strategy.",
   },
   {
     number: "03",
-    title: "Construct",
-    text: "Manage site execution, technical coordination and quality.",
+    title: "Build",
+    text: "Oversee execution, programme, coordination and construction quality.",
   },
   {
     number: "04",
-    title: "Handover",
-    text: "Coordinate completion, documentation and final delivery.",
+    title: "Deliver",
+    text: "Manage completion, documentation and handover.",
   },
+];
+
+const navigation = [
+  { label: "Services", href: "#services" },
+  { label: "Approach", href: "#approach" },
+  { label: "Dreamhouse", href: "#dreamhouse" },
 ];
 
 export default function Residential() {
@@ -73,371 +71,332 @@ export default function Residential() {
     <>
       <DivisionHeader division="residential" />
 
-      <main className="overflow-hidden bg-[#F8F6F1] text-[#0F2740]">
+      <main className="overflow-x-hidden bg-[#F8F6F1] text-[#0F2740]">
+
+        {/* DIVISION NAVIGATION */}
+        <nav
+          aria-label="Residential navigation"
+          className="border-b border-[#0F2740]/10 bg-[#F8F6F1]"
+        >
+          <div className="mx-auto flex max-w-[1440px] items-center gap-6 overflow-x-auto px-6 py-4 sm:px-10 md:px-12 lg:px-20">
+            <span className="hidden shrink-0 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B58B42] md:block">
+              Residential
+            </span>
+
+            <span className="hidden h-4 w-px bg-[#0F2740]/15 md:block" />
+
+            {navigation.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.09em] text-[#0F2740]/65 transition-colors hover:text-[#0F2740]"
+              >
+                {item.label}
+              </a>
+            ))}
+
+            <Link
+              to="/contact"
+              className="ml-auto shrink-0 text-[11px] font-semibold uppercase tracking-[0.09em] text-[#0F2740]"
+            >
+              Contact <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+        </nav>
 
         {/* HERO */}
-        <section className="relative border-b border-[#0F2740]/10">
-          <div className="mx-auto grid max-w-[1600px] lg:min-h-[680px] lg:grid-cols-[1.08fr_0.92fr]">
-
-            <div className="flex flex-col justify-center px-6 pb-20 pt-16 sm:px-10 md:px-12 md:py-24 lg:px-20 lg:py-28">
-              <div className="mb-8 flex items-center gap-3">
-                <span className="h-px w-8 bg-[#C9A962]" />
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#3F6B68]">
+        <section className="border-b border-[#0F2740]/10">
+          <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[1.12fr_0.88fr]">
+            <div className="flex flex-col justify-center px-6 pb-16 pt-14 sm:px-10 md:px-12 md:py-20 lg:min-h-[560px] lg:px-20 lg:py-20">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-7 bg-[#C9A962]" />
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#A77E36]">
                   AURUMBUILD RESIDENTIAL
                 </span>
               </div>
 
-              <h1 className="max-w-[780px] text-[clamp(2.9rem,5.3vw,5.9rem)] font-medium leading-[1.05] tracking-[-0.055em]">
+              <h1 className="mt-8 max-w-[780px] text-[clamp(2.9rem,5.6vw,5.8rem)] font-medium leading-[1.04] tracking-[-0.06em]">
                 Build abroad.
                 <br />
-                <span className="text-[#3F6B68]">
-                  We handle the complexity.
-                </span>
+                With confidence.
               </h1>
 
-              <p className="mt-8 max-w-[560px] text-[16px] leading-8 text-[#0F2740]/65 md:text-[17px]">
-                A trusted partner on the ground for your
-                property project in Europe. We coordinate
-                design, construction and delivery, so you
-                can focus on the decisions that matter.
+              <p className="mt-7 max-w-[520px] text-[16px] leading-[1.7] text-[#0F2740]/65 md:text-[17px]">
+                From planning to handover, one trusted
+                partner for your property project in Europe.
               </p>
 
-              <div className="mt-10 flex flex-wrap items-center gap-6">
+              <div className="mt-9">
                 <Link
                   to="/contact"
-                  className="inline-flex min-h-12 items-center gap-3 bg-[#0F2740] px-7 py-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#23425D]"
+                  className="inline-flex min-h-12 items-center justify-between gap-8 bg-[#0F2740] px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#23425D]"
                 >
-                  Start your project
-                  <ArrowUpRight size={17} />
+                  Discuss your project
+                  <ArrowUpRight size={17} strokeWidth={1.8} />
                 </Link>
-
-                <a
-                  href="#approach"
-                  className="inline-flex min-h-12 items-center gap-2 border-b border-[#0F2740]/30 text-[12px] font-semibold uppercase tracking-[0.12em] hover:border-[#0F2740]"
-                >
-                  How we work
-                  <ArrowRight size={16} />
-                </a>
               </div>
             </div>
 
-            {/* PURPOSEFUL ARCHITECTURAL VISUAL */}
-            <div className="relative hidden overflow-hidden bg-[#E3E9E2] lg:block">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#E7ECE5] via-[#DCE6DD] to-[#B8CCC1]" />
+            {/* DESKTOP BRAND COMPOSITION */}
+            <div className="relative hidden min-h-[560px] overflow-hidden border-l border-[#0F2740]/10 bg-[#EAE8E1] lg:flex lg:flex-col lg:justify-between">
+              <div className="flex items-start justify-between p-12">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#0F2740]/45">
+                  AURUMBUILD / 02
+                </span>
 
-              <div className="absolute inset-x-[14%] top-[16%] h-px bg-[#0F2740]/15" />
-              <div className="absolute bottom-[15%] left-[14%] top-[16%] w-px bg-[#0F2740]/15" />
-              <div className="absolute bottom-[15%] right-[14%] top-[16%] w-px bg-[#0F2740]/15" />
+                <ArrowUpRight
+                  size={25}
+                  strokeWidth={1.2}
+                  className="text-[#B58B42]"
+                />
+              </div>
 
-              <div className="absolute bottom-[13%] left-[18%] max-w-[330px]">
-                <div className="border-l-2 border-[#3F6B68] pl-7">
-                  <p className="text-[clamp(1.6rem,2.5vw,2.5rem)] font-normal leading-[1.18] tracking-[-0.04em]">
-                    Your vision.
-                    <br />
-                    Our responsibility.
-                  </p>
+              <div className="px-12 pb-14">
+                <div className="mb-7 h-px w-16 bg-[#C9A962]" />
 
-                  <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3F6B68]">
-                    From concept to completion
-                  </p>
-                </div>
+                <p className="max-w-[360px] text-[clamp(1.8rem,2.5vw,2.8rem)] font-normal leading-[1.2] tracking-[-0.04em]">
+                  Your vision.
+                  <br />
+                  Our responsibility.
+                </p>
+
+                <p className="mt-6 max-w-[320px] text-[13px] leading-6 text-[#0F2740]/55">
+                  Private homes and residential
+                  investments, managed with care
+                  and technical understanding.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* INTRODUCTION */}
-        <section className="px-6 py-20 sm:px-10 md:px-12 md:py-28 lg:px-20">
-          <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">
-            <div>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B18D4B]">
-                The right partner
-              </span>
-            </div>
+        {/* WHO WE SERVE */}
+        <section
+          id="clients"
+          className="scroll-mt-24 px-6 py-16 sm:px-10 md:px-12 md:py-24 lg:px-20"
+        >
+          <div className="mx-auto max-w-[1280px]">
+            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#A77E36]">
+                  Who we work with
+                </p>
 
-            <div>
-              <h2 className="max-w-[850px] text-[clamp(2rem,3.7vw,4rem)] font-medium leading-[1.14] tracking-[-0.045em]">
-                Building a home abroad should feel exciting.
-                Not overwhelming.
-              </h2>
+                <h2 className="mt-5 text-[clamp(2.1rem,3.8vw,3.8rem)] font-medium leading-[1.12] tracking-[-0.045em]">
+                  Built around
+                  <br />
+                  your ambitions.
+                </h2>
+              </div>
 
-              <p className="mt-8 max-w-[740px] text-[16px] leading-8 text-[#0F2740]/60">
-                Planning a private residence or property investment
-                across borders brings together architects,
-                contractors, local regulations and many important
-                decisions. AURUMBuild Residential provides
-                experienced coordination and technical oversight
-                to bring clarity to the process.
+              <p className="max-w-[580px] self-end text-[15px] leading-[1.8] text-[#0F2740]/65 md:text-[16px]">
+                Building or investing in another country
+                involves many moving parts. We bring
+                the people, decisions and delivery
+                process together under clear coordination.
               </p>
             </div>
-          </div>
-        </section>
 
-        {/* CLIENT TYPES */}
-        <section className="bg-[#ECECE6] px-6 py-20 sm:px-10 md:px-12 md:py-24 lg:px-20">
-          <div className="mx-auto max-w-[1400px]">
-            <div className="mb-12">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#3F6B68]">
-                Who we support
-              </span>
+            <div className="mt-12 grid border-y border-[#0F2740]/15 md:grid-cols-2">
+              <div className="py-9 md:pr-12 md:py-12">
+                <span className="text-[11px] font-semibold tracking-[0.14em] text-[#B58B42]">
+                  01
+                </span>
 
-              <h2 className="mt-5 text-[clamp(2rem,3.6vw,3.7rem)] font-medium leading-[1.1] tracking-[-0.045em]">
-                Your project.
-                <br />
-                Our commitment.
-              </h2>
-            </div>
-
-            <div className="grid gap-px overflow-hidden border border-[#0F2740]/10 bg-[#0F2740]/10 md:grid-cols-2">
-              <div className="bg-[#F8F6F1] p-8 sm:p-10 lg:p-14">
-                <MapPin
-                  size={27}
-                  strokeWidth={1.5}
-                  className="text-[#3F6B68]"
-                />
-
-                <h3 className="mt-9 text-[27px] font-medium tracking-[-0.035em]">
+                <h3 className="mt-5 text-[25px] font-medium tracking-[-0.035em]">
                   Private Clients
                 </h3>
 
-                <p className="mt-5 max-w-[450px] text-[15px] leading-8 text-[#0F2740]/65">
-                  For families and individuals building a
-                  primary home, holiday property or second
-                  residence abroad. We provide a reliable
-                  local point of coordination throughout
-                  the project.
+                <p className="mt-3 max-w-[480px] text-[14px] leading-7 text-[#0F2740]/60">
+                  Homes, holiday residences and
+                  personal property projects
+                  requiring dependable local coordination.
                 </p>
               </div>
 
-              <div className="bg-[#F8F6F1] p-8 sm:p-10 lg:p-14">
-                <Building2
-                  size={27}
-                  strokeWidth={1.5}
-                  className="text-[#3F6B68]"
-                />
+              <div className="border-t border-[#0F2740]/15 py-9 md:border-l md:border-t-0 md:py-12 md:pl-12">
+                <span className="text-[11px] font-semibold tracking-[0.14em] text-[#B58B42]">
+                  02
+                </span>
 
-                <h3 className="mt-9 text-[27px] font-medium tracking-[-0.035em]">
+                <h3 className="mt-5 text-[25px] font-medium tracking-[-0.035em]">
                   Investors & Developers
                 </h3>
 
-                <p className="mt-5 max-w-[450px] text-[15px] leading-8 text-[#0F2740]/65">
-                  For residential investments and development
-                  projects requiring structured planning,
-                  construction coordination and transparent
-                  delivery oversight.
+                <p className="mt-3 max-w-[480px] text-[14px] leading-7 text-[#0F2740]/60">
+                  Residential investments and
+                  developments needing structured
+                  management and delivery oversight.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SERVICES */}
+        {/* SERVICES - NAVY CONTRAST */}
         <section
           id="services"
-          className="px-6 py-20 sm:px-10 md:px-12 md:py-28 lg:px-20"
+          className="scroll-mt-24 bg-[#0F2740] px-6 py-16 text-[#F8F6F1] sm:px-10 md:px-12 md:py-24 lg:px-20"
         >
-          <div className="mx-auto max-w-[1400px]">
-            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <div className="mx-auto max-w-[1280px]">
+            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end md:gap-12">
               <div>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B18D4B]">
-                  What we do
-                </span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#C9A962]">
+                  What we deliver
+                </p>
 
-                <h2 className="mt-5 text-[clamp(2.2rem,4vw,4.2rem)] font-medium leading-[1.1] tracking-[-0.045em]">
+                <h2 className="mt-5 text-[clamp(2.1rem,3.8vw,3.8rem)] font-medium leading-[1.12] tracking-[-0.045em]">
                   One partner.
                   <br />
                   Clear responsibility.
                 </h2>
               </div>
 
-              <p className="max-w-[430px] text-[15px] leading-7 text-[#0F2740]/60">
-                Flexible support tailored to the project,
-                from individual management services to
-                coordinated turnkey delivery.
+              <p className="max-w-[380px] text-[14px] leading-7 text-white/60">
+                The right level of support for
+                your project, from targeted
+                management to coordinated delivery.
               </p>
             </div>
 
-            <div className="mt-14 grid gap-px overflow-hidden border border-[#0F2740]/10 bg-[#0F2740]/10 md:grid-cols-2">
-              {services.map((service) => {
-                const Icon = service.icon;
+            <div className="mt-12 grid border-t border-white/20 md:grid-cols-2">
+              {services.map((service, index) => (
+                <div
+                  key={service.number}
+                  className={`border-b border-white/20 py-8 md:py-10 ${
+                    index % 2 === 0
+                      ? "md:pr-10"
+                      : "md:border-l md:border-white/20 md:pl-10"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-5">
+                    <span className="text-[11px] font-semibold tracking-[0.15em] text-[#C9A962]">
+                      {service.number}
+                    </span>
 
-                return (
-                  <div
-                    key={service.number}
-                    className="bg-[#F8F6F1] p-8 transition-colors duration-300 hover:bg-white sm:p-10 lg:p-12"
-                  >
-                    <div className="flex items-start justify-between">
-                      <Icon
-                        size={28}
-                        strokeWidth={1.5}
-                        className="text-[#3F6B68]"
-                      />
-
-                      <span className="text-[11px] font-semibold tracking-[0.15em] text-[#B18D4B]">
-                        {service.number}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-12 text-[25px] font-medium tracking-[-0.035em]">
-                      {service.title}
-                    </h3>
-
-                    <p className="mt-5 max-w-[460px] text-[15px] leading-7 text-[#0F2740]/60">
-                      {service.text}
-                    </p>
+                    <ArrowUpRight
+                      size={18}
+                      strokeWidth={1.4}
+                      className="text-white/35"
+                    />
                   </div>
-                );
-              })}
+
+                  <h3 className="mt-7 text-[23px] font-medium leading-[1.2] tracking-[-0.035em] md:text-[27px]">
+                    {service.title}
+                  </h3>
+
+                  <p className="mt-3 max-w-[440px] text-[14px] leading-7 text-white/60">
+                    {service.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* PROCESS */}
+        {/* APPROACH */}
         <section
           id="approach"
-          className="bg-[#0F2740] px-6 py-20 text-[#F8F6F1] sm:px-10 md:px-12 md:py-28 lg:px-20"
+          className="scroll-mt-24 px-6 py-16 sm:px-10 md:px-12 md:py-24 lg:px-20"
         >
-          <div className="mx-auto max-w-[1400px]">
-            <div className="grid gap-8 lg:grid-cols-[1fr_0.85fr] lg:gap-20">
+          <div className="mx-auto max-w-[1280px]">
+            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
               <div>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#C9A962]">
-                  How we work
-                </span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#A77E36]">
+                  Our approach
+                </p>
 
-                <h2 className="mt-5 text-[clamp(2.2rem,4vw,4.2rem)] font-medium leading-[1.1] tracking-[-0.045em]">
-                  From first conversation
+                <h2 className="mt-5 text-[clamp(2.1rem,3.8vw,3.8rem)] font-medium leading-[1.12] tracking-[-0.045em]">
+                  A clear path
                   <br />
-                  to final handover.
+                  to completion.
                 </h2>
               </div>
 
-              <p className="max-w-[440px] self-end text-[15px] leading-8 text-white/60">
-                We bring structure to the project journey,
-                with defined stages, clear communication
-                and attention to the decisions that
-                shape the final result.
+              <p className="max-w-[540px] self-end text-[15px] leading-[1.8] text-[#0F2740]/65">
+                Every project is different.
+                Our process creates structure
+                without unnecessary complexity,
+                keeping decisions and responsibilities clear.
               </p>
             </div>
 
-            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-              {steps.map((step) => (
+            <div className="mt-12 grid border-t border-[#0F2740]/15 sm:grid-cols-2 lg:grid-cols-4">
+              {stages.map((stage, index) => (
                 <div
-                  key={step.number}
-                  className="border-t border-white/20 pt-7"
+                  key={stage.number}
+                  className={`border-b border-[#0F2740]/15 py-7 sm:pr-7 lg:py-9 ${
+                    index > 0
+                      ? "lg:border-l lg:pl-7"
+                      : ""
+                  } ${
+                    index % 2 === 1
+                      ? "sm:border-l sm:pl-7 lg:pl-7"
+                      : ""
+                  }`}
                 >
-                  <span className="text-[12px] font-semibold tracking-[0.2em] text-[#C9A962]">
-                    {step.number}
+                  <span className="text-[11px] font-semibold tracking-[0.14em] text-[#B58B42]">
+                    {stage.number}
                   </span>
 
-                  <h3 className="mt-11 text-[25px] font-medium tracking-[-0.035em]">
-                    {step.title}
+                  <h3 className="mt-6 text-[23px] font-medium tracking-[-0.035em]">
+                    {stage.title}
                   </h3>
 
-                  <p className="mt-5 text-[14px] leading-7 text-white/55">
-                    {step.text}
+                  <p className="mt-3 text-[13px] leading-7 text-[#0F2740]/60">
+                    {stage.text}
                   </p>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* DIFFERENCE */}
-        <section className="px-6 py-20 sm:px-10 md:px-12 md:py-28 lg:px-20">
-          <div className="mx-auto grid max-w-[1400px] gap-14 lg:grid-cols-2 lg:gap-24">
-            <div>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B18D4B]">
-                Why AURUMBuild
-              </span>
-
-              <h2 className="mt-5 text-[clamp(2.2rem,4vw,4rem)] font-medium leading-[1.1] tracking-[-0.045em]">
-                Personal attention.
-                <br />
-                Professional control.
-              </h2>
-
-              <p className="mt-8 max-w-[520px] text-[16px] leading-8 text-[#0F2740]/60">
-                We combine construction experience,
-                structured project management and
-                practical technical understanding.
-                Our focus is clear communication,
-                informed decisions and quality
-                throughout the delivery process.
-              </p>
-            </div>
-
-            <div className="border-t border-[#0F2740]/15">
-              {[
-                "One point of coordination",
-                "Technical understanding",
-                "Transparent communication",
-                "Quality-focused oversight",
-                "Support for international clients",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-5 border-b border-[#0F2740]/15 py-6"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#3F6B68]/10">
-                    <Check
-                      size={17}
-                      className="text-[#3F6B68]"
-                    />
-                  </span>
-
-                  <p className="text-[15px] font-medium leading-6">
-                    {item}
+            {/* DREAMHOUSE - INTEGRATED, NOT ANOTHER LARGE SECTION */}
+            <div
+              id="dreamhouse"
+              className="mt-12 scroll-mt-24 border border-[#0F2740]/15 md:mt-16"
+            >
+              <div className="grid gap-7 p-7 sm:p-9 md:grid-cols-[1fr_1fr] md:items-center md:gap-12 lg:p-12">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#A77E36]">
+                    Dreamhouse
                   </p>
+
+                  <h3 className="mt-4 text-[clamp(1.7rem,2.7vw,2.8rem)] font-medium leading-[1.15] tracking-[-0.04em]">
+                    Your home.
+                    <br />
+                    Thoughtfully delivered.
+                  </h3>
                 </div>
-              ))}
+
+                <div>
+                  <p className="max-w-[440px] text-[14px] leading-7 text-[#0F2740]/65">
+                    Our dedicated offering for
+                    private clients planning and
+                    building a home abroad.
+                  </p>
+
+                  <Link
+                    to="/Dreamhouse"
+                    className="mt-6 inline-flex items-center gap-3 border-b border-[#0F2740]/35 pb-2 text-[11px] font-semibold uppercase tracking-[0.12em] transition-opacity hover:opacity-60"
+                  >
+                    Explore Dreamhouse
+                    <ArrowUpRight size={16} />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* DREAMHOUSE */}
-        <section className="bg-[#E8EAE2] px-6 py-20 sm:px-10 md:px-12 md:py-24 lg:px-20">
-          <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-2 lg:items-center lg:gap-20">
+        {/* FINAL GREEN SECTION - THE ONLY GREEN */}
+        <section className="bg-[#3F6B68] px-6 py-16 text-white sm:px-10 md:px-12 md:py-24 lg:px-20">
+          <div className="mx-auto grid max-w-[1280px] gap-9 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20">
             <div>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#3F6B68]">
-                Dreamhouse
-              </span>
-
-              <h2 className="mt-5 text-[clamp(2.2rem,4vw,4rem)] font-medium leading-[1.1] tracking-[-0.045em]">
-                Your home.
-                <br />
-                Thoughtfully delivered.
-              </h2>
-            </div>
-
-            <div>
-              <p className="max-w-[520px] text-[16px] leading-8 text-[#0F2740]/65">
-                Dreamhouse is our dedicated offering
-                for private clients planning a home
-                abroad, bringing design coordination,
-                construction management and
-                delivery into one clear process.
-              </p>
-
-              <Link
-                to="/Dreamhouse"
-                className="mt-8 inline-flex items-center gap-3 border-b border-[#3F6B68] pb-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#3F6B68] transition-opacity hover:opacity-70"
-              >
-                Explore Dreamhouse
-                <ArrowUpRight size={17} />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* FINAL CTA */}
-        <section className="bg-[#3F6B68] px-6 py-20 text-white sm:px-10 md:px-12 md:py-28 lg:px-20">
-          <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-end lg:gap-20">
-            <div>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#E2D1A3]">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#E4D2A7]">
                 Start a conversation
-              </span>
+              </p>
 
-              <h2 className="mt-5 text-[clamp(2.5rem,5vw,5.2rem)] font-medium leading-[1.07] tracking-[-0.05em]">
+              <h2 className="mt-5 text-[clamp(2.5rem,4.8vw,5rem)] font-medium leading-[1.08] tracking-[-0.05em]">
                 Tell us what
                 <br />
                 you want to build.
@@ -445,24 +404,23 @@ export default function Residential() {
             </div>
 
             <div>
-              <p className="max-w-[450px] text-[16px] leading-8 text-white/75">
-                Whether you already own land,
-                have a concept in mind or are
-                exploring an investment,
-                let's discuss your plans.
+              <p className="max-w-[450px] text-[15px] leading-[1.8] text-white/80">
+                Whether you're exploring an idea,
+                planning a home or preparing an
+                investment, we'd like to understand
+                your project.
               </p>
 
               <Link
                 to="/contact"
-                className="mt-9 inline-flex min-h-12 items-center gap-4 bg-[#F8F6F1] px-7 py-3 text-[12px] font-semibold uppercase tracking-[0.13em] text-[#0F2740] transition-colors hover:bg-white"
+                className="mt-7 inline-flex min-h-12 items-center gap-8 bg-[#F8F6F1] px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0F2740] transition-colors hover:bg-white"
               >
                 Discuss your project
-                <ArrowUpRight size={17} />
+                <ArrowUpRight size={17} strokeWidth={1.8} />
               </Link>
             </div>
           </div>
         </section>
-
       </main>
 
       <DivisionFooter division="residential" />
