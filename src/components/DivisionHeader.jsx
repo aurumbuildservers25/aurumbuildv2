@@ -1,121 +1,262 @@
+
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
-export default function DivisionHeader({ division = "industrial" }) {
+const NAVIGATION = {
+  industrial: [
+    {
+      label: "Residential",
+      path: "/residential",
+      switchDivision: true,
+    },
+    {
+      label: "Digital Twin",
+      path: "/industrial/digital-twin",
+    },
+    {
+      label: "Technologies",
+      path: "/industrial/technologies",
+    },
+    {
+      label: "Projects",
+      path: "/industrial/projects",
+    },
+  ],
+  residential: [
+    {
+      label: "Industrial",
+      path: "/industrial",
+      switchDivision: true,
+    },
+    {
+      label: "Dreamhouse",
+      path: "/Dreamhouse",
+    },
+    {
+      label: "Our Services",
+      path: "/residential/services",
+    },
+    {
+      label: "Projects",
+      path: "/residential/projects",
+    },
+  ],
+};
+
+export default function DivisionHeader({
+  division = "residential",
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
-  const industrial = division === "industrial";
+  const isIndustrial =
+    division.toLowerCase() === "industrial";
 
-  const navItems = industrial
-    ? [
-        ["Capabilities", "#capabilities"],
-        ["Sectors", "#sectors"],
-        ["Approach", "#approach"],
-        ["Contact", "#contact"],
-      ]
-    : [
-        ["Services", "#services"],
-        ["Dreamhouse", "#dreamhouse"],
-        ["Approach", "#approach"],
-        ["Contact", "#contact"],
-      ];
+  const links = isIndustrial
+    ? NAVIGATION.industrial
+    : NAVIGATION.residential;
+
+  const background = isIndustrial
+    ? "bg-[#06111C]"
+    : "bg-[#FFF9EF]";
+
+  const textColor = isIndustrial
+    ? "text-[#F6F5F1]"
+    : "text-[#102D5B]";
+
+  const borderColor = isIndustrial
+    ? "border-white/15"
+    : "border-[#102D5B]/15";
+
+  const activeColor = isIndustrial
+    ? "text-[#F2AA2A]"
+    : "text-[#B28B45]";
+
+  const contactStyle = isIndustrial
+    ? "border border-[#F2AA2A] text-[#F2AA2A] hover:bg-[#F2AA2A] hover:text-[#06111C]"
+    : "bg-[#102D5B] text-white hover:bg-[#1B4177]";
+
+  const logo = isIndustrial
+    ? "/images/aurumbuild-logo-industrial.svg"
+    : "/images/aurumbuild-logo-residential.svg";
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md ${
-        industrial
-          ? "border-white/10 bg-[#03070C]/95 text-[#F2F3F0]"
-          : "border-[#0F2740]/10 bg-[#F8F6F1]/95 text-[#0F2740]"
-      }`}
+      className={`relative z-50 ${background} ${textColor}`}
     >
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-16">
-
-        {/* MASTER AURUMBUILD LOGO */}
+      {/* HEADER BAR */}
+      <div
+        className={`
+          mx-auto flex h-[76px] w-full
+          max-w-[1600px] items-center
+          justify-between gap-7 border-b
+          px-6 sm:px-10
+          lg:h-[92px] lg:px-12 xl:px-20
+          ${borderColor}
+        `}
+      >
+        {/* LOGO */}
         <Link
-          to={industrial ? "/industrial" : "/residential"}
-          className="flex items-center"
-          aria-label="AURUMBuild"
+          to="/"
+          aria-label="AURUMBUILD home"
+          onClick={() => setMenuOpen(false)}
+          className="shrink-0"
         >
           <img
-            src="/images/aurumbuild-logo.png"
-            alt="AURUMBuild"
-            className="h-[18px] w-auto sm:h-[20px] lg:h-[22px]"
+            src={logo}
+            alt="AURUMBUILD"
+            className="
+              block h-auto w-[167px]
+              sm:w-[187px] xl:w-[210px]
+            "
           />
         </Link>
 
-        {/* DESKTOP NAV */}
-        <nav className="hidden items-center gap-8 lg:flex">
-          {navItems.map(([label, href]) => (
-            <a
-              key={label}
-              href={href}
-              className={`text-[13px] font-medium transition-opacity hover:opacity-60 ${
-                industrial ? "text-white/65" : "text-[#0F2740]/70"
-              }`}
-            >
-              {label}
-            </a>
-          ))}
-
-          <button
-            type="button"
-            className={`ml-2 text-[11px] font-semibold tracking-[0.14em] ${
-              industrial ? "text-white/45" : "text-[#0F2740]/45"
-            }`}
+        {/* DESKTOP NAVIGATION */}
+        <div
+          className="
+            ml-auto hidden items-center
+            justify-end gap-7
+            lg:flex xl:gap-9 2xl:gap-11
+          "
+        >
+          <nav
+            aria-label={`${division} navigation`}
+            className="
+              flex items-center gap-6
+              xl:gap-9 2xl:gap-11
+            "
           >
-            EN
-          </button>
-        </nav>
+            {links.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className={`
+                  whitespace-nowrap
+                  text-[12px] font-medium
+                  tracking-[0.025em]
+                  transition-opacity duration-200
+                  hover:opacity-70
+                  ${
+                    pathname === item.path
+                      ? activeColor
+                      : textColor
+                  }
+                `}
+              >
+                <span className="inline-flex items-center gap-1.5">
+                  {item.label}
 
-        {/* MOBILE MENU BUTTON */}
+                  {item.switchDivision && (
+                    <ArrowUpRight
+                      size={13}
+                      strokeWidth={1.6}
+                      aria-hidden="true"
+                    />
+                  )}
+                </span>
+              </Link>
+            ))}
+          </nav>
+
+          {/* CONTACT — NO ARROW */}
+          <Link
+            to="/contact"
+            className={`
+              flex h-[42px] min-w-[116px]
+              items-center justify-center
+              px-6 text-[11px] font-semibold
+              uppercase tracking-[0.12em]
+              transition-colors
+              ${contactStyle}
+            `}
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* MOBILE MENU TOGGLE */}
         <button
           type="button"
+          aria-label={
+            menuOpen
+              ? "Close navigation"
+              : "Open navigation"
+          }
+          aria-expanded={menuOpen}
+          aria-controls={`mobile-nav-${division}`}
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`grid h-10 w-10 place-items-center lg:hidden ${
-            industrial ? "text-white/75" : "text-[#0F2740]"
-          }`}
-          aria-label="Toggle navigation"
+          className={`
+            ml-auto flex h-11 w-11
+            shrink-0 items-center
+            justify-center lg:hidden
+            ${textColor}
+          `}
         >
-          {menuOpen ? <X size={21} /> : <Menu size={21} />}
+          {menuOpen ? (
+            <X size={25} strokeWidth={1.7} />
+          ) : (
+            <Menu size={25} strokeWidth={1.7} />
+          )}
         </button>
       </div>
 
-      {/* MOBILE NAV */}
+      {/* FULL-WIDTH MOBILE MENU */}
       {menuOpen && (
-        <div
-          className={`border-t px-5 pb-7 pt-3 lg:hidden ${
-            industrial
-              ? "border-white/10 bg-[#03070C]"
-              : "border-[#0F2740]/10 bg-[#F8F6F1]"
-          }`}
+        <nav
+          id={`mobile-nav-${division}`}
+          aria-label={`${division} mobile navigation`}
+          className={`
+            w-full border-b px-6 pb-7 pt-3
+            shadow-[0_16px_25px_rgba(0,0,0,0.1)]
+            sm:px-10 lg:hidden
+            ${borderColor} ${background}
+          `}
         >
-          <nav className="flex flex-col">
-            {navItems.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className={`border-b py-4 text-[15px] ${
-                  industrial
-                    ? "border-white/10 text-white/75"
-                    : "border-[#0F2740]/10 text-[#0F2740]/75"
-                }`}
-              >
-                {label}
-              </a>
-            ))}
-
-            <button
-              type="button"
-              className={`pt-5 text-left text-[11px] font-semibold tracking-[0.14em] ${
-                industrial ? "text-white/40" : "text-[#0F2740]/40"
-              }`}
+          {links.map((item) => (
+            <Link
+              key={item.label}
+              to={item.path}
+              onClick={() => setMenuOpen(false)}
+              className={`
+                flex min-h-[54px]
+                items-center justify-between
+                border-b text-[16px] font-medium
+                ${borderColor}
+                ${
+                  pathname === item.path
+                    ? activeColor
+                    : textColor
+                }
+              `}
             >
-              EN
-            </button>
-          </nav>
-        </div>
+              {item.label}
+
+              {item.switchDivision && (
+                <ArrowUpRight
+                  size={18}
+                  strokeWidth={1.5}
+                />
+              )}
+            </Link>
+          ))}
+
+          {/* MOBILE CONTACT */}
+          <Link
+            to="/contact"
+            onClick={() => setMenuOpen(false)}
+            className={`
+              mt-6 inline-flex min-h-[46px]
+              items-center justify-center
+              px-7 text-[12px] font-semibold
+              uppercase tracking-[0.12em]
+              ${contactStyle}
+            `}
+          >
+            Contact
+          </Link>
+        </nav>
       )}
     </header>
   );
