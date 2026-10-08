@@ -12,7 +12,7 @@ export default function Welcome() {
           <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-6 py-6 md:px-12 md:py-8 lg:px-20">
             <Link to="/" aria-label="AURUMBuild home">
               <img
-                src="/aurumbuild-logo.png"
+                src="/images/aurumbuild-logo.png"
                 alt="AURUMBuild"
                 className="block h-auto w-[165px] sm:w-[190px] md:w-[210px]"
               />
