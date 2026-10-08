@@ -25,7 +25,7 @@ export default function DivisionFooter({ division = "industrial" }) {
               className="inline-block"
             >
       <img
-  src="/aurumbuild-logo.png"
+  src="/images/aurumbuild-logo.png"
   alt="AURUMBuild"
   className="block h-auto w-[190px] sm:w-[210px]"
   style={{
