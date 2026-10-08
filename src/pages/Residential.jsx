@@ -215,7 +215,7 @@ function ResidentialHeader() {
 export default function Residential() {
   return (
     <>
-      <<DivisionHeader division="residential" /> />
+      <DivisionHeader division="residential" />
 
       <main
         id="top"
