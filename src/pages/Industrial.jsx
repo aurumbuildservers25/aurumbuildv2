@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Atom,
@@ -90,7 +91,9 @@ export default function Industrial() {
       <main className="overflow-hidden bg-[#03070C] text-[#F2F3F0]">
 
         {/* HERO */}
-        <section className="relative min-h-[100dvh] overflow-hidden">
+        <section className="relative overflow-hidden lg:min-h-[calc(100dvh-92px)]">
+
+          {/* DESKTOP HERO IMAGE */}
           <div
             className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block"
             style={{
@@ -105,7 +108,8 @@ export default function Industrial() {
               alt=""
               className="h-full w-full scale-[1.02] object-cover object-center opacity-[0.78]"
               style={{
-                filter: "saturate(.66) contrast(1.06) brightness(.80)",
+                filter:
+                  "saturate(.66) contrast(1.06) brightness(.80)",
               }}
             />
 
@@ -116,48 +120,54 @@ export default function Industrial() {
             <div className="absolute bottom-[9%] left-[12%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#63BCD0]/30 to-transparent" />
           </div>
 
-          
-<div className="mb-7 flex items-center gap-3">
-  <span className="h-px w-8 bg-[#F2AA2A]" />
+          {/* HERO CONTENT */}
+          <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col justify-start px-6 pb-12 pt-14 sm:px-10 md:px-12 lg:min-h-[calc(100dvh-92px)] lg:justify-center lg:px-16 lg:py-20 xl:px-20">
 
-  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#F2AA2A]">
-    INDUSTRIAL
-  </span>
-</div>
+            {/* DIVISION LABEL */}
+            <div className="mb-7 flex items-center gap-3">
+              <span className="h-px w-8 bg-[#F2AA2A]" />
 
-
-              <h1 className="max-w-[760px] text-[3.25rem] font-semibold leading-[0.94] tracking-[-0.045em] sm:text-6xl md:text-7xl lg:text-[5.4rem]">
-                Control the project.
-                <br />
-                <span className="text-[#F2AA2A]">
-                  Verify the reality.
-                </span>
-              </h1>
-
-              <p className="mt-8 max-w-[670px] text-[17px] leading-[1.8] text-white/65 md:text-lg">
-                Engineering, technical supervision and digital project control
-                for complex construction. We connect project information with
-                physical site reality to verify progress, identify deviations
-                and support confident execution.
-              </p>
-
-              <div className="mt-10 flex flex-wrap items-center gap-7">
-                <a
-                  href="#capabilities"
-                  className="bg-[#F2AA2A] px-6 py-4 text-[12px] font-semibold tracking-[0.18em] text-[#03070C] transition-opacity hover:opacity-90"
-                >
-                  OUR CAPABILITIES
-                </a>
-
-                <a
-                  href="#pilot"
-                  className="flex items-center gap-2 text-[12px] font-semibold tracking-[0.16em] text-white/65 transition-colors hover:text-white"
-                >
-                  DISCUSS A PROJECT
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#F2AA2A]">
+                INDUSTRIAL
+              </span>
             </div>
+
+            {/* HEADLINE */}
+            <h1 className="max-w-[760px] text-[3.25rem] font-semibold leading-[0.94] tracking-[-0.045em] sm:text-6xl md:text-7xl lg:text-[5.4rem]">
+              Control the project.
+              <br />
+              <span className="text-[#F2AA2A]">
+                Verify the reality.
+              </span>
+            </h1>
+
+            {/* DESCRIPTION */}
+            <p className="mt-8 max-w-[670px] text-[17px] leading-[1.8] text-white/65 md:text-lg">
+              Engineering, technical supervision and digital project
+              control for complex construction. We connect project
+              information with physical site reality to verify
+              progress, identify deviations and support confident
+              execution.
+            </p>
+
+            {/* ACTIONS */}
+            <div className="mt-10 flex flex-wrap items-center gap-7">
+              <a
+                href="#capabilities"
+                className="bg-[#F2AA2A] px-6 py-4 text-[12px] font-semibold tracking-[0.18em] text-[#03070C] transition-opacity hover:opacity-90"
+              >
+                OUR CAPABILITIES
+              </a>
+
+              <a
+                href="#pilot"
+                className="flex items-center gap-2 text-[12px] font-semibold tracking-[0.16em] text-white/65 transition-colors hover:text-white"
+              >
+                DISCUSS A PROJECT
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+
           </div>
         </section>
 
@@ -216,10 +226,10 @@ export default function Industrial() {
                 </h2>
 
                 <p className="mt-7 max-w-xl text-[16px] leading-8 text-[#0A1118]/60">
-                  AURUMBuild works where technical complexity, multiple
-                  interfaces and demanding execution require a clear
-                  understanding of what is planned and what is actually
-                  happening on site.
+                  AURUMBuild works where technical complexity,
+                  multiple interfaces and demanding execution
+                  require a clear understanding of what is planned
+                  and what is actually happening on site.
                 </p>
               </div>
 
@@ -291,8 +301,9 @@ export default function Industrial() {
               </h2>
 
               <p className="mt-7 max-w-2xl text-[16px] leading-8 text-white/55">
-                Project documentation describes intent. Construction happens
-                in physical space. We create the evidence layer between the two.
+                Project documentation describes intent.
+                Construction happens in physical space.
+                We create the evidence layer between the two.
               </p>
             </div>
 
@@ -304,7 +315,7 @@ export default function Industrial() {
                   key={step.number}
                   className="relative border-t border-white/15 py-7 md:border-t-0 md:px-6 md:first:pl-0"
                 >
-                  <div className="hidden md:block absolute -top-[4px] left-6 h-[7px] w-[7px] rounded-full bg-[#63BCD0] first:left-0" />
+                  <div className="absolute -top-[4px] left-6 hidden h-[7px] w-[7px] rounded-full bg-[#63BCD0] md:block" />
 
                   <div className="text-xs font-semibold text-[#63BCD0]">
                     {step.number}
@@ -339,14 +350,16 @@ export default function Industrial() {
                 </h2>
 
                 <p className="mt-8 text-[16px] leading-8 text-[#0A1118]/60">
-                  Digital information is valuable only when it is interpreted
-                  in the context of engineering, construction sequence,
-                  interfaces and site conditions.
+                  Digital information is valuable only when it is
+                  interpreted in the context of engineering,
+                  construction sequence, interfaces and site
+                  conditions.
                 </p>
 
                 <p className="mt-5 text-[16px] leading-8 text-[#0A1118]/60">
-                  Our technical supervision combines physical site presence
-                  with structured project information to support quality,
+                  Our technical supervision combines physical
+                  site presence with structured project
+                  information to support quality,
                   constructability and execution.
                 </p>
               </div>
@@ -383,15 +396,17 @@ export default function Industrial() {
 
               <div className="lg:pt-10">
                 <p className="max-w-2xl text-[16px] leading-8 text-white/55">
-                  Verified construction information can become the foundation
-                  of a structured digital asset. The objective is not simply
-                  to create a 3D model, but to preserve useful information
-                  beyond construction.
+                  Verified construction information can become
+                  the foundation of a structured digital asset.
+                  The objective is not simply to create a 3D model,
+                  but to preserve useful information beyond construction.
                 </p>
 
                 <div className="mt-12 grid gap-4 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center">
                   <div className="border border-white/10 p-6">
-                    <div className="text-xs text-[#63BCD0]">01</div>
+                    <div className="text-xs text-[#63BCD0]">
+                      01
+                    </div>
                     <div className="mt-4 font-medium">
                       Construction reality
                     </div>
@@ -400,7 +415,9 @@ export default function Industrial() {
                   <ArrowRight className="hidden h-4 w-4 text-white/25 sm:block" />
 
                   <div className="border border-white/10 p-6">
-                    <div className="text-xs text-[#63BCD0]">02</div>
+                    <div className="text-xs text-[#63BCD0]">
+                      02
+                    </div>
                     <div className="mt-4 font-medium">
                       Structured digital asset
                     </div>
@@ -409,7 +426,9 @@ export default function Industrial() {
                   <ArrowRight className="hidden h-4 w-4 text-white/25 sm:block" />
 
                   <div className="border border-white/10 p-6">
-                    <div className="text-xs text-[#63BCD0]">03</div>
+                    <div className="text-xs text-[#63BCD0]">
+                      03
+                    </div>
                     <div className="mt-4 font-medium">
                       Operation
                     </div>
@@ -417,9 +436,9 @@ export default function Industrial() {
                 </div>
 
                 <p className="mt-8 max-w-2xl text-sm leading-7 text-white/40">
-                  The scope of an operational Digital Twin depends on available
-                  asset data, systems integration and cooperation with the
-                  owner or operator.
+                  The scope of an operational Digital Twin depends
+                  on available asset data, systems integration
+                  and cooperation with the owner or operator.
                 </p>
               </div>
             </div>
@@ -446,11 +465,12 @@ export default function Industrial() {
 
             <div>
               <p className="max-w-2xl text-[16px] leading-8 text-[#071019]/70">
-                Select one defined asset area — a reactor cooler, foundry sand
-                plant, clean room in a battery facility, process unit or another
-                construction package. We establish the baseline, capture
-                physical reality, compare planned versus actual and deliver
-                usable project-control output.
+                Select one defined asset area — a reactor cooler,
+                foundry sand plant, clean room in a battery facility,
+                process unit or another construction package.
+                We establish the baseline, capture physical reality,
+                compare planned versus actual and deliver usable
+                project-control output.
               </p>
 
               <a
