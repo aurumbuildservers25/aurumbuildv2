@@ -46,59 +46,50 @@ export default function Contact() {
       <DivisionHeader division="residential" />
 
       <main className="w-full min-w-0 overflow-x-hidden bg-[#FFF9EF] text-[#102D5B]">
-        {/* INTRODUCTION */}
-        <section className="w-full px-6 pb-14 pt-16 sm:px-10 md:pb-20 md:pt-24 lg:px-20">
+        {/* COMPACT HERO */}
+        <section className="w-full px-6 pb-7 pt-9 sm:px-10 md:pb-14 md:pt-20 lg:px-20">
           <div className="mx-auto w-full max-w-[1360px]">
-            <div className="mb-8 flex items-center gap-3">
+            <div className="mb-5 flex items-center gap-3 md:mb-8">
               <span className="h-px w-8 bg-[#C9A962]" />
               <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#B18D43]">
                 CONTACT
               </span>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20">
-              <h1 className="max-w-[850px] text-[clamp(2.65rem,6.2vw,6.2rem)] font-semibold leading-[1.06] tracking-[-0.055em]">
-                Your vision.
-                <br />
-                Our conversation.
-              </h1>
-
-              <p className="max-w-[480px] text-[16px] leading-[1.75] text-[#102D5B]/65 md:text-lg lg:pb-2">
-                Whether you're planning a private residence or a
-                complex industrial development, we're ready to
-                understand your goals, discuss your ideas and help
-                define the next steps. Feel free to reach out anytime.
-              </p>
-            </div>
+            <h1 className="max-w-[1000px] text-[clamp(2.35rem,5.8vw,6.2rem)] font-semibold leading-[1.04] tracking-[-0.055em]">
+              Your vision.
+              <br />
+              Our conversation.
+            </h1>
           </div>
         </section>
 
-        {/* DIRECT CONTACT */}
+        {/* CONTACT DETAILS FIRST */}
         <section className="w-full px-6 sm:px-10 lg:px-20">
           <div className="mx-auto w-full max-w-[1360px] border-t border-[#102D5B]/20">
             <div className="grid md:grid-cols-2">
               <a
                 href={`mailto:${EMAIL}`}
-                className="group flex min-w-0 items-center gap-5 border-b border-[#102D5B]/20 py-9 md:border-r md:pr-10"
+                className="group flex min-w-0 items-center gap-4 border-b border-[#102D5B]/20 py-5 md:gap-5 md:border-r md:py-9 md:pr-10"
               >
                 <Mail
-                  size={25}
+                  size={23}
                   strokeWidth={1.4}
                   className="shrink-0 text-[#B18D43]"
                 />
 
                 <div className="min-w-0 flex-1">
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B18D43]">
+                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D43] md:mb-2 md:text-[11px]">
                     EMAIL
                   </div>
 
-                  <div className="break-all text-[17px] font-medium tracking-[-0.025em] sm:text-xl">
+                  <div className="break-all text-[16px] font-medium tracking-[-0.025em] sm:text-xl">
                     {EMAIL}
                   </div>
                 </div>
 
                 <ArrowUpRight
-                  size={20}
+                  size={19}
                   strokeWidth={1.5}
                   className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
                 />
@@ -106,26 +97,26 @@ export default function Contact() {
 
               <a
                 href="tel:+48696379094"
-                className="group flex min-w-0 items-center gap-5 border-b border-[#102D5B]/20 py-9 md:pl-10"
+                className="group flex min-w-0 items-center gap-4 border-b border-[#102D5B]/20 py-5 md:gap-5 md:py-9 md:pl-10"
               >
                 <Phone
-                  size={25}
+                  size={23}
                   strokeWidth={1.4}
                   className="shrink-0 text-[#B18D43]"
                 />
 
                 <div className="min-w-0 flex-1">
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B18D43]">
+                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D43] md:mb-2 md:text-[11px]">
                     PHONE
                   </div>
 
-                  <div className="text-[17px] font-medium tracking-[-0.025em] sm:text-xl">
+                  <div className="text-[16px] font-medium tracking-[-0.025em] sm:text-xl">
                     {PHONE}
                   </div>
                 </div>
 
                 <ArrowUpRight
-                  size={20}
+                  size={19}
                   strokeWidth={1.5}
                   className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
                 />
@@ -134,12 +125,24 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* ENQUIRY FORM */}
+        {/* SHORT INTRODUCTION */}
+        <section className="w-full px-6 pb-12 pt-8 sm:px-10 md:pb-24 md:pt-16 lg:px-20">
+          <div className="mx-auto w-full max-w-[1360px]">
+            <p className="max-w-[760px] text-[15px] leading-[1.8] text-[#102D5B]/65 md:text-lg">
+              Whether you're planning a private residence or a
+              complex industrial development, we're ready to
+              understand your goals, discuss your ideas and help
+              define the next steps. Feel free to reach out anytime.
+            </p>
+          </div>
+        </section>
+
+        {/* PROJECT ENQUIRY */}
         <section
           id="enquiry"
-          className="w-full px-6 pb-24 pt-24 sm:px-10 md:pb-32 md:pt-32 lg:px-20"
+          className="w-full px-6 pb-24 pt-12 sm:px-10 md:pb-32 md:pt-24 lg:px-20"
         >
-          <div className="mx-auto grid w-full max-w-[1360px] gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+          <div className="mx-auto grid w-full max-w-[1360px] gap-12 border-t border-[#102D5B]/20 pt-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 lg:pt-20">
             <div className="min-w-0">
               <div className="mb-7 flex items-center gap-3">
                 <span className="h-px w-8 bg-[#C9A962]" />
@@ -148,7 +151,7 @@ export default function Contact() {
                 </span>
               </div>
 
-              <h2 className="max-w-[500px] text-[clamp(2.5rem,4vw,4.3rem)] font-semibold leading-[1.07] tracking-[-0.055em]">
+              <h2 className="max-w-[500px] text-[clamp(2.35rem,4vw,4.3rem)] font-semibold leading-[1.07] tracking-[-0.055em]">
                 Tell us what
                 <br />
                 you're building.
@@ -160,10 +163,7 @@ export default function Contact() {
               </p>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="w-full min-w-0"
-            >
+            <form onSubmit={handleSubmit} className="w-full min-w-0">
               <fieldset className="mb-10">
                 <legend className="mb-4 text-[13px] font-semibold">
                   What is your project about?
