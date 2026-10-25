@@ -1,198 +1,474 @@
-import React, { useEffect } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock, Globe } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useI18n } from '@/i18n';
 
-export default function Contact({ division = 'industrial' }) {
-  const { t } = useI18n();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowUpRight,
+  Mail,
+  Menu,
+  Phone,
+  X,
+} from "lucide-react";
 
-  const isIndustrial = division === 'industrial';
+const EMAIL = "admin@aurumbuild.eu";
+const PHONE_DISPLAY = "+48 696 379 094";
+const PHONE_LINK = "tel:+48696379094";
 
-  // ---- SAFE TRANSLATIONS (fallbacks so nothing crashes) ----
-  const safeT = {
-    nav: { contact: t?.nav?.contact ?? 'Contact' },
-    contact: {
-      subtitle: t?.contact?.subtitle ?? "Let's Build Your Future Today",
-      email: t?.contact?.email ?? 'Email',
-      phone: t?.contact?.phone ?? 'Phone',
-      headquarters: t?.contact?.headquarters ?? 'Headquarters',
-      location: t?.contact?.location ?? 'Warsaw, Poland',
-      operationsCenter: t?.contact?.operationsCenter ?? 'European Operations Center',
-      officeHours: t?.contact?.officeHours ?? 'Office Hours',
-      mondayFriday: t?.contact?.mondayFriday ?? 'Monday - Friday: 8:00 AM - 6:00 PM',
-      saturday: t?.contact?.saturday ?? 'Saturday: 9:00 AM - 2:00 PM',
-      coverageAreas: t?.contact?.coverageAreas ?? 'Coverage Areas',
-    },
-  };
-  // ----------------------------------------------------------
+export default function Contact() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [division, setDivision] = useState("Residential");
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+  });
+
+  function updateField(field, value) {
+    setForm((previous) => ({
+      ...previous,
+      [field]: value,
+    }));
+  }
+
+  function prepareEmail(event) {
+    event.preventDefault();
+
+    const subject =
+      `AURUMBUILD ${division} enquiry — ${form.name.trim()}`;
+
+    const body = [
+      `Division: ${division}`,
+      `Name: ${form.name.trim()}`,
+      `Email: ${form.email.trim()}`,
+      form.company.trim()
+        ? `Company: ${form.company.trim()}`
+        : null,
+      "",
+      "Project details:",
+      form.message.trim(),
+    ]
+      .filter((line) => line !== null)
+      .join("\n");
+
+    window.location.href =
+      `mailto:${EMAIL}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+  }
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        backgroundColor: isIndustrial ? '#0C0E14' : '#F5F3F0',
-        color: isIndustrial ? '#F1F5F9' : '#24324B'
-      }}
-    >
-      <div
-        style={{
-          paddingTop: 'calc(var(--header-h-current, 64px) + clamp(16px, 3vh, 32px))',
-          paddingBottom: 'clamp(24px, 5vh, 48px)',
-          minHeight: '100vh',
-          position: 'relative',
-          zIndex: 1
-        }}
-      >
-        <main className="pb-6">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <h1
-                className="font-bold tracking-tight text-center mb-2"
-                style={{
-                  fontSize: 'clamp(1.8rem, 2.8vw, 2.4rem)',
-                  fontWeight: 700,
-                  color: isIndustrial ? '#FFB833' : '#D9B566',
-                  lineHeight: 1.2,
-                  textShadow: isIndustrial
-                    ? '0 2px 12px rgba(255,184,51,0.22)'
-                    : '0 2px 12px rgba(217,181,102,0.5), 0 1px 3px rgba(0,0,0,0.3)'
-                }}
-              >
-                {safeT.nav.contact}
-              </h1>
+    <div className="min-h-screen bg-[#FFF9EF] text-[#102D5B]">
+      {/* HEADER */}
+      <header className="relative z-50 border-b border-[#102D5B]/15 bg-[#FFF9EF]">
+        <div className="mx-auto flex h-[76px] w-full max-w-[1600px] items-center justify-between gap-7 px-6 sm:px-10 lg:h-[92px] lg:px-12 xl:px-20">
+          <Link
+            to="/"
+            aria-label="AURUMBUILD home"
+            className="shrink-0"
+            onClick={() => setMenuOpen(false)}
+          >
+            <img
+              src="/images/aurumbuild-logo-residential.png"
+              alt="AURUMBUILD"
+              className="block h-auto w-[167px] sm:w-[187px] xl:w-[210px]"
+            />
+          </Link>
 
-              <p className="text-center text-base mb-6 max-w-2xl mx-auto" style={{ color: isIndustrial ? '#C9D1D9' : '#4A5568' }}>
-                {safeT.contact.subtitle}
-              </p>
+          {/* DESKTOP NAVIGATION */}
+          <nav
+            aria-label="Main navigation"
+            className="ml-auto hidden items-center gap-8 lg:flex"
+          >
+            <Link
+              to="/industrial"
+              className="inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.03em] transition-opacity hover:opacity-65"
+            >
+              Industrial
+              <ArrowUpRight
+                size={14}
+                strokeWidth={1.7}
+              />
+            </Link>
 
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
-                {/* Email */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} whileHover={{ y: -3, transition: { duration: 0.3 } }}>
-                  <Card
-                    className="border-2 rounded-2xl transition-all duration-300"
-                    style={{
-                      backgroundColor: isIndustrial ? '#132132' : '#FFFFFF',
-                      borderColor: isIndustrial ? 'rgba(255,255,255,0.06)' : 'rgba(36,50,75,0.08)',
-                      boxShadow: isIndustrial ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.08)'
-                    }}
-                  >
-                    <CardContent className="p-5">
-                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3" style={{ backgroundColor: isIndustrial ? '#1B2A3A' : 'rgba(36,50,75,0.08)' }}>
-                        <Mail className="w-6 h-6" style={{ color: isIndustrial ? '#FFB833' : '#8B6914' }} />
-                      </div>
-                      <h3 className="text-lg font-bold mb-2" style={{ color: isIndustrial ? '#F1F5F9' : '#24324B' }}>
-                        {safeT.contact.email}
-                      </h3>
-                      <div className="space-y-1 text-sm">
-                        <a href="mailto:contact@aurumbuild.eu" className="block" style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>
-                          admin@aurumbuild.eu
-                        </a>
-    
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+            <Link
+              to="/residential"
+              className="inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.03em] transition-opacity hover:opacity-65"
+            >
+              Residential
+              <ArrowUpRight
+                size={14}
+                strokeWidth={1.7}
+              />
+            </Link>
 
-                {/* Phone */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} whileHover={{ y: -3, transition: { duration: 0.3 } }}>
-                  <Card className="border-2 rounded-2xl transition-all duration-300" style={{
-                    backgroundColor: isIndustrial ? '#132132' : '#FFFFFF',
-                    borderColor: isIndustrial ? 'rgba(255,255,255,0.06)' : 'rgba(36,50,75,0.08)',
-                    boxShadow: isIndustrial ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.08)'
-                  }}>
-                    <CardContent className="p-5">
-                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3" style={{ backgroundColor: isIndustrial ? '#1B2A3A' : 'rgba(36,50,75,0.08)' }}>
-                        <Phone className="w-6 h-6" style={{ color: isIndustrial ? '#7FCF8A' : '#2C7A7B' }} />
-                      </div>
-                      <h3 className="text-lg font-bold mb-2" style={{ color: isIndustrial ? '#F1F5F9' : '#24324B' }}>
-                        {safeT.contact.phone}
-                      </h3>
-                      <div className="space-y-1 text-sm">
-                        <a href="tel:+48221234567" className="block" style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>
-                          +48 696379094
-                        </a>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+            <span
+              aria-current="page"
+              className="border-b-2 border-[#C9A962] pb-1 text-[12px] font-semibold tracking-[0.03em]"
+            >
+              Contact
+            </span>
+          </nav>
 
-                {/* HQ */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 }} whileHover={{ y: -3, transition: { duration: 0.3 } }}>
-                  <Card className="border-2 rounded-2xl transition-all duration-300" style={{
-                    backgroundColor: isIndustrial ? '#132132' : '#FFFFFF',
-                    borderColor: isIndustrial ? 'rgba(255,255,255,0.06)' : 'rgba(36,50,75,0.08)',
-                    boxShadow: isIndustrial ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.08)'
-                  }}>
-                    <CardContent className="p-5">
-                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3" style={{ backgroundColor: isIndustrial ? '#1B2A3A' : 'rgba(36,50,75,0.08)' }}>
-                        <MapPin className="w-6 h-6" style={{ color: isIndustrial ? '#8B5CF6' : '#8B6914' }} />
-                      </div>
-                      <h3 className="text-lg font-bold mb-2" style={{ color: isIndustrial ? '#F1F5F9' : '#24324B' }}>
-                        {safeT.contact.headquarters}
-                      </h3>
-                      <div className="space-y-1 text-sm">
-                        <p style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>{safeT.contact.location}</p>
-                        <p style={{ color: isIndustrial ? '#C9D1D9' : '#4A5568' }}>{safeT.contact.operationsCenter}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+          {/* MOBILE MENU BUTTON */}
+          <button
+            type="button"
+            aria-controls="contact-mobile-navigation"
+            aria-expanded={menuOpen}
+            aria-label={
+              menuOpen ? "Close menu" : "Open menu"
+            }
+            onClick={() =>
+              setMenuOpen((open) => !open)
+            }
+            className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center lg:hidden"
+          >
+            {menuOpen ? (
+              <X size={25} strokeWidth={1.7} />
+            ) : (
+              <Menu size={25} strokeWidth={1.7} />
+            )}
+          </button>
+        </div>
 
-                {/* Hours */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.4 }} whileHover={{ y: -3, transition: { duration: 0.3 } }}>
-                  <Card className="border-2 rounded-2xl transition-all duration-300" style={{
-                    backgroundColor: isIndustrial ? '#132132' : '#FFFFFF',
-                    borderColor: isIndustrial ? 'rgba(255,255,255,0.06)' : 'rgba(36,50,75,0.08)',
-                    boxShadow: isIndustrial ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.08)'
-                  }}>
-                    <CardContent className="p-5">
-                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3" style={{ backgroundColor: isIndustrial ? '#1B2A3A' : 'rgba(36,50,75,0.08)' }}>
-                        <Clock className="w-6 h-6" style={{ color: isIndustrial ? '#FFB833' : '#8B6914' }} />
-                      </div>
-                      <h3 className="text-lg font-bold mb-2" style={{ color: isIndustrial ? '#F1F5F9' : '#24324B' }}>
-                        {safeT.contact.officeHours}
-                      </h3>
-                      <div className="space-y-1 text-sm">
-                        <p style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>{safeT.contact.mondayFriday}</p>
-                        <p style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>{safeT.contact.saturday}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+        {/* FULL-WIDTH MOBILE NAVIGATION */}
+        {menuOpen && (
+          <nav
+            id="contact-mobile-navigation"
+            aria-label="Mobile navigation"
+            className="w-full border-t border-[#102D5B]/10 bg-[#FFF9EF] px-6 pb-6 sm:px-10 lg:hidden"
+          >
+            <div className="mx-auto max-w-[650px]">
+              {[
+                {
+                  label: "Industrial",
+                  to: "/industrial",
+                },
+                {
+                  label: "Residential",
+                  to: "/residential",
+                },
+              ].map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex min-h-[56px] items-center justify-between border-b border-[#102D5B]/10 text-[16px] font-medium"
+                >
+                  {item.label}
+                  <ArrowUpRight
+                    size={17}
+                    strokeWidth={1.5}
+                  />
+                </Link>
+              ))}
+
+              <div className="flex min-h-[56px] items-center border-b border-[#102D5B]/10 text-[16px] font-semibold text-[#B18D4B]">
+                Contact — current page
+              </div>
+            </div>
+          </nav>
+        )}
+      </header>
+
+      <main>
+        <section className="px-6 pb-20 pt-14 sm:px-10 md:px-12 md:pb-28 md:pt-20 lg:px-20">
+          <div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 xl:gap-28">
+
+            {/* LEFT: CONTACT INFORMATION */}
+            <div className="lg:pt-7">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-[#C9A962]" />
+
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#AD8641]">
+                  Contact
+                </span>
               </div>
 
-              {/* Coverage */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.5 }} whileHover={{ y: -3, transition: { duration: 0.3 } }}>
-                <Card className="border-2 rounded-2xl transition-all duration-300" style={{
-                  backgroundColor: isIndustrial ? '#132132' : '#FFFFFF',
-                  borderColor: isIndustrial ? 'rgba(255,255,255,0.06)' : 'rgba(36,50,75,0.08)',
-                  boxShadow: isIndustrial ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.08)'
-                }}>
-                  <CardContent className="p-5">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: isIndustrial ? '#1B2A3A' : 'rgba(36,50,75,0.08)' }}>
-                        <Globe className="w-6 h-6" style={{ color: isIndustrial ? '#7FCF8A' : '#2C7A7B' }} />
-                      </div>
-                      <h3 className="text-xl font-bold" style={{ color: isIndustrial ? '#F1F5F9' : '#24324B' }}>
-                        {safeT.contact.coverageAreas}
-                      </h3>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                      {['Italy', 'Poland', 'Spain', 'Turkey'].map((country) => (
-                        <span key={country} style={{ color: isIndustrial ? '#E2E8F0' : '#1E293B' }}>
-                          {country}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </motion.div>
+              <h1 className="mt-7 max-w-[650px] text-[clamp(2.8rem,5vw,5.5rem)] font-medium leading-[1.06] tracking-[-0.055em]">
+                Let's talk about
+                <br />
+                your project.
+              </h1>
+
+              <p className="mt-7 max-w-[525px] text-[16px] leading-[1.8] text-[#102D5B]/70">
+                A home abroad or a complex industrial
+                project — tell us what you're planning.
+                We'll help you find the right starting point.
+              </p>
+
+              {/* EMAIL */}
+              <div className="mt-12 max-w-[540px] border-t border-[#102D5B]/15">
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="group flex items-center gap-5 border-b border-[#102D5B]/15 py-6"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#C9A962]/60 text-[#B18D4B]">
+                    <Mail
+                      size={20}
+                      strokeWidth={1.6}
+                    />
+                  </span>
+
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#AD8641]">
+                      Email
+                    </span>
+
+                    <span className="mt-1 block break-all text-[17px] font-medium sm:text-[19px]">
+                      {EMAIL}
+                    </span>
+                  </span>
+
+                  <ArrowUpRight
+                    size={20}
+                    strokeWidth={1.5}
+                    className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                  />
+                </a>
+
+                {/* PHONE */}
+                <a
+                  href={PHONE_LINK}
+                  className="group flex items-center gap-5 border-b border-[#102D5B]/15 py-6"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#C9A962]/60 text-[#B18D4B]">
+                    <Phone
+                      size={20}
+                      strokeWidth={1.6}
+                    />
+                  </span>
+
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#AD8641]">
+                      Phone
+                    </span>
+
+                    <span className="mt-1 block text-[17px] font-medium sm:text-[19px]">
+                      {PHONE_DISPLAY}
+                    </span>
+                  </span>
+
+                  <ArrowUpRight
+                    size={20}
+                    strokeWidth={1.5}
+                    className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                  />
+                </a>
+              </div>
+
+              <p className="mt-7 max-w-[460px] text-[13px] leading-6 text-[#102D5B]/55">
+                One point of contact for AURUMBUILD
+                Residential and Industrial.
+              </p>
+            </div>
+
+            {/* RIGHT: PROJECT ENQUIRY */}
+            <div className="border border-[#102D5B]/10 bg-[#F5EEDF] p-6 sm:p-9 lg:p-10 xl:p-12">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-[#C9A962]" />
+
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#AD8641]">
+                  Project enquiry
+                </span>
+              </div>
+
+              <h2 className="mt-5 text-[clamp(1.9rem,3vw,2.65rem)] font-medium leading-[1.15] tracking-[-0.04em]">
+                Tell us what you're building.
+              </h2>
+
+              <p className="mt-3 text-[14px] leading-7 text-[#102D5B]/65">
+                A few details are enough to begin.
+              </p>
+
+              <form
+                onSubmit={prepareEmail}
+                className="mt-9 space-y-6"
+              >
+                {/* DIVISION SELECTION */}
+                <fieldset>
+                  <legend className="mb-3 text-[12px] font-semibold text-[#102D5B]">
+                    I'm enquiring about
+                  </legend>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      "Residential",
+                      "Industrial",
+                    ].map((item) => (
+                      <button
+                        type="button"
+                        key={item}
+                        aria-pressed={
+                          division === item
+                        }
+                        onClick={() =>
+                          setDivision(item)
+                        }
+                        className={`min-h-[46px] border px-3 text-[13px] font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D5B] ${
+                          division === item
+                            ? "border-[#102D5B] bg-[#102D5B] text-white"
+                            : "border-[#102D5B]/20 bg-[#FFF9EF] text-[#102D5B] hover:border-[#102D5B]/60"
+                        }`}
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
+
+                {/* NAME AND EMAIL */}
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <label className="block">
+                    <span className="mb-2 block text-[12px] font-semibold">
+                      Your name *
+                    </span>
+
+                    <input
+                      type="text"
+                      name="name"
+                      autoComplete="name"
+                      required
+                      maxLength={100}
+                      value={form.name}
+                      onChange={(event) =>
+                        updateField(
+                          "name",
+                          event.target.value
+                        )
+                      }
+                      className="h-12 w-full rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 text-[15px] text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
+                      placeholder="Full name"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-[12px] font-semibold">
+                      Email address *
+                    </span>
+
+                    <input
+                      type="email"
+                      name="email"
+                      autoComplete="email"
+                      required
+                      maxLength={150}
+                      value={form.email}
+                      onChange={(event) =>
+                        updateField(
+                          "email",
+                          event.target.value
+                        )
+                      }
+                      className="h-12 w-full rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 text-[15px] text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
+                      placeholder="you@example.com"
+                    />
+                  </label>
+                </div>
+
+                {/* COMPANY */}
+                <label className="block">
+                  <span className="mb-2 block text-[12px] font-semibold">
+                    Company{" "}
+                    <span className="font-normal text-[#102D5B]/50">
+                      (optional)
+                    </span>
+                  </span>
+
+                  <input
+                    type="text"
+                    name="company"
+                    autoComplete="organization"
+                    maxLength={150}
+                    value={form.company}
+                    onChange={(event) =>
+                      updateField(
+                        "company",
+                        event.target.value
+                      )
+                    }
+                    className="h-12 w-full rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 text-[15px] text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
+                    placeholder="Company or organisation"
+                  />
+                </label>
+
+                {/* PROJECT DETAILS */}
+                <label className="block">
+                  <span className="mb-2 block text-[12px] font-semibold">
+                    About your project *
+                  </span>
+
+                  <textarea
+                    name="message"
+                    rows={5}
+                    required
+                    maxLength={2000}
+                    value={form.message}
+                    onChange={(event) =>
+                      updateField(
+                        "message",
+                        event.target.value
+                      )
+                    }
+                    className="min-h-[140px] w-full resize-y rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 py-3 text-[15px] leading-7 text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
+                    placeholder="Where is the project, and how can we help?"
+                  />
+                </label>
+
+                {/* SUBMIT */}
+                <button
+                  type="submit"
+                  className="min-h-[52px] w-full bg-[#102D5B] px-6 text-[12px] font-semibold uppercase tracking-[0.13em] text-white transition-colors hover:bg-[#1A4179] sm:w-auto"
+                >
+                  Open email to send
+                </button>
+
+                <p className="text-[12px] leading-6 text-[#102D5B]/60">
+                  This opens your email app with the
+                  enquiry prepared. Review and send
+                  it there; the website does not
+                  submit it automatically.
+                </p>
+              </form>
+            </div>
           </div>
-        </main>
-      </div>
+        </section>
+      </main>
+
+      {/* CORPORATE FOOTER */}
+      <footer className="bg-[#102D5B] px-6 py-10 text-white sm:px-10 md:px-12 lg:px-20">
+        <div className="mx-auto grid max-w-[1440px] gap-8 border-b border-white/15 pb-8 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <p className="text-[14px] font-semibold">
+              AURUMBUILD Sp. z o.o.
+            </p>
+
+            <p className="mt-2 text-[13px] leading-6 text-white/65">
+              Registered office:
+              <br />
+              ul. Stanisława Konarskiego 18C
+              <br />
+              44-100 Gliwice, Poland
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-white/65">
+            <span>KRS 0001252561</span>
+            <span>NIP 6312742513</span>
+            <span>REGON 54519473000000</span>
+          </div>
+        </div>
+
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-3 pt-6 text-[12px] text-white/50 sm:flex-row sm:items-center sm:justify-between">
+          <span>
+            © {new Date().getFullYear()} AURUMBUILD Sp. z o.o.
+          </span>
+
+          <span>
+            Engineering · Construction · Project Delivery
+          </span>
+        </div>
+      </footer>
     </div>
   );
 }
