@@ -45,12 +45,9 @@ export default function Contact() {
     <>
       <DivisionHeader division="residential" />
 
-      <main
-        id="contact"
-        className="w-full min-w-0 overflow-x-hidden bg-[#FFF9EF] text-[#102D5B]"
-      >
+      <main className="w-full min-w-0 overflow-x-hidden bg-[#FFF9EF] text-[#102D5B]">
         {/* INTRODUCTION */}
-        <section className="w-full px-6 pb-16 pt-16 sm:px-10 md:pb-24 md:pt-24 lg:px-20">
+        <section className="w-full px-6 pb-14 pt-16 sm:px-10 md:pb-20 md:pt-24 lg:px-20">
           <div className="mx-auto w-full max-w-[1360px]">
             <div className="mb-8 flex items-center gap-3">
               <span className="h-px w-8 bg-[#C9A962]" />
@@ -59,17 +56,18 @@ export default function Contact() {
               </span>
             </div>
 
-            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20">
-              <h1 className="max-w-[850px] text-[clamp(3.1rem,6.8vw,6.5rem)] font-semibold leading-[0.99] tracking-[-0.06em]">
-                Let's talk about
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20">
+              <h1 className="max-w-[850px] text-[clamp(2.65rem,6.2vw,6.2rem)] font-semibold leading-[1.06] tracking-[-0.055em]">
+                Your vision.
                 <br />
-                your project.
+                Our conversation.
               </h1>
 
-              <p className="max-w-[480px] text-[16px] leading-[1.85] text-[#102D5B]/65 md:text-lg lg:pb-2">
-                From private homes to complex industrial construction,
-                every successful project starts with a conversation.
-                Tell us what you're planning.
+              <p className="max-w-[480px] text-[16px] leading-[1.75] text-[#102D5B]/65 md:text-lg lg:pb-2">
+                Whether you're planning a private residence or a
+                complex industrial development, we're ready to
+                understand your goals, discuss your ideas and help
+                define the next steps. Feel free to reach out anytime.
               </p>
             </div>
           </div>
