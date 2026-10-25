@@ -116,11 +116,15 @@ export default function Industrial() {
             <div className="absolute bottom-[9%] left-[12%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#63BCD0]/30 to-transparent" />
           </div>
 
-          <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[1440px] items-center px-6 pb-20 pt-28 md:px-12 lg:px-20">
-            <div className="max-w-[760px]">
-              <div className="mb-7 text-[11px] font-semibold tracking-[0.28em] text-[#F2AA2A] md:text-xs">
-                AURUMBUILD INDUSTRIAL
-              </div>
+          
+<div className="mb-7 flex items-center gap-3">
+  <span className="h-px w-8 bg-[#F2AA2A]" />
+
+  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#F2AA2A]">
+    INDUSTRIAL
+  </span>
+</div>
+
 
               <h1 className="max-w-[760px] text-[3.25rem] font-semibold leading-[0.94] tracking-[-0.045em] sm:text-6xl md:text-7xl lg:text-[5.4rem]">
                 Control the project.
