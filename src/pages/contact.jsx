@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
@@ -46,17 +45,18 @@ export default function Contact() {
       <DivisionHeader division="residential" />
 
       <main className="w-full min-w-0 overflow-x-hidden bg-[#FFF9EF] text-[#102D5B]">
-        {/* COMPACT HERO */}
-        <section className="w-full px-6 pb-7 pt-9 sm:px-10 md:pb-14 md:pt-20 lg:px-20">
+        {/* HERO */}
+        <section className="w-full px-6 pb-7 pt-9 sm:px-10 md:pb-12 md:pt-16 lg:px-20">
           <div className="mx-auto w-full max-w-[1360px]">
-            <div className="mb-5 flex items-center gap-3 md:mb-8">
+            <div className="mb-5 flex items-center gap-3 md:mb-7">
               <span className="h-px w-8 bg-[#C9A962]" />
+
               <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#B18D43]">
                 CONTACT
               </span>
             </div>
 
-            <h1 className="max-w-[1000px] text-[clamp(2.35rem,5.8vw,6.2rem)] font-semibold leading-[1.04] tracking-[-0.055em]">
+            <h1 className="max-w-[1000px] text-[clamp(2.35rem,5.8vw,6.2rem)] font-semibold leading-[1.03] tracking-[-0.055em]">
               Your vision.
               <br />
               Our conversation.
@@ -64,26 +64,27 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* CONTACT DETAILS FIRST */}
+        {/* CONTACT DETAILS */}
         <section className="w-full px-6 sm:px-10 lg:px-20">
           <div className="mx-auto w-full max-w-[1360px] border-t border-[#102D5B]/20">
             <div className="grid md:grid-cols-2">
+              {/* EMAIL */}
               <a
                 href={`mailto:${EMAIL}`}
-                className="group flex min-w-0 items-center gap-4 border-b border-[#102D5B]/20 py-5 md:gap-5 md:border-r md:py-9 md:pr-10"
+                className="group flex min-w-0 items-center gap-4 border-b border-[#102D5B]/20 py-5 md:gap-5 md:border-r md:py-8 md:pr-10"
               >
                 <Mail
-                  size={23}
+                  size={22}
                   strokeWidth={1.4}
                   className="shrink-0 text-[#B18D43]"
                 />
 
                 <div className="min-w-0 flex-1">
-                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D43] md:mb-2 md:text-[11px]">
+                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D43]">
                     EMAIL
                   </div>
 
-                  <div className="break-all text-[16px] font-medium tracking-[-0.025em] sm:text-xl">
+                  <div className="break-all text-[16px] font-medium tracking-[-0.025em] sm:text-lg">
                     {EMAIL}
                   </div>
                 </div>
@@ -91,26 +92,27 @@ export default function Contact() {
                 <ArrowUpRight
                   size={19}
                   strokeWidth={1.5}
-                  className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                  className="shrink-0 transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
                 />
               </a>
 
+              {/* PHONE */}
               <a
                 href="tel:+48696379094"
-                className="group flex min-w-0 items-center gap-4 border-b border-[#102D5B]/20 py-5 md:gap-5 md:py-9 md:pl-10"
+                className="group flex min-w-0 items-center gap-4 border-b border-[#102D5B]/20 py-5 md:gap-5 md:py-8 md:pl-10"
               >
                 <Phone
-                  size={23}
+                  size={22}
                   strokeWidth={1.4}
                   className="shrink-0 text-[#B18D43]"
                 />
 
                 <div className="min-w-0 flex-1">
-                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D43] md:mb-2 md:text-[11px]">
+                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D43]">
                     PHONE
                   </div>
 
-                  <div className="text-[16px] font-medium tracking-[-0.025em] sm:text-xl">
+                  <div className="text-[16px] font-medium tracking-[-0.025em] sm:text-lg">
                     {PHONE}
                   </div>
                 </div>
@@ -118,21 +120,21 @@ export default function Contact() {
                 <ArrowUpRight
                   size={19}
                   strokeWidth={1.5}
-                  className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                  className="shrink-0 transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
                 />
               </a>
             </div>
           </div>
         </section>
 
-        {/* SHORT INTRODUCTION */}
-        <section className="w-full px-6 pb-12 pt-8 sm:px-10 md:pb-24 md:pt-16 lg:px-20">
+        {/* INTRO COPY */}
+        <section className="w-full px-6 pb-12 pt-7 sm:px-10 md:pb-20 md:pt-12 lg:px-20">
           <div className="mx-auto w-full max-w-[1360px]">
-            <p className="max-w-[760px] text-[15px] leading-[1.8] text-[#102D5B]/65 md:text-lg">
-              Whether you're planning a private residence or a
-              complex industrial development, we're ready to
-              understand your goals, discuss your ideas and help
-              define the next steps. Feel free to reach out anytime.
+            <p className="max-w-[760px] text-[15px] leading-[1.8] text-[#102D5B]/65 md:text-[17px]">
+              Whether you're planning a private residence or a complex
+              industrial development, we're ready to understand your goals,
+              discuss your ideas and help define the next steps. Feel free to
+              reach out anytime.
             </p>
           </div>
         </section>
@@ -140,36 +142,39 @@ export default function Contact() {
         {/* PROJECT ENQUIRY */}
         <section
           id="enquiry"
-          className="w-full px-6 pb-24 pt-12 sm:px-10 md:pb-32 md:pt-24 lg:px-20"
+          className="w-full px-6 pb-24 pt-6 sm:px-10 md:pb-32 md:pt-12 lg:px-20"
         >
           <div className="mx-auto grid w-full max-w-[1360px] gap-12 border-t border-[#102D5B]/20 pt-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 lg:pt-20">
+            {/* FORM INTRO */}
             <div className="min-w-0">
-              <div className="mb-7 flex items-center gap-3">
+              <div className="mb-6 flex items-center gap-3">
                 <span className="h-px w-8 bg-[#C9A962]" />
+
                 <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#B18D43]">
                   PROJECT ENQUIRY
                 </span>
               </div>
 
-              <h2 className="max-w-[500px] text-[clamp(2.35rem,4vw,4.3rem)] font-semibold leading-[1.07] tracking-[-0.055em]">
+              <h2 className="max-w-[500px] text-[clamp(2.25rem,4vw,4.3rem)] font-semibold leading-[1.07] tracking-[-0.055em]">
                 Tell us what
                 <br />
                 you're building.
               </h2>
 
-              <p className="mt-6 max-w-[390px] text-[16px] leading-8 text-[#102D5B]/60">
-                A few details are enough to begin. We'll take it
-                from there.
+              <p className="mt-5 max-w-[390px] text-[15px] leading-7 text-[#102D5B]/60 md:text-[16px] md:leading-8">
+                A few details are enough to begin. We'll take it from there.
               </p>
             </div>
 
+            {/* FORM */}
             <form onSubmit={handleSubmit} className="w-full min-w-0">
+              {/* PROJECT TYPE */}
               <fieldset className="mb-10">
                 <legend className="mb-4 text-[13px] font-semibold">
                   What is your project about?
                 </legend>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
                   {["Residential", "Industrial"].map((type) => {
                     const selected = projectType === type;
 
@@ -179,7 +184,7 @@ export default function Contact() {
                         type="button"
                         aria-pressed={selected}
                         onClick={() => setProjectType(type)}
-                        className={`border px-6 py-3.5 text-[13px] font-semibold transition-colors ${
+                        className={`min-h-[48px] border px-4 text-[12px] font-semibold uppercase tracking-[0.08em] transition-colors sm:px-7 sm:text-[13px] ${
                           selected
                             ? "border-[#102D5B] bg-[#102D5B] text-white"
                             : "border-[#102D5B]/25 bg-transparent text-[#102D5B] hover:border-[#102D5B]"
@@ -193,6 +198,7 @@ export default function Contact() {
               </fieldset>
 
               <div className="grid gap-x-8 gap-y-9 md:grid-cols-2">
+                {/* NAME */}
                 <div className="min-w-0">
                   <label
                     htmlFor="contact-name"
@@ -213,6 +219,7 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* EMAIL */}
                 <div className="min-w-0">
                   <label
                     htmlFor="contact-email"
@@ -233,6 +240,7 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* COMPANY */}
                 <div className="min-w-0 md:col-span-2">
                   <label
                     htmlFor="contact-company"
@@ -255,6 +263,7 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* MESSAGE */}
                 <div className="min-w-0 md:col-span-2">
                   <label
                     htmlFor="contact-message"
@@ -275,6 +284,7 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* SUBMIT */}
               <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
                 <button
                   type="submit"
@@ -284,23 +294,23 @@ export default function Contact() {
                   <ArrowUpRight size={18} strokeWidth={1.6} />
                 </button>
 
-                <p className="max-w-[300px] text-[12px] leading-6 text-[#102D5B]/50">
-                  Opens your email app with the enquiry prepared.
-                  Review and send it there.
+                <p className="max-w-[310px] text-[12px] leading-6 text-[#102D5B]/50">
+                  Opens your email app with the enquiry prepared. Review and
+                  send it from there.
                 </p>
               </div>
             </form>
           </div>
         </section>
 
-        {/* CLOSING STRIP */}
-        <section className="w-full bg-[#102D5B] px-6 py-12 text-[#FFF9EF] sm:px-10 lg:px-20">
+        {/* CLOSING */}
+        <section className="w-full bg-[#102D5B] px-6 py-11 text-[#FFF9EF] sm:px-10 lg:px-20">
           <div className="mx-auto flex w-full max-w-[1360px] flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <p className="text-[20px] font-medium tracking-[-0.03em] md:text-2xl">
+            <p className="text-[19px] font-medium tracking-[-0.03em] md:text-2xl">
               Expertise to plan. Responsibility to deliver.
             </p>
 
-            <span className="text-[12px] tracking-[0.08em] text-white/55">
+            <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/50">
               AURUMBUILD · RESIDENTIAL & INDUSTRIAL
             </span>
           </div>
