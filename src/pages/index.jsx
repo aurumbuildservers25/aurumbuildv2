@@ -1,3 +1,4 @@
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./Layout.jsx";
 
@@ -24,17 +25,23 @@ export default function Pages({ division, setDivision }) {
     return <Welcome />;
   }
 
-  // New Industrial page - work in progress
+  // Industrial — uses its own header and footer
   if (pathname === "/industrial") {
     return <Industrial />;
   }
 
-  // New Residential page - work in progress
+  // Residential — uses its own header and footer
   if (pathname === "/residential") {
     return <Residential />;
   }
 
-  // Existing public website stays unchanged
+  // Contact — uses its own header and footer
+  // Do not wrap in the old Layout
+  if (pathname === "/contact") {
+    return <Contact division={division} />;
+  }
+
+  // Legacy pages retain the existing Layout
   return (
     <Layout
       currentPageName={page}
@@ -50,11 +57,6 @@ export default function Pages({ division, setDivision }) {
               setDivision={setDivision}
             />
           }
-        />
-
-        <Route
-          path="/contact"
-          element={<Contact division={division} />}
         />
 
         <Route
