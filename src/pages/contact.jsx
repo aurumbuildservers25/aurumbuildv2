@@ -10,13 +10,17 @@ import {
 } from "lucide-react";
 
 const EMAIL = "admin@aurumbuild.eu";
-const PHONE_DISPLAY = "+48 696 379 094";
-const PHONE_LINK = "tel:+48696379094";
+const PHONE = "+48 696 379 094";
+
+const NAV_ITEMS = [
+  { label: "Industrial", to: "/industrial" },
+  { label: "Residential", to: "/residential" },
+  { label: "Contact", to: "/contact" },
+];
 
 export default function Contact() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [division, setDivision] = useState("Residential");
-
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -25,30 +29,27 @@ export default function Contact() {
   });
 
   function updateField(field, value) {
-    setForm((previous) => ({
-      ...previous,
+    setForm((prev) => ({
+      ...prev,
       [field]: value,
     }));
   }
 
-  function prepareEmail(event) {
+  function sendEnquiry(event) {
     event.preventDefault();
 
-    const subject =
-      `AURUMBUILD ${division} enquiry — ${form.name.trim()}`;
+    const subject = `AURUMBUILD ${division} enquiry`;
 
     const body = [
       `Division: ${division}`,
-      `Name: ${form.name.trim()}`,
-      `Email: ${form.email.trim()}`,
-      form.company.trim()
-        ? `Company: ${form.company.trim()}`
-        : null,
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      form.company ? `Company: ${form.company}` : "",
       "",
       "Project details:",
-      form.message.trim(),
+      form.message,
     ]
-      .filter((line) => line !== null)
+      .filter((line) => line !== "")
       .join("\n");
 
     window.location.href =
@@ -59,69 +60,60 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#FFF9EF] text-[#102D5B]">
+
       {/* HEADER */}
-      <header className="relative z-50 border-b border-[#102D5B]/15 bg-[#FFF9EF]">
-        <div className="mx-auto flex h-[76px] w-full max-w-[1600px] items-center justify-between gap-7 px-6 sm:px-10 lg:h-[92px] lg:px-12 xl:px-20">
+      <header className="relative z-50 border-b border-[#102D5B]/10 bg-[#FFF9EF]">
+        <div className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-6 sm:px-10 lg:h-[90px] lg:px-16 xl:px-20">
+
           <Link
             to="/"
             aria-label="AURUMBUILD home"
-            className="shrink-0"
             onClick={() => setMenuOpen(false)}
+            className="shrink-0"
           >
             <img
               src="/images/aurumbuild-logo-residential.png"
               alt="AURUMBUILD"
-              className="block h-auto w-[167px] sm:w-[187px] xl:w-[210px]"
+              className="h-auto w-[167px] sm:w-[190px] lg:w-[205px]"
             />
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
+          {/* DESKTOP NAV */}
           <nav
             aria-label="Main navigation"
-            className="ml-auto hidden items-center gap-8 lg:flex"
+            className="hidden items-center gap-9 lg:flex"
           >
-            <Link
-              to="/industrial"
-              className="inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.03em] transition-opacity hover:opacity-65"
-            >
-              Industrial
-              <ArrowUpRight
-                size={14}
-                strokeWidth={1.7}
-              />
-            </Link>
+            {NAV_ITEMS.map((item) => {
+              const active = item.to === "/contact";
 
-            <Link
-              to="/residential"
-              className="inline-flex items-center gap-1.5 text-[12px] font-medium tracking-[0.03em] transition-opacity hover:opacity-65"
-            >
-              Residential
-              <ArrowUpRight
-                size={14}
-                strokeWidth={1.7}
-              />
-            </Link>
-
-            <span
-              aria-current="page"
-              className="border-b-2 border-[#C9A962] pb-1 text-[12px] font-semibold tracking-[0.03em]"
-            >
-              Contact
-            </span>
+              return active ? (
+                <span
+                  key={item.to}
+                  aria-current="page"
+                  className="border-b-2 border-[#C9A962] pb-1 text-[13px] font-semibold"
+                >
+                  {item.label}
+                </span>
+              ) : (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className="text-[13px] font-medium transition-colors hover:text-[#B18D4B]"
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* MOBILE MENU BUTTON */}
           <button
             type="button"
-            aria-controls="contact-mobile-navigation"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            aria-label={
-              menuOpen ? "Close menu" : "Open menu"
-            }
-            onClick={() =>
-              setMenuOpen((open) => !open)
-            }
-            className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center lg:hidden"
+            aria-controls="contact-mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+            className="flex h-11 w-11 items-center justify-center lg:hidden"
           >
             {menuOpen ? (
               <X size={25} strokeWidth={1.7} />
@@ -131,184 +123,165 @@ export default function Contact() {
           </button>
         </div>
 
-        {/* FULL-WIDTH MOBILE NAVIGATION */}
+        {/* MOBILE NAV — FULL WIDTH, NO OVERLAY */}
         {menuOpen && (
           <nav
-            id="contact-mobile-navigation"
+            id="contact-mobile-menu"
             aria-label="Mobile navigation"
-            className="w-full border-t border-[#102D5B]/10 bg-[#FFF9EF] px-6 pb-6 sm:px-10 lg:hidden"
+            className="border-t border-[#102D5B]/10 bg-[#FFF9EF] px-6 pb-5 sm:px-10 lg:hidden"
           >
-            <div className="mx-auto max-w-[650px]">
-              {[
-                {
-                  label: "Industrial",
-                  to: "/industrial",
-                },
-                {
-                  label: "Residential",
-                  to: "/residential",
-                },
-              ].map((item) => (
+            {NAV_ITEMS.map((item) => {
+              const active = item.to === "/contact";
+
+              return active ? (
+                <div
+                  key={item.to}
+                  aria-current="page"
+                  className="flex min-h-[56px] items-center border-b border-[#102D5B]/10 text-[16px] font-semibold text-[#B18D4B]"
+                >
+                  Contact
+                </div>
+              ) : (
                 <Link
-                  key={item.label}
+                  key={item.to}
                   to={item.to}
                   onClick={() => setMenuOpen(false)}
                   className="flex min-h-[56px] items-center justify-between border-b border-[#102D5B]/10 text-[16px] font-medium"
                 >
                   {item.label}
                   <ArrowUpRight
-                    size={17}
+                    size={18}
                     strokeWidth={1.5}
                   />
                 </Link>
-              ))}
-
-              <div className="flex min-h-[56px] items-center border-b border-[#102D5B]/10 text-[16px] font-semibold text-[#B18D4B]">
-                Contact — current page
-              </div>
-            </div>
+              );
+            })}
           </nav>
         )}
       </header>
 
       <main>
-        <section className="px-6 pb-20 pt-14 sm:px-10 md:px-12 md:pb-28 md:pt-20 lg:px-20">
-          <div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 xl:gap-28">
+        {/* INTRO + CONTACT DETAILS + FORM */}
+        <section className="px-6 pb-16 pt-12 sm:px-10 md:px-12 md:pb-24 md:pt-20 lg:px-16 xl:px-20">
+          <div className="mx-auto grid max-w-[1440px] gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20 xl:gap-28">
 
-            {/* LEFT: CONTACT INFORMATION */}
-            <div className="lg:pt-7">
+            {/* LEFT COLUMN */}
+            <div>
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-[#C9A962]" />
 
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#AD8641]">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D4B]">
                   Contact
                 </span>
               </div>
 
-              <h1 className="mt-7 max-w-[650px] text-[clamp(2.8rem,5vw,5.5rem)] font-medium leading-[1.06] tracking-[-0.055em]">
-                Let's talk about
+              <h1 className="mt-6 max-w-[600px] text-[clamp(2.65rem,5vw,5.1rem)] font-semibold leading-[1.04] tracking-[-0.055em]">
+                Let's build
                 <br />
-                your project.
+                something together.
               </h1>
 
-              <p className="mt-7 max-w-[525px] text-[16px] leading-[1.8] text-[#102D5B]/70">
-                A home abroad or a complex industrial
-                project — tell us what you're planning.
-                We'll help you find the right starting point.
+              <p className="mt-6 max-w-[490px] text-[16px] leading-[1.7] text-[#102D5B]/65">
+                Planning a private property or managing
+                a complex construction project?
+                Start the conversation with AURUMBUILD.
               </p>
 
-              {/* EMAIL */}
-              <div className="mt-12 max-w-[540px] border-t border-[#102D5B]/15">
+              {/* CONTACT LINKS */}
+              <div className="mt-9 max-w-[530px] border-t border-[#102D5B]/15 lg:mt-12">
+
                 <a
                   href={`mailto:${EMAIL}`}
-                  className="group flex items-center gap-5 border-b border-[#102D5B]/15 py-6"
+                  className="group flex items-center gap-4 border-b border-[#102D5B]/15 py-5"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#C9A962]/60 text-[#B18D4B]">
-                    <Mail
-                      size={20}
-                      strokeWidth={1.6}
-                    />
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center text-[#B18D4B]">
+                    <Mail size={22} strokeWidth={1.5} />
                   </span>
 
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#AD8641]">
+                    <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-[#B18D4B]">
                       Email
                     </span>
 
-                    <span className="mt-1 block break-all text-[17px] font-medium sm:text-[19px]">
+                    <span className="mt-1 block break-all text-[16px] font-medium sm:text-[18px]">
                       {EMAIL}
                     </span>
                   </span>
 
                   <ArrowUpRight
-                    size={20}
+                    size={19}
                     strokeWidth={1.5}
                     className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
                   />
                 </a>
 
-                {/* PHONE */}
                 <a
-                  href={PHONE_LINK}
-                  className="group flex items-center gap-5 border-b border-[#102D5B]/15 py-6"
+                  href="tel:+48696379094"
+                  className="group flex items-center gap-4 border-b border-[#102D5B]/15 py-5"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#C9A962]/60 text-[#B18D4B]">
-                    <Phone
-                      size={20}
-                      strokeWidth={1.6}
-                    />
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center text-[#B18D4B]">
+                    <Phone size={22} strokeWidth={1.5} />
                   </span>
 
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#AD8641]">
+                    <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-[#B18D4B]">
                       Phone
                     </span>
 
-                    <span className="mt-1 block text-[17px] font-medium sm:text-[19px]">
-                      {PHONE_DISPLAY}
+                    <span className="mt-1 block text-[16px] font-medium sm:text-[18px]">
+                      {PHONE}
                     </span>
                   </span>
 
                   <ArrowUpRight
-                    size={20}
+                    size={19}
                     strokeWidth={1.5}
                     className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
                   />
                 </a>
               </div>
-
-              <p className="mt-7 max-w-[460px] text-[13px] leading-6 text-[#102D5B]/55">
-                One point of contact for AURUMBUILD
-                Residential and Industrial.
-              </p>
             </div>
 
-            {/* RIGHT: PROJECT ENQUIRY */}
-            <div className="border border-[#102D5B]/10 bg-[#F5EEDF] p-6 sm:p-9 lg:p-10 xl:p-12">
+            {/* RIGHT COLUMN — ENQUIRY FORM */}
+            <div className="bg-[#F3EBDD] p-6 sm:p-9 lg:p-10 xl:p-12">
+
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-[#C9A962]" />
 
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#AD8641]">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B18D4B]">
                   Project enquiry
                 </span>
               </div>
 
-              <h2 className="mt-5 text-[clamp(1.9rem,3vw,2.65rem)] font-medium leading-[1.15] tracking-[-0.04em]">
-                Tell us what you're building.
+              <h2 className="mt-5 text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-[1.12] tracking-[-0.04em]">
+                Tell us about your project.
               </h2>
 
-              <p className="mt-3 text-[14px] leading-7 text-[#102D5B]/65">
-                A few details are enough to begin.
+              <p className="mt-3 text-[14px] leading-6 text-[#102D5B]/60">
+                A few details are enough to get started.
               </p>
 
               <form
-                onSubmit={prepareEmail}
-                className="mt-9 space-y-6"
+                onSubmit={sendEnquiry}
+                className="mt-7 space-y-5"
               >
-                {/* DIVISION SELECTION */}
+                {/* DIVISION */}
                 <fieldset>
-                  <legend className="mb-3 text-[12px] font-semibold text-[#102D5B]">
-                    I'm enquiring about
+                  <legend className="mb-3 text-[12px] font-semibold">
+                    Project type
                   </legend>
 
                   <div className="grid grid-cols-2 gap-2">
-                    {[
-                      "Residential",
-                      "Industrial",
-                    ].map((item) => (
+                    {["Residential", "Industrial"].map((item) => (
                       <button
-                        type="button"
                         key={item}
-                        aria-pressed={
-                          division === item
-                        }
-                        onClick={() =>
-                          setDivision(item)
-                        }
-                        className={`min-h-[46px] border px-3 text-[13px] font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D5B] ${
+                        type="button"
+                        aria-pressed={division === item}
+                        onClick={() => setDivision(item)}
+                        className={`min-h-[45px] border px-3 text-[13px] font-semibold transition-colors ${
                           division === item
                             ? "border-[#102D5B] bg-[#102D5B] text-white"
-                            : "border-[#102D5B]/20 bg-[#FFF9EF] text-[#102D5B] hover:border-[#102D5B]/60"
+                            : "border-[#102D5B]/20 bg-[#FFF9EF] text-[#102D5B] hover:border-[#102D5B]/50"
                         }`}
                       >
                         {item}
@@ -317,117 +290,99 @@ export default function Contact() {
                   </div>
                 </fieldset>
 
-                {/* NAME AND EMAIL */}
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="block">
-                    <span className="mb-2 block text-[12px] font-semibold">
-                      Your name *
-                    </span>
+                {/* NAME */}
+                <label className="block">
+                  <span className="mb-2 block text-[12px] font-semibold">
+                    Name *
+                  </span>
 
-                    <input
-                      type="text"
-                      name="name"
-                      autoComplete="name"
-                      required
-                      maxLength={100}
-                      value={form.name}
-                      onChange={(event) =>
-                        updateField(
-                          "name",
-                          event.target.value
-                        )
-                      }
-                      className="h-12 w-full rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 text-[15px] text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
-                      placeholder="Full name"
-                    />
-                  </label>
+                  <input
+                    type="text"
+                    required
+                    autoComplete="name"
+                    maxLength={100}
+                    value={form.name}
+                    onChange={(event) =>
+                      updateField("name", event.target.value)
+                    }
+                    placeholder="Your name"
+                    className="h-12 w-full rounded-none border border-[#102D5B]/15 bg-[#FFFDF8] px-4 text-[15px] outline-none focus:border-[#102D5B]"
+                  />
+                </label>
 
-                  <label className="block">
-                    <span className="mb-2 block text-[12px] font-semibold">
-                      Email address *
-                    </span>
+                {/* EMAIL */}
+                <label className="block">
+                  <span className="mb-2 block text-[12px] font-semibold">
+                    Email *
+                  </span>
 
-                    <input
-                      type="email"
-                      name="email"
-                      autoComplete="email"
-                      required
-                      maxLength={150}
-                      value={form.email}
-                      onChange={(event) =>
-                        updateField(
-                          "email",
-                          event.target.value
-                        )
-                      }
-                      className="h-12 w-full rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 text-[15px] text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
-                      placeholder="you@example.com"
-                    />
-                  </label>
-                </div>
+                  <input
+                    type="email"
+                    required
+                    autoComplete="email"
+                    maxLength={150}
+                    value={form.email}
+                    onChange={(event) =>
+                      updateField("email", event.target.value)
+                    }
+                    placeholder="you@example.com"
+                    className="h-12 w-full rounded-none border border-[#102D5B]/15 bg-[#FFFDF8] px-4 text-[15px] outline-none focus:border-[#102D5B]"
+                  />
+                </label>
 
                 {/* COMPANY */}
                 <label className="block">
                   <span className="mb-2 block text-[12px] font-semibold">
                     Company{" "}
-                    <span className="font-normal text-[#102D5B]/50">
+                    <span className="font-normal text-[#102D5B]/45">
                       (optional)
                     </span>
                   </span>
 
                   <input
                     type="text"
-                    name="company"
                     autoComplete="organization"
                     maxLength={150}
                     value={form.company}
                     onChange={(event) =>
-                      updateField(
-                        "company",
-                        event.target.value
-                      )
+                      updateField("company", event.target.value)
                     }
-                    className="h-12 w-full rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 text-[15px] text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
                     placeholder="Company or organisation"
+                    className="h-12 w-full rounded-none border border-[#102D5B]/15 bg-[#FFFDF8] px-4 text-[15px] outline-none focus:border-[#102D5B]"
                   />
                 </label>
 
-                {/* PROJECT DETAILS */}
+                {/* MESSAGE */}
                 <label className="block">
                   <span className="mb-2 block text-[12px] font-semibold">
-                    About your project *
+                    Project details *
                   </span>
 
                   <textarea
-                    name="message"
-                    rows={5}
                     required
+                    rows={4}
                     maxLength={2000}
                     value={form.message}
                     onChange={(event) =>
-                      updateField(
-                        "message",
-                        event.target.value
-                      )
+                      updateField("message", event.target.value)
                     }
-                    className="min-h-[140px] w-full resize-y rounded-none border border-[#102D5B]/20 bg-[#FFFDF8] px-4 py-3 text-[15px] leading-7 text-[#102D5B] outline-none transition-colors focus:border-[#102D5B]"
-                    placeholder="Where is the project, and how can we help?"
+                    placeholder="Where is the project and how can we help?"
+                    className="min-h-[120px] w-full resize-y rounded-none border border-[#102D5B]/15 bg-[#FFFDF8] px-4 py-3 text-[15px] leading-6 outline-none focus:border-[#102D5B]"
                   />
                 </label>
 
-                {/* SUBMIT */}
                 <button
                   type="submit"
-                  className="min-h-[52px] w-full bg-[#102D5B] px-6 text-[12px] font-semibold uppercase tracking-[0.13em] text-white transition-colors hover:bg-[#1A4179] sm:w-auto"
+                  className="flex min-h-[52px] w-full items-center justify-center gap-3 bg-[#102D5B] px-5 text-[12px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#1B4076]"
                 >
-                  Open email to send
+                  Prepare email
+                  <ArrowUpRight size={17} strokeWidth={1.7} />
                 </button>
 
-                <p className="text-[12px] leading-6 text-[#102D5B]/60">
-                  This opens your email app with the
-                  enquiry prepared. Review and send
-                  it there; the website does not
-                  submit it automatically.
+                <p className="text-[12px] leading-5 text-[#102D5B]/55">
+                  Your email app will open with the
+                  enquiry prepared for you to review
+                  and send.
                 </p>
               </form>
             </div>
@@ -435,38 +390,41 @@ export default function Contact() {
         </section>
       </main>
 
-      {/* CORPORATE FOOTER */}
-      <footer className="bg-[#102D5B] px-6 py-10 text-white sm:px-10 md:px-12 lg:px-20">
-        <div className="mx-auto grid max-w-[1440px] gap-8 border-b border-white/15 pb-8 md:grid-cols-[1fr_auto] md:items-end">
-          <div>
-            <p className="text-[14px] font-semibold">
-              AURUMBUILD Sp. z o.o.
-            </p>
+      {/* FOOTER */}
+      <footer className="bg-[#102D5B] px-6 py-9 text-white sm:px-10 lg:px-16 xl:px-20">
+        <div className="mx-auto max-w-[1440px]">
+          <div className="flex flex-col justify-between gap-6 border-b border-white/15 pb-7 md:flex-row md:items-end">
 
-            <p className="mt-2 text-[13px] leading-6 text-white/65">
-              Registered office:
-              <br />
-              ul. Stanisława Konarskiego 18C
-              <br />
-              44-100 Gliwice, Poland
-            </p>
+            <div>
+              <p className="text-[14px] font-semibold">
+                AURUMBUILD Sp. z o.o.
+              </p>
+
+              <p className="mt-2 text-[12px] leading-6 text-white/60">
+                Registered office:
+                <br />
+                ul. Stanisława Konarskiego 18C
+                <br />
+                44-100 Gliwice, Poland
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-[12px] text-white/60">
+              <span>KRS 0001252561</span>
+              <span>NIP 6312742513</span>
+              <span>REGON 54519473000000</span>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-white/65">
-            <span>KRS 0001252561</span>
-            <span>NIP 6312742513</span>
-            <span>REGON 54519473000000</span>
+          <div className="flex flex-col justify-between gap-2 pt-6 text-[12px] text-white/45 sm:flex-row">
+            <span>
+              © {new Date().getFullYear()} AURUMBUILD Sp. z o.o.
+            </span>
+
+            <span>
+              Engineering · Construction · Project Delivery
+            </span>
           </div>
-        </div>
-
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-3 pt-6 text-[12px] text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <span>
-            © {new Date().getFullYear()} AURUMBUILD Sp. z o.o.
-          </span>
-
-          <span>
-            Engineering · Construction · Project Delivery
-          </span>
         </div>
       </footer>
     </div>
